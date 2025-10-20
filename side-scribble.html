@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SideScribble Case Study - Susanna Boberg">
+    <title>SideScribble | Susanna Boberg</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="case-study-styles.css">
+</head>
+<body data-mode="side-scribble" class="case-study-page">
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a id = "logo" class="logo" href="index.html" aria-label="Home">sjb</a>
+                <div class="logo-overlay"></div>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-list">
+                <div class="overlay-bounds">
+                <div class="overlay"></div>
+                <ul>
+                    <li><a href="index.html#work">Work</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="mailto:susanna@example.com">Contact</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Navigation -->
+    <aside class="page-nav" aria-label="Page sections">
+        <nav class="page-nav-content">
+            <svg class="progress-line" viewBox="0 0 2 100" preserveAspectRatio="none">
+                <line x1="1" y1="0" x2="1" y2="100" stroke="#e5e7eb" stroke-width="2"/>
+                <line class="progress-line-active" x1="1" y1="0" x2="1" y2="0" stroke="#6366f1" stroke-width="2"/>
+            </svg>
+            <ul class="page-nav-links">
+                <li class="nav-section" data-section="overview">
+                    <a href="#overview">Overview</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#problem">The Problem</a></li>
+                        <li><a href="#solution">Our Solution</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="research">
+                    <a href="#research">Research & Ideation</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#interviews">User Interviews</a></li>
+                        <li><a href="#competitive1">Competitive Analysis I</a></li>
+                        <li><a href="#competitive2">Competitive Analysis II</a></li>
+                        <li><a href="#brainstorming">Brainstorming</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="prototyping">
+                    <a href="#prototyping">Prototyping</a>
+                </li>
+                <li class="nav-section" data-section="testing">
+                    <a href="#testing">User Testing</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#takeaways">Takeaways</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="visual">
+                    <a href="#visual">Visual Redesign</a>
+                </li>
+                <li class="nav-section" data-section="final">
+                    <a href="#final">Final Solution</a>
+
+                </li>
+                <li class="nav-section" data-section="going-forward">
+                    <a href="#going-forward">Going Forward</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#growth">Our Growth</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#board">Drawing Board</a></li>
+                    </ul>
+
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Case Study Content -->
+    <main class="side-scribble case-study-content">
+        <!-- Hero -->
+        <section class="case-study-hero">
+            <div class="case-study-hero-container">
+                <a href="index.html#work" class="back-link">← Back to work</a>
+
+                <h1 class="case-study-title">SideScribble</h1>
+                
+                <p class="case-study-subtitle">A collapsible, distraction-free note-taking sidebar 
+                                                that solves context-switching and keeps your ideas connected to where they begin.
+                </p>
+                <div class="img-rounder">
+                    <img class="case-study-title-img full-img" src="scribble-imgs/generic.png" alt="SideScribble Logo Banner">
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section id="overview" class="case-study-section">
+            <div class="case-study-container">
+                <div class="case-study-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Role</span>
+                        <span class="meta-value">UX Researcher, Designer & Frontend Developer</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Timeline</span>
+                        <span class="meta-value">6 weeks</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Team</span>
+                        <span class="meta-value">3 Students</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Tools</span>
+                        <span class="meta-value">Figma, HTML, CSS, JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem -->
+        <section id="problem" class="case-study-section">
+            <div class="case-study-container">
+                <h3>The Problem</h3>
+                
+                <p><mark class="highlight-text">Twenty tabs open, a dozen sources, 
+                    and notes scattered across apps, stickies, and text files.</mark></p> 
+
+                <p>When note-taking, there always comes what I describe as the <mark class="highlight-text">"icky" 
+                        moment</mark>: when you have to switch from where you're reading 
+                        to where you're writing. Think switching tabs, clicking off a webpage window to note-taking app, or looking away to write in a notebook.</p>
+                
+                <p>For many people, this issue of context switching has never come to mind. In theory, it should take no more
+                    than a couple seconds. However, for people like students, 
+                    writers, and researchers, who all need to read through numerous sources on a daily basis, time adds up.</p>
+            </div>
+        </section>
+
+        <!-- The Solution -->
+        <section id="solution" class="case-study-section">
+            <div class="case-study-container">    
+                <div class="solution-dropdown">
+                    <button class="dropdown-trigger" aria-expanded="false">
+                        <span><h4>Our Solution</h4></span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content">
+                        <div class="two-column-layout">
+                            <div>
+                                <p>A side panel Chrome extension that allows users to take notes as they read and
+                                    keeps track of the details for them.
+                                </p>
+
+                                <p>Users simply open up the side panel, create a note, and their thoughts are 
+                                    stored, along with the website URL. When users want to transfer their notes, they can simply copy notes into any document, 
+                                    which are then pasted with the title, body text, and website URL formatted.</p>
+                                <a href="#final" class="jump-button">Skip to Final Solution →</a>
+
+                            </div>
+                            <div id="long-panel-rounder">
+                                <img id="long-panel-img" src="scribble-imgs/light-side-panel-notes.png" alt="screenshot of the side panel extension with sample notes">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research & Ideation -->
+        <section id="research" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Research & Ideation</h2>
+                
+                <p>Because note-taking is such a broad domain—spanning 
+                    everything from todo apps to knowledge management systems&mdash;research formed 
+                    a significant part of this project. Early on, we wanted to understand both 
+                    <mark class="highlight-text"><i>how</i> people take notes</mark> and 
+                    <mark class="highlight-text"><i>why</i> they choose certain tools over others.</mark></p>
+            </div>
+
+        <!-- User Interviews -->
+        <section id="interviews" class="case-study-section">
+            <div id="interview-dropdown-div" class="case-study-container">
+                <h3>User Interviews</h3>
+                
+                <p>We interviewed <mark class="highlight-text">7 individuals: a mixture of students, writers, and 
+                    researchers</mark>&mdash;all people who would most likely need to read through many 
+                    sources while taking notes. We had them <mark class="highlight-text">walk us through a recent project they 
+                    had completed</mark>&mdash;an essay, research paper, news article, etc.&mdash;and observed 
+                    their process while asking a few questions.</p>
+
+                <div class="solution-dropdown">
+                    <button class="dropdown-trigger" aria-expanded="false">
+                        <span><h4>Interview Questions</h4></span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content custom-list">
+                    <ul>
+                        <li>What is your process when researching a subject?</li>
+                        <li>What tools or software do you use to take notes while browsing?</li>
+                        <li>How do you keep track of your sources?</li>
+                        <li>What frustrates you most about your current system?</li>
+                        <li>If you could change one thing about your note-taking workflow, what would it be?</li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empathy Map -->
+            <section id="empathy map" class="case-study-image-side">
+                <div class="case-study-container">
+                    <h4>Results</h4>
+                    <div class="side-by-side-layout">
+                        <div class="content-side">
+    
+                            <p>The vast majority of people opted to use 
+                                a split-screen with their browser for readings and their preferred 
+                                note-taking software (the majority used Google Docs).</p>
+
+                            <p>
+                                As represented in a particular user's empathy map, 
+                                we noticed <mark class="highlight-text">repetitive behaviors&mdash;clicking on the wrong tabs, revisiting
+                                a page multiple times to re-read one quote, and more</mark>. The systems users had
+                                developed for themselves were still <i>mentally 
+                                    taxing</i> and often <i>inefficient.</i>
+                            </p>
+                        </div>
+                        <div class="image-side">
+                            <img src="scribble-imgs/empathy-map.png" alt="empathy map of a single user">
+                            <p class="caption">Empathy map of user with split-screen method</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+        <!-- Competitive Analysis I -->
+        <section id="competitive1" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Competitive Analysis Part I</h3>
+                
+                <p>Based on the user interviews, we separated note-taking 
+                techniques into <b>three main categories</b>, and analyzed the differences between 
+                them all. The vast majority of users opted for a <mark class="highlight-text">split-screen approach</mark> with 
+                their preferred software (Google Docs, Notion, Word, etc.), however a few 
+                preferred <mark class="highlight-text">floating windows</mark>, where they could position note-taking software 
+                wherever they pleased on the screen, or <mark class="highlight-text">a separate device</mark>, such as a notebook or iPad.</p>
+                <img class="full-img" src="scribble-imgs/comp-analysis-1.png" alt="pros and cons the three main methods of note-taking observed from testing">
+            </div>
+
+
+
+            <div class="case-study-container">
+                <p>From these comparisons, we realized what would be most helpful is something
+                    integrated into the websites users read through. After poking around a bit, 
+                    we realized a browser extension, despite it's smaller, lightweight size, could 
+                    be perfect. 
+                    For users needing to research numerous webpages, <mark class="highlight-text">what would be better 
+                    than a piece of software built into their browser?</mark></p>
+
+                <div class="solution-dropdown">
+                    <button class="dropdown-trigger" aria-expanded="false">
+                        <span><h4>Advantages of Browser Extensions</h4></span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content">
+                        <ul>
+                            <li>Onboarding made easy&mdash;one click to install, no log-in or complex installation process required</li>
+                            <li>Persistent access&mdash;always accessible in the toolbar</li>
+                            <li>Non-intrusive by nature&mdash;side panels and pop-ups are 
+                                designed to coexist with webpages, not replace them</li>
+                            <li>Easy transfer of notes&mdash;can copy or type citations 
+                                directly into the side panel, rather than switching tabs</li>
+                            <li>Context-aware interaction&mdash;browser extensions can also 
+                                access URLs (when permitted), allowing them to automatically link to sources</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitive Analysis II -->
+        <section id="competitive2" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Competitive Analysis Part II</h3>
+                
+                <p>To ensure, however, that similar software didn't 
+                    already exist, and to justify the existence of this software, <mark class="highlight-text">we conducted 
+                    competitive analysis once more, but solely for note-taking browser extensions 
+                    we could find on the Chrome Web Store.</mark></p>
+
+
+                    <img class="full-img" src="scribble-imgs/comp-analysis-2.png" alt="pros and cons of three types of browser extensions from the Chrome web store">
+
+            </div>
+
+                <div class="case-study-container">
+                    <p>We thought that surely, an extension had already been created to solve 
+                        this problem. Upon further examination, though, <mark class="highlight-text">none 
+                        of the existing extensions we found seemed indended for the research process.</mark></p>
+                
+                    
+                    <p>Most of these extensions seem great for jotting down 
+                        ideas untied to specific webpages&mdash;maybe a shopping list, a takeaway from an article, etc. 
+                        We still failed to find an extension with the specificity we were searching for.</p>
+                </div>
+        </section>
+
+        <!-- Brainstorming -->
+        <section id="brainstorming" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Features, features, features</h3>
+                
+                <p>With our end-goal in mind: a note-taking browser extension, 
+                    it was time to brainstorm.</p>
+
+                <div style="padding: 20px 0px;">
+                    <img class="full-img" src="scribble-imgs/brainstorming.png" alt="sticky notes showing all possible features we brainstormed">
+                    <p class="caption">Brainstormed features created in Miro</p>
+                </div>
+
+                    <p>Should we 
+                        implement file organization? What text formatting options? Is a search feature helpful? 
+                        Should users be able to pin notes?
+                    </p>
+                    <p><mark class="highlight-text">We had begun to overwhelm ourselves with the breadth of 
+                        features we could implement.</mark>
+                    </p>
+            </div>
+
+                <div class="case-study-container">
+
+                    <p>What helped us define our needs was an idea from Cal Newport, a computer 
+                    science professor at Georgetown University and author. He describes <b>three 
+                    different types of notes</b>:
+                    </p>
+                    
+                    <div class="quote-box">
+                        <ol>
+                            <li>What he calls "a working memory file" where you quickly jot down stuff 
+                                immediately so it's captured and you get on with what you're focusing on. 
+                                You process later.</li>
+                            <li>A list of "obligations" and associated details. Your to do list.</li>
+                            <li>Big picture, deep thinking stuff about goals, insights, etc.</li>
+                        </ol>
+                    </div>
+                    
+                    <p><mark class="highlight-text">The goal of our extension was primarily the first. </mark>
+                        Through this lens, we could narrow down our features. For instance, starring and pinning 
+                    notes wouldn't help us achieve our goal: a lightweight extension for <b>temporary notes.</b></p>
+                
+                    
+                    <p>A lot of this project is grounded in <b>Hick's Law</b>: <mark class="highlight-text">the more choices a person is presented with, the longer it takes 
+                         them to reach a decision</mark>. When our primary goal was to minimize distractions 
+                         to the research process, adding too many features could actually take away 
+                         from the user's experience.</p>
+                </div>
+        </section>
+
+        <!-- Prototyping -->
+        <section id="prototyping" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Prototyping</h2>
+
+                <!-- Low Fidelity Prototype -->
+                <div>
+                    <img class="full-img" src="scribble-imgs/low-fidelity.jpeg" alt="low-fidelity prototype of side-panel extension">
+                    <p class="caption">Low-fidelity prototypes of our browser extension</p>
+                </div>
+
+                <div class="two-column-layout">
+
+                    <div class="grid-img-wrapper">
+                        <img class="full-img" src="scribble-imgs/first-prototype.png" alt="screenshot of the first implementation of our extension">
+                    </div>
+                    <div>
+                        <p>Here is our first implementation, with functioning features. 
+                            We ended up doing a major revision on the visual design aspects, however the core 
+                            is still there&mdash;<mark class="highlight-text">a simple, unobtrusive interface with one bold color, to indicate 
+                            the main actions available</mark>. The "create new note" button is intentionally larger&mdash;it 
+                            should be easier to click, as it is the user's main action.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Testing -->
+        <section id="testing" class="case-study-section">
+            <div class="case-study-container">
+                <h2>User Testing</h2>
+                
+                <p>We each selected two people to interview, resulting in 
+                    six user interviews. <mark class="highlight-text">Each user was tasked with researching a topic of their 
+                    choice&mdash;this time, using our browser extension. The only requirement was that 
+                    they used a minimum of four sources, all online on their laptops</mark>. They were 
+                    then asked to start writing an outline.</p>
+                
+                <p><mark class="highlight-text">Overall, users expressed satisfaction with the extension.</mark> 
+                    They all used it as expected&mdash;taking a new note for each website, clicking 
+                    on saved URLs to revisit sources&mdash;and many expressed that they wished their 
+                    current note-taking method was as built-in to websites as the extension.</p>
+
+                <div class="quote-box">
+                    <p>"I kind of forget that I'm using it, since the side panel is just there, on all of my tabs."</p>
+                </div>
+                
+                <p>However, there were still many things to 
+                    improve:</p>
+            </div>
+        </section>
+
+        <!-- Minimalism Gone Too Far -->
+        <section id="takeaways" class="case-study-section">
+            <div class="case-study-container">
+                <h4>1. Minimalism Gone Too Far</h4>
+                
+                <p>It appears that in the process of searching for simplicity, 
+                    <mark class="highlight-text">we had omitted certain features users found themselves reaching for.</mark> We needed to give them more explicit choices--ex. buttons to bold and underline text, or a way to update the
+                    link stored in a note.</p>
+            </div>
+
+        <!-- Maximizing Space -->
+            <div class="case-study-container">
+                <h4>2. Maximizing Space</h4>
+                
+                <p><mark class="highlight-text">Our other main realization was how small the side panel was.</mark> 
+                    Thus, we needed to make the most of the limited space 
+                    we were given. From this, we decided to prioritize implementing the search feature, 
+                    as well as a collapsible note feature&mdash;so long notes didn't take up too much space.</p>
+            </div>
+
+        <!-- Second Guessing -->
+            <div class="case-study-container">
+                <h4>3. Second Guessing</h4>
+                
+                <p>Some users asked for features we had intentionally omitted, like a file organization system.
+                    At this point, we chose to continue omitting them. However, this made us reconsider
+                    how simple we really wanted the extension to be, and we did end up revisiting these ideas, as you'll 
+                    see at the end of this case study.</p>
+            </div>
+        </section>
+
+        <!-- Visual Redesign -->
+        <section id="visual" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Visual Redesign</h2>
+                
+                    <p>I won't list them all for the sake of brevity, but <mark class="highlight-text">there were 
+                        so many more small decisions that ended up making a huge difference on 
+                        the final product</mark>. This step of the design process required many late nights of 
+                        staring at corners, font sizes, spacing, and more. Below are some 
+                        of the decisions that went into our design prototype.</p>
+                    <div class="solution-dropdown">
+                        <button class="dropdown-trigger" aria-expanded="false">
+                            <span><h4>Redesign Decisions</h4></span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="dropdown-content custom-list">
+                            <ul>
+                                <li>Removed the "MyNotes" text and moved the "create note" button up → freed up a LOT space for notes</li>
+                                <li>Increased size of buttons → users previously had trouble clicking on delete icon</li>
+                                <li>Increased corner radius → made the extension fit in much more with modern websites</li>
+                                <li>Changed from pink to purple → the purple blended much more with other websites (while still standing out enough as an action button)</li>
+                                <li>Removed the pink from the delete all button → this action was used less frequently than the "create note" button</li>
+                                <li>Box shadow on note hover → added visual separation between notes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>We created a high-fidelity prototype in Figma, to lay out all of the details, then proceeded 
+                        with full implementation.
+                    </p>
+
+                <!-- Side by Side Comparison -->
+                <div class="comparison-img-wrapper">
+                    <img class="full-img" src="scribble-imgs/side-by-side.png" alt="side-by-side comparison of the old and new design">
+                </div>
+                <p class="caption">Side-by-side comparison of the old and new designs</p>
+            </div>
+        </section>
+        <!-- Final Solution -->
+        <section id="final" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Final Solution</h2>
+                
+                <p>SideScribble has been published to the Chrome Web Store! 
+                    <a class="inline-link" href="https://chromewebstore.google.com/detail/SideScribble/lkibhkambmelbmdmbgdhobmgmcbbpdkp" target="_blank" rel="noopener noreferrer" >Check it out and install it here.</a></p>
+
+                <!-- Final Solution Video -->
+                <div class="img-full video-container">
+                    <iframe class="video" width="700" height="400" src="https://www.youtube.com/embed/GzhxRizNCcw">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Going Forward -->
+        <section id="going-forward" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Going Forward</h2>
+                <section id="growth" class="case-study-section">
+                    <h3>Our Growth</h3>
+                    <p>This entire research and design process has taught us a lot. First, it 
+                        exposed the complexities of note-taking software&mdash;and <mark class="highlight-text">how to analyze competitors 
+                        to understand the different role each software plays.</mark></p>
+                    <p><mark class="highlight-text">It showed us just how much thought goes into making something intentionally 
+                        simplistic</mark>&mdash;and a user not noticing all the thought we've put into the design 
+                        choices is a good thing, as it means they're immersed in their process. 
+                        </p>
+                </section>
+
+                <section id="features" class="case-study-section">
+                    <h3>Features, Features, Features</h3>
+                    <p>There were still a few features we simply ran out of time for&mdash;like 
+                        bullet point formatting and specific text formatting buttons. As this 
+                        extension continues to grow, we hope to implement these, and more.</p>
+
+                    <p><mark class="highlight-text">This whole time, we've avoided certain features&mdash;like file organization&mdash;out 
+                        of fear that it would overwhelm the user</mark>. Perhaps Hick's Law had caused us 
+                        to live too much in fear. However, we're now looking at how to implement a 
+                        folder structure system that stays in line with our original goal of simplicity. 
+                        So many users immediately asked about it, that we've learned it's essentially 
+                        an expected feature of note-taking software.</p>
+                </section>
+
+                <section id="board" class="case-study-section">
+                    <h3>Back to the Drawing Board</h3>
+                    <p>This process is neverending. <mark class="highlight-text">We're hoping to interview users after a 
+                        longer usage period (around a month), to see how they end up really 
+                        using the extension</mark>&mdash;we don't want to end up guessing how the extension 
+                        will be used&mdash;we really want to make changes based on feedback.</p>
+                    <p>If you've made it to the end&mdash;thank you for reading this case study&mdash;hopefully 
+                        you were also as fascinated by the complexities of the note-taking world as we were :&rpar;</p>
+                </section>
+            </div>
+        </section>
+
+        <!-- Next Project -->
+        <section class="next-project">
+            <div class="case-study-container">
+                <a href="index.html" class="next-project-link">
+                    <span class="next-label">More Projects</span>
+                    <h3>View All Work →</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p class="footer-text">Coded in html, css, js, with a sprinkle of frustration and a pinch of love</p>
+            </div>
+            <div class="footer-right">
+                <button class="footer-email"id="copyEmailBtn">Email</button>
+                <span class="footer-divider">·</span>
+                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <span class="footer-divider">·</span>
+                <span class="footer-copyright">© 2025 Susanna Boberg</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

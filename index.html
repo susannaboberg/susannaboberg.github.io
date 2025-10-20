@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Susanna Boberg - UX Designer Portfolio">
+    <title>Susanna Boberg | UX Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a id = "logo" class="logo active" href="index.html" aria-label="Home">sjb</a>
+                <div class="logo-overlay"></div>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-list">
+                <div class="overlay-bounds">
+                <div class="overlay"></div>
+                <ul>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="mailto:susanna@example.com">Contact</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hello-text">Hi, I'm</p>
+                <h1 class="hero-title">Susanna Boberg</h1>
+                <div>
+                    <div class="one-line-text">
+                        <p class="hero-description">Seeking fluency in&nbsp;</p>
+                    </div>
+                    <div class="words-container">
+
+                    </div>
+                </div>
+                <div>
+                    <p class="hero-description"> As a UX designer with a computer science background, design 
+                        and programming are two sides of the same coin to me&mdash;both languages 
+                        for understanding systems, stories, and how people connect with technology. </p>
+                </div>
+            </div>
+        </div>
+            <div class="scroll-down-section">
+                <div class="scroll-down-text">Deutsch</div>
+                <div class="scroll-arrow">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5v14M19 12l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work-section">
+        <div class="container">
+            <div class="work-section-header">
+                <h2 class="work-section-title">Works</h2>
+            </div>
+            <div class="work-grid">
+                <!-- Case Study 1 -->
+                <a href="side-scribble.html" class="work-card">
+                    <div class="work-image">
+                        <img class="mock-up-img" src="scribble-imgs/closer-mockup.png" alt="image of a macbook showing a side panel browser extension with notes">
+                    </div>
+                    <div class="work-content">
+                        <h3>SideScribble</h3>
+                        <p>A Chrome extension for seamless note-taking alongside web research, eliminating context-switching.</p>
+                        <div class="work-meta">
+                            <span>UX Research</span>
+                            <span>UI Design</span>
+                            <span>Development</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Case Study 2 -->
+                <a href="time-freeze.html" class="work-card">
+                    <div class="work-image">
+                        <img class="mock-up-img" src="time-freeze-imgs/time-freeze-mockup.png" alt="image of a macbook showing a side panel browser extension with notes">
+                    </div>
+                    <div class="work-content">
+                        <h3>Time Freeze</h3>
+                        <p>Designing and measuring hand-gesture inputs for a web game, balancing ergonomics with gameplay precision.</p>
+                        <div class="work-meta">
+                            <span>UX Research</span>
+                            <span>Gesture Design</span>
+                            <span>User Testing</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Case Study 3 -->
+                <article class="work-card">
+                    <div class="work-image">
+                        <img class="mock-up-img" src="scribble-imgs/closer-mockup.png" alt="image of a macbook showing a side panel browser extension with notes">
+                    </div>
+                    <div class="work-content">
+                        <h3>Finance Dashboard</h3>
+                        <p>Creating an intuitive data visualization platform for financial analysts with real-time insights.</p>
+                        <div class="work-meta">
+                            <span>Data Visualization</span>
+                            <span>B2B</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p class="footer-text">Coded with a serving of html, css, js, a sprinkle of frustration and a pinch of ♡</p>
+            </div>
+            <div class="footer-right">
+                <button class="footer-email"id="copyEmailBtn">Email</button>
+                <span class="footer-divider">·</span>
+                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <span class="footer-divider">·</span>
+                <span class="footer-copyright">© 2025 Susanna Boberg</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/TextPlugin.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

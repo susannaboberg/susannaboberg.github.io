@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SideScribble Case Study - Susanna Boberg">
+    <title>Time Freeze | Susanna Boberg</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="case-study-styles.css">
+</head>
+<body data-mode="time-freeze" class="case-study-page">
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a id = "logo" class="logo" href="index.html" aria-label="Home">sjb</a>
+                <div class="logo-overlay"></div>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-list">
+                <div class="overlay-bounds">
+                <div class="overlay"></div>
+                <ul>
+                    <li><a href="index.html#work">Work</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="mailto:susanna@example.com">Contact</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Navigation -->
+    <aside class="page-nav" aria-label="Page sections">
+        <nav class="page-nav-content">
+            <svg class="progress-line" viewBox="0 0 2 100" preserveAspectRatio="none">
+                <line x1="1" y1="0" x2="1" y2="100" stroke="#e5e7eb" stroke-width="2"/>
+                <line class="progress-line-active" x1="1" y1="0" x2="1" y2="0" stroke="#6366f1" stroke-width="2"/>
+            </svg>
+            <ul class="page-nav-links">
+                <li class="nav-section" data-section="overview">
+                    <a href="#overview">Overview</a>
+                </li>
+                <li class="nav-section" data-section="research">
+                    <a href="#research">Research</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#analyzing">Analyzing the Artifact</a></li>
+                        <li><a href="#good-gestures">What Makes a Good Gesture?</a></li>
+                        <li><a href="#principles">Design Principles</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="ideation">
+                    <a href="#ideation">Ideation</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#wizard">Wizard of Oz Testing</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="implementation">
+                    <a href="#implementation">User Testing</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#methods">Methods</a></li>
+                        <li><a href="#nasa-tlx">Why NASA-TLX?</a></li>
+                        <li><a href="#results">Results</a></li>
+                        <li><a href="#tech-limits">Technological Limitations</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="reevaluating">
+                    <a href="#reevaluating">Reevaluating Our Evaluation</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#plan-of-action">Plan of Action</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="testing-two">
+                    <a href="#testing-two">User Testing Part II</a>
+                </li>
+                <li class="nav-section" data-section="going-forward">
+                    <a href="#going-forward">Going Forward</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Case Study Content -->
+    <main class="time-freeze case-study-content">
+        <!-- Hero -->
+        <section class="case-study-hero">
+            <div class="case-study-hero-container">
+                <a href="index.html#work" class="back-link">← Back to work</a>
+                <h1 class="case-study-title">Time Freeze</h1>
+                <p class="case-study-subtitle">Designing and measuring the effectiveness of hand-gesture inputs for a web game</p>
+                
+                <div class="img-rounder">
+                    <img class="case-study-title-img full-img" src="time-freeze-imgs/intro-time.gif" alt="gif of a level of the time freeze web game">
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Overview -->
+        <section id="overview" class="case-study-section">
+            <div class="case-study-container">
+
+                <div class="case-study-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Role</span>
+                        <span class="meta-value">UX Researcher, Designer</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Timeline</span>
+                        <span class="meta-value">4 weeks</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Team</span>
+                        <span class="meta-value">4 Students</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Tools</span>
+                        <span class="meta-value">NASA-TLX, OpenCV, MediaPipe, Python</span>
+                    </div>
+                </div>
+
+                <h2>Overview</h2>
+                
+                <p><b>Time Freeze</b> is a 2D puzzle-platformer that balances precision and problem-solving. 
+                    Its signature mechanic&mdash;the ability to freeze time&mdash;makes for intricate 
+                    gameplay that depends on split-second control.</p>
+                
+                <p><mark class="highlight-text"><b>Our challenge:</b> to replace traditional 
+                    keyboard inputs with hand-gesture controls using a webcam-based 
+                    recognition system.</mark></p>
+                
+                <p>What seemed straightforward quickly became a deep exploration of 
+                    ergonomics, cognitive load, and gesture intuitiveness. The entire process was far from perfect. But it quickly became an 
+                    unexpectedly complex UX journey full of physical, cognitive, and 
+                    technical obstacles. This case study documents our nonlinear process.</p>
+            </div>
+        </section>
+
+        <!-- Research -->
+        <section id="research" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Research</h2>
+            </div>
+
+        <!-- Analyzing the Artifact -->
+        <section id="analyzing" class="case-study-section">
+            <div class="case-study-container">
+                <h4>Analyzing the Artifact</h4>
+                <p>The existing keyboard inputs for Time Freeze are shown below. In addition, the player can press 'e' to freeze time, meaning 
+                    moveable objects are frozen, while the player can move around.</p>
+                </p>
+                <img class="full-img" src="time-freeze-imgs/basic-controls.gif" alt="gif showing various keyboard controls">
+                <p>The platformer aspect of this game added an extra challenge. <mark class="highlight-text">We would need hand gestures that 
+                    could easily be combined together (in order to jump while moving laterally)</mark>. In order to
+                time jumps properly, these controls had to also be responsive.</p>
+
+            </div>
+        </section>
+
+        <!-- What Makes a Good Gesture -->
+        <section id="good-gestures" class="case-study-section">
+            <div class="case-study-container">
+                <h3>What Makes a "Good" Hand Gesture?</h3>
+                
+                <p>3D gesture controls have been around for a while, originally starting in the 
+                    80s with video game controllers like the Nintendo Power Glove, then the 2010s 
+                    with Xbox Kinect, and in previous years appearing in VR environments, like the 
+                    Apple Vision Pro.</p>
+                
+                <p>Due to these developments in VR and XR (extended reality), hand gestures have become 
+                    quite popular, and thus increasingly more research is being done on the ergonomics 
+                    and design of hand gestures.</p>
+                
+                <p>In <a href="https://www.sciencedirect.com/science/article/abs/pii/S1071581914000706">The Design 
+                    of Hand Gestures for Human-Computer Interaction: Lessons from Sign
+                    Language Interpreters</a>, researchers worked with sign language interpreters to map 
+                    out which hand positions were less physically demanding for individuals.</p>
+                <div class="side-by-side-layout-first-larger">
+                    <div class="image-side">
+                        <img src="time-freeze-imgs/hand-ergonomics.png" alt="ranking of various sign language hand positions by mean discomfort">
+                        <p class="caption">Rank order of 37 alphanumeric characters by mean discomfort</p>
+                    </div>
+                
+                    <p>It can be seen that <mark class="highlight-text">most gestures with fingers spread out and extended, 
+                        or gestures involving the ring and pinky fingers extended, ranked higher on discomfort</mark>. 
+                        Close fist gestures with pointer or index fingers extended were generally more comfortable.</p>
+                </div>
+                <p>The wrist movement was also quite interesting. It appears that swiveling/rotating of 
+                    the wrist was generally comfortable, yet flexion too much in either direction caused 
+                    discomfort.</p>
+
+            </div>
+            </section>
+
+        <!-- Design Principles -->
+        <section id="principles" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Design Principles that Guided Us</h3>
+                
+                <p><b>Fitt's Law</b> states that how quickly a person moves to a target depends on the 
+                    target's size and distance. While this often describes visual design, we can re-phrase 
+                    this law to help our case: <mark class="highlight-text">hand gestures that require a lot of rotation, or extended fingers, 
+                    should be reserved for less frequently used controls.</mark></p>
+                
+                <p><b>Don Norman's concept of mapping</b> is also insightful&mdash;<mark class="highlight-text">if possible, hand 
+                    gestures should match their real-world meaning.</mark> For instance, an open palm held 
+                    up often indicates stopping&mdash;potentially making a good hand gesture for our "freeze" control.</p>
+            </div>
+        </section>
+
+        </section>
+
+        <!-- Ideation -->
+        <section id="ideation" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Ideation</h2>
+                
+                <p>Based on our research and technical limitations, we came up with four separate control schemes.</p>
+            </div>
+                <div class="case-study-container">
+                    <h3>Scheme 1: Two-Handed Mapping</h3>
+                    <p>The user holds up either hand, based on which direction they would like to travel in, and:</p>
+                    <div class="side-by-side-layout">
+                        <div class="image-side">
+                            <img class="image-side" src="time-freeze-imgs/two-handed-fists.png" alt="clip art of two fists held up">
+                        </div>
+                        <ul>
+                            <li><b>Lateral movement</b> &mdash; closed fist</li>
+                            <li><b>Jump</b> &mdash; thumb extended upwards</li>
+                            <li><b>Freeze time</b> &mdash; open palm</li>
+                        </ul>
+                    </div>
+                    <div class="side-by-side-layout" style="align-items: start;">
+                        <p><b>Benefit:</b> Easier to combine lateral movement and jumping. 
+                            Overall, there is less finger movement, thus less potential hand 
+                            strain and fatigue.</p>
+                        <p><b>Cons:</b> Without a pointing gesture, the gesture with a closed 
+                            fist may not feel as intuitive, or suggestive of movement.</p>
+                    
+                    </div>
+                </div>
+
+                <div class="case-study-container">
+                    <h3>Scheme 2: One-Handed Control w/ Wrist Rotation</h3>
+                    <p>With one hand, the user holds their fist up, palm facing camera, and:</p>
+                    <div class="side-by-side-layout">
+                        <ul>
+                            <li><b>Lateral movement</b> &mdash; extend thumb (sideways thumbs up) and rotate wrist to switch directions</li>
+                            <li><b>Jump</b> &mdash; extend pointer finger</li>
+                            <li><b>Freeze time</b> &mdash; open palm</li>
+                        </ul>
+                        <div class="image-side" style="margin: auto">
+                            <img style="max-width: 250px;" class="image-side" src="time-freeze-imgs/pointer-finger.jpg" alt="clip art of two fists held up">
+                        </div>
+                    </div>
+                    <div class="side-by-side-layout" style="align-items: start;">
+                        <p><b>Benefit:</b> Pointing with the thumb feels more directional than using 
+                            two hands for movement. The pointer finger is a natural indicator 
+                            for upward movement, and combines well with the thumb, without any additional strain.</p>
+                        <p><b>Cons:</b> We worried about excessive wrist rotation after extended
+                             periods of time.</p>
+                    
+                    </div>
+                </div>
+
+                <div class="case-study-container">
+                    <h3>Scheme 3: Finger-based, No Wrist Rotation</h3>
+                    <p>Another single hand scheme we explored was one without wrist rotation. The user simply holds their fist up, palm facing the camera, and:</p>
+                    <div class="side-by-side-layout">
+                        <div class="image-side" style="margin: auto;">
+                            <img style="max-width: 250px" class="image-side" src="time-freeze-imgs/shake-hand.jpeg" alt="clip art of two fists held up">
+                        </div>
+                        <ul>
+                            <li><b>Lateral movement</b> &mdash; extend pinky or thumb</li>
+                            <li><b>Jump</b> &mdash; extend pointer finger</li>
+                            <li><b>Freeze time</b> &mdash; open palm</li>
+                        </ul>
+                    </div>
+                    <div class="side-by-side-layout" style="align-items: start;">
+                        <p><b>Benefit:</b> No risk of wrist irritation, the wrist is left neutral at all times.</p>
+                        <p><b>Cons:</b> Full extension of the pinky finger was difficult, if not 
+                            impossible, and potentially would not be recognized by the camera. In addition, 
+                            the pinky and thumb were being used with equal importance here, which didn't match 
+                            the inherent mismatch in each finger's flexibility</p>
+                    
+                    </div>
+                </div>
+
+                <div class="case-study-container">
+                    <h3>Scheme 4: Swiping Gestures</h3>
+                    <p>In this scheme, the user simply swipes or pushes their hand in the direction they would like to move the character.</p>
+                    <img  class="img-smaller" src="time-freeze-imgs/gesture-hand.jpeg" alt="clip art of two fists held up">
+                    <div class="side-by-side-layout" style="align-items: start; margin-top: 2rem;">
+                        <p><b>Benefit:</b> The large benefit of swiping is that it exists in other interfaces. 
+                            Yes, in VR with Apple Vision Pro, in certain car interfaces for music playback, 
+                            but more commonly, on touchscreens. Users map physical movement to movement on 
+                            the screen.</p>
+                        <p><b>Cons:</b> However, this movement has limitations in a video game, and raises 
+                            a lot of questions. For instance, how far should one "swipe" move the character? 
+                            Combining jumping and lateral movement would also be difficult.</p>
+                    
+                    </div>
+                </div>
+
+
+        </section>
+        <!-- Wizard of Oz Testing -->
+        <section id="wizard" class="case-study-section">
+            <div class="case-study-container">
+                <h3>"Wizard of Oz" Testing</h3>
+                
+                <p>Before coding a full system, we used a Wizard of Oz approach. While users made gestures, 
+                    we manually triggered corresponding keyboard inputs. This helped us evaluate the usability 
+                    of each gesture scheme without the noise of technical issues.</p>
+                
+                <p>We had 4 users try out each of the first three schemes by playing through 2 levels of Time Freeze.</p>
+                
+                <p><b>Results:</b> Both scheme 1 (two-handed) and scheme 2 (one-handed with wrist rotation)
+                     worked quite well. As anticipated, users found the third scheme quite strenuous, due to the 
+                     need to extend the pinky. <mark class="highlight-text">We proceeded with implementing the first scheme, as users seemed 
+                     to have more control&mdash;changing directions felt much more fluid.</mark></p>
+            <img class="full-img" src="time-freeze-imgs/first-gestures.png" alt="gallery of different hand gestures for our first gesture scheme">
+            </div>
+        </section>
+
+
+        <!-- Implementation & User Testing -->
+        <section id="implementation" class="case-study-section">
+            <div class="case-study-container">
+                <h2>User Testing</h2>
+            </div>
+            <div class="case-study-container">
+                <p>Our initial evaluation was between the keyboard and hand gestures controls&mdash;measuring 
+                    both the performance and cognitive load, or user satisfaction.</p>
+            </div>
+        </section>
+
+        <!-- Methods -->
+        <section id="methods" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Methods</h3>
+                
+                <p>We evaluated the keyboard and gesture input schemes with <b>6 participants</b>, 
+                    all of whom were students in our human-computer interaction class.</p>
+                
+                <div class="solution-dropdown">
+                    <button class="dropdown-trigger" aria-expanded="false">
+                        <span><h5>Order of Testing</h5></span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                <div class="dropdown-content">
+                    <ol>
+                        <li>Pre-test questionnaire
+                            <ul style="margin-top: 0.5rem;">
+                                <li>What is your experience with gesture-based technology?</li>
+                                <li>What is your experience with playing online computer games and/or video games?</li>
+                            </ul>
+                        </li>
+                        <li>Give participants 2 minutes to familiarize themselves with the keyboard controls</li>
+                        <li>Participants play through 3 levels of Time Freeze with the keyboard controls</li>
+                        <li>Post-task questionnaire - participants will complete the NASA-TLX questionnaire to provide ratings from a scale of 1–10 across various dimensions of cognitive workload (mental, physical, and temporal demands, performance, effort, and frustration)</li>
+                        <li>Repeat steps 2-4, with the hand-gesture controls</li>
+                        <li>Follow-up interviews with the following questions:
+                            <ul style="margin-top: 0.5rem;">
+                                <li>Describe your overall experience with utilizing the keys/gestures to complete game levels.</li>
+                                <li>Did you feel as though there were gestures that were more easily understood than others?</li>
+                                <li>How would you describe your feelings of comfort and engagement with the keys? The gestures?</li>
+                                <li>Did you prefer using the keys or the gestures? Which one did you find more comfortable?</li>
+                                <li>Did you experience more strain, exhaustion, or discomfort with the gesture scheme? What about arm and/or body fatigue?</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+                
+                
+                <div class="side-by-side-layout first-largerish" style="align-items: start;">
+                    <div>
+                        <h4>Quantitative Evaluation</h4>
+                        <p><mark class="highlight-text">Our quantitative evaluation measured two 
+                        dimensions: <b>performance</b> and <b>workload</b>.</mark> 
+                        We recorded the time it took to complete each level with both control schemes. 
+                        After each round, they completed the <b>NASA-TLX questionnaire</b> to rate their 
+                        experience across six subscales: mental, physical, temporal, performance, 
+                        effort, and frustration.</p>
+                    </div>
+                    <div class="image-side">
+                        <img src="time-freeze-imgs/user-testing.jpg" alt="a user playing the first level with hand gesture controls">
+                        <p class="caption">User playing through the first level</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NASA-TLX -->
+        <section id="nasa-tlx" class="case-study-section">
+            <div class="case-study-container">
+
+                                <div class="solution-dropdown">
+                    <button class="dropdown-trigger" aria-expanded="false">
+                        <span><h3>Why NASA-TLX?</h3></span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                <div class="dropdown-content">
+                    <div class="case-study-container">
+                        <p>The NASA-TLX evaluates perceived workload across six subscales (each factor is rated on a scale from 1 to 10):</p>
+                        
+                        <ul class="features-list">
+                            <li><b>Mental Demand</b> — How much cognitive effort the task required.</li>
+                            <li><b>Physical Demand</b> — How much physical activity or strain was involved</li>
+                            <li><b>Temporal Demand</b> — How hurried or rushed the participant felt.</li>
+                            <li><b>Performance</b> — How successful the participant felt in completing the task.</li>
+                            <li><b>Effort</b> — The overall amount of work required to achieve the performance level.</li>
+                            <li><b>Frustration</b> — How insecure, irritated, or stressed the participant felt.</li>
+                        </ul>
+                        
+                        <p>A higher score indicates higher perceived workload. Thus, lower NASA-TLX averages 
+                            reflected a more comfortable experience.</p>
+                        
+                        <p>When we began planning our evaluation, our instinct was to use the <b>System Usability 
+                            Scale (SUS)</b>&mdash;the industry-standard ten-item survey for measuring perceived usability. 
+                            However, the SUS produces only a single composite score.</p>
+                        
+                        <p>Unlike many traditional UIs, gesture control engages both mental and physical effort. 
+                            A user might understand the gesture mapping perfectly (low mental demand) yet still 
+                            experience fatigue (high physical demand).</p>
+                        
+                        <div class="quote-box">
+                            <h4>Note</h4>
+                            <p>Rather than using a weighted average of the raw ratings of the NASA sub-scales 
+                                (which involves pairwise rankings and more questions on the user's end), we simply 
+                                analyzed the raw ratings and used an average on the ratings for comparisons between 
+                                gesture schemes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Results -->
+        <section id="results" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Results</h3>
+                <div class="side-by-side-layout">
+                <div class="image-side">
+                    <img src="time-freeze-imgs/scatter-plot.png" alt="scatter plot displaying completion times of users across three levels">
+                </div>
+                <p>We used Altair, a python library, for data visualization. Since skill level varied greatly 
+                    among participants, we created a graph displaying individual times, rather than averaging 
+                    times together. As you can see, for all participants, in all levels, gesture inputs proved 
+                    far slower than keyboard inputs.</p>
+            </div>
+            <p>When we first saw this, we grew quite concerned. Well…even though gestures were slower, 
+                    maybe users found them less demanding?</p>
+
+            <div class="case-study-container" style="margin-bottom: 2rem;">
+                <img style="margin-bottom: 0.4rem;" class="img-smaller" src="time-freeze-imgs/bar-chart.png" alt="bar chart displaying NASA-TLX scores">
+                <p class="caption">NASA-TLX scores of 6 participants</p>
+            </div>
+            <div class="case-study-container">
+                <p><b>Nope.</b> NASA-TLX scores were consistently higher for hand gestures&mdash;meaning 
+                    the vast majority of participants found gesture inputs more demanding and frustrating. 
+                    The only large exception was a participant who was particularly accustomed to video 
+                    game controls&mdash;and their video game knowledge most likely helped them adapt to the hand 
+                    gestures more quickly.</p>
+                
+                <p class="large-text"><b>So why were our results so disappointing?</b></p>
+                
+                <p>Through observation, we noticed that many participants struggled with the 
+                    platforming aspect of the game. They found themselves needing to tediously shift 
+                    left and right before making a leap to the next platform&mdash;the two-hand gesture scheme 
+                    was somewhat inconvenient for this, as they had to bring one hand completely out of frame 
+                    to prevent themselves from overshooting&mdash;there was no resting hand state, and this caused 
+                    many users to panic at times. We wondered whether the single-hand approach would be more 
+                    suitable for such specific movements.</p>
+                
+                <p>However, through interviews we learned that most of the dissatisfaction 
+                    stemmed from technological limitations&mdash;less from the specific design of 
+                    our gestures.</p>
+
+                <div class="quote-box">
+                    <p>"The gestures felt intuitive, but the latency was frustrating. [...] 
+                        I was fighting with the controls [with the gestures] more than I was 
+                        actually strategizing within the game"</p>
+                    <p style="float: right">-- <i>participant after using gesture controls</i></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technological Limitations -->
+        <section id="tech-limits" class="case-study-section">
+            <div class="case-study-container">
+                <h3>Technological Limitations</h3>
+
+                <div>
+                    <img style="margin-bottom: 0px;" class="full-img" src="time-freeze-imgs/mediapipe-hand.png" alt="mediapipes diagram of joints on a hand">
+                    <p style="margin-bottom: 2rem;" class="caption">MediaPipe's hand tracking and gesture recognition showing joint mapping</p>
+                </div>
+                <p>Mediapipe's Handtracking and Gesture Recognition provides a lot of built-in capabilities. Running just the starter code allows you to see the above joints mapped to your hand on the webcam, in real-time. There is a set of built-in recognized gestures, such as "thumbs up", "i love you" (from American Sign Language), and "open palm".</p>
+                
+                <p>For our scheme, however, we had to custom implement more gestures, and also add code to recognize handedness–whether the user was holding up their left or right hand. This ended up drastically increasing the amount of delay in gesture recognition–something we were unable to solve.</p>
+                
+                <p>While users didn't verbally express dissatisfaction with the current hand gesture controls, we realized a single-hand model would indirectly reduce cognitive load, by reducing latency.</p>
+            </div>
+        </section>
+
+        <!-- Reevaluating -->
+        <section id="reevaluating" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Reevaluating…our evaluation</h2>
+                
+                <p>One quote in particular that stuck with us after seeing our disappointing results was:</p>
+                
+                <div class="quote-box">
+                    <p>"I definitely prefer the keys, because I'm already used to playing video games with that exact same set of key binds and because it's almost muscle memory for me."</p>
+                </div>
+                
+                <p>See, our initial goal for this assignment was to replace keyboard inputs with hand-gesture inputs. And we had achieved this–however, clearly the results did not show that hand-gesture inputs were any faster, or less mentally taxing to use. Essentially, we were stumped. We'd conducted research, and it had proved that our new system was inferior in almost every way to the original. What now?</p>
+                
+                <p>We decided, instead, to shift our lens of analysis, as we had most likely been incorrectly evaluating our system. Keyboard inputs would always be more efficient–users have grown up with keyboards, there's inherent latency with gesture recognition (at least with the technology accessible to us), it takes more time to make a hand gesture than press a key, etc.</p>
+                
+                <p><strong>We decided our priority should instead be how effective and intuitive we could make the hand-gestures – and thus began to compare new revisions to our original scheme, rather than the keyboard inputs.</strong> Our new question was: given that a user wants to or must use gestural controls, how pleasant can we make that interaction?</p>
+                
+                 <section id="plan-of-action">
+        
+                    <div style="margin-top: 4rem;" class="side-by-side-layout">
+                        <div>
+                        <h4>Plan of Action</h4>
+                        <p>We decided to switch to a single-hand gesture scheme, to reduce latency and allow for more precise movement–in addition, we felt that the pointing for lateral movement would map to more intuitive controls, rather than holding up a closed fist.</p>
+                        </div>
+                        <div class="image-side">
+                            <img src="time-freeze-imgs/final-gestures.png" alt="our final, one-handed gesture scheme">
+                        </div>
+                    </div>
+                    </section>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- User Testing Part II -->
+        <section id="testing-two" class="case-study-section">
+            <div class="case-study-container">
+                <h2>User Testing Part II</h2>
+
+                    <div class="side-by-side-layout-first-larger">
+                        <div class="image-side">
+                            <img src="time-freeze-imgs/new-scatter-plot.png" alt="scatter plot comparing old vs. new gesture scheme">
+                        </div>
+                        <p>With some exceptions, the performance results showed a drastic improvement. 
+                            More participants were able to complete the 4th level, whereas previously 
+                            the majority failed to finish.</p>
+                    </div>                
+                    <p><mark class="highlight-text">Overall, this new implementation solved nearly all issues with latency.</mark> 
+                        Gesture recognition was much faster. In addition, players were much more 
+                        successful in platforming&mdash;explaining the increase in number of players who 
+                        could complete all levels.</p>
+            </div>
+
+
+                <div class="case-study-container">
+
+                    
+                    <div class="side-by-side-layout">
+                    <p><mark class="highlight-text">The NASA-TLX scores also revealed large improvements.</mark> <b>Frustration</b> and <b>mental load</b> were the two subscales 
+                        that decreased the most. Interestingly, <b>physical load</b> also decreased&mdash;most likely due 
+                        to less physical movement needed to switch directions&mdash;simply a rotation of 
+                        the wrist, rather than switching hands.</p>
+                    <div class="image-side">
+                        <img src="time-freeze-imgs/new-bar-chart.png" alt="bar chart comparing NASA-TLX of new vs. old gesture scheme">
+                    </div>
+                    </div>
+                    
+                    <p>Interviews also reflected the quantitative results:</p>
+                    
+                    <div class="quote-box">
+                        <p>"Since there's [less] latency, I feel like I'm actually controlling the character [...] I feel like I picked up the controls faster because they responded more quickly"</p>
+                    </div>
+                    
+                    <div class="quote-box">
+                        <p>"The reduced latency and new controls made me want to move around, to explore the level. Before, I was trying my best simply to not fail."</p>
+                    </div>
+                </div>
+
+        </section>
+
+        <!-- Going Forward -->
+        <section id="going-forward" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Going Forward</h2>
+                
+                <div>
+                    <div>
+                        <h4>Technical Constraints Shape Design</h4>
+                        <p><mark class="highlight-text">We learned the hard way that design 
+                            decisions often have to bend to the realities of implementation.</mark> 
+                            MediaPipe's recognition speed and occlusion limitations forced us to pivot 
+                            from a two-hand scheme to a more feasible one-hand design.</p>
+                    </div>
+                    
+                    <div>
+                        <h4>Evaluation Frameworks Matter</h4>
+                        <p>Choosing NASA-TLX gave us dimensional insight into users' experiences. It transformed vague feedback ("it's tiring") into measurable, actionable patterns of mental and physical workload.</p>
+                        <p><mark class="highlight-text">The right metrics reveal the right problems.</mark></p>
+                    </div>
+                    
+                    <div>
+                        <h4>Sometimes You Need to Reframe Success</h4>
+                        <p>Our initial goal was to beat keyboard controls. When that proved impossible, we pivoted to optimizing within the gesture space itself.</p>
+                        <p><mark class="highlight-text">Knowing when to shift your comparison point is crucial.</mark></p>
+                    </div>
+                </div>
+                
+                <h3>Future Directions</h3>
+                <p>Moving forward, in order to improve the experience of playing Time Freeze, or other similar web games, with hand gestures, we're interested in:</p>
+                
+                <ul class="features-list">
+                    <li>Evaluating gestures in longer play sessions, to better understand fatigue and flow over time</li>
+                    <li>Experimenting more with custom gesture recognition, to allow more ambiguous gestures to be picked up–this could allow users to be "lazier", and thus make gestures without as much rigidity or strictness</li>
+                    <li>Exploring what games would be best suited to such hand gesture schemes, as we often felt like we were fighting against our goal in this design project</li>
+                </ul>
+                
+                <p>With that, here is a demo of our final implemented hand gesture controls:</p>
+                <div class="img-full video-container">
+                    <iframe class="video" title="vimeo-player" src="https://player.vimeo.com/video/1019244112?h=c2e1f69ed6" width="700" height="400"  referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <!-- Next Project -->
+        <section class="next-project">
+            <div class="case-study-container">
+                <a href="index.html" class="next-project-link">
+                    <span class="next-label">More Projects</span>
+                    <h3>View All Work →</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p class="footer-text">Coded in html, css, js, with a sprinkle of frustration and a pinch of love</p>
+            </div>
+            <div class="footer-right">
+                <button class="footer-email"id="copyEmailBtn">Email</button>
+                <span class="footer-divider">·</span>
+                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <span class="footer-divider">·</span>
+                <span class="footer-copyright">© 2025 Susanna Boberg</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
