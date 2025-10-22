@@ -261,6 +261,7 @@ body.menu-open {
 .hello-text {
     font-size: 1.5rem;
     font-weight: 500;
+    opacity: 0;
 }
 
 .hero-title {
@@ -271,6 +272,7 @@ body.menu-open {
     margin-bottom: 2rem;
     letter-spacing: -0.03em;
     color: var(--text-dark);
+    opacity: 0;
 }
 
 .hero-description {
@@ -278,6 +280,7 @@ body.menu-open {
     color: var(--text-gray);
     max-width: 800px;
     line-height: 1.8;
+    opacity: 0;
 }
 
     .curved-underline {
@@ -313,6 +316,8 @@ body.menu-open {
     vertical-align: baseline;
     min-width: 260px; /* Wide enough for longest word */
     height: 1.8rem;
+    opacity: 0;
+    transform: translateY(-20px);
 }
 
 .typing-word {

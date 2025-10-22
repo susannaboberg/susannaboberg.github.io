@@ -155,12 +155,14 @@
    ================================= */
 .case-study-hero {
     padding: 2rem 2rem 0rem 2rem;
+    opacity: 0;
 }
 
 .case-study-hero-container {
     max-width: 1200px;
     margin: 0 auto;
 }
+
 
 .back-link {
     color: var(--text-gray);

@@ -160,16 +160,16 @@ navLinks.find('a').on('click', function() {
 // ===================================
 if ($('.hero').length) {
 
-    gsap.from('.hello-text', {
-    opacity: 0,
-    y: 20,
+    gsap.to('.hello-text', {
+    opacity: 1,
+    y: -20,
     duration: 0.8,
     delay: 0.0 // Starts immediately
 });
 
-gsap.from('.hero-title', {
-    opacity: 0,
-    y: 20,
+gsap.to('.hero-title', {
+    opacity: 1,
+    y: -20,
     duration: 0.8,
     delay: 0.2 // Slight stagger for natural timing
 });
@@ -177,7 +177,7 @@ gsap.from('.hero-title', {
 
     // Hero title animation
     gsap.to('.hero-title', {
-        duration: 3.0, 
+        duration: 2.5, 
         scrambleText: {
             text: "Susanna Boberg",
             chars: "lowerCase",
@@ -187,24 +187,25 @@ gsap.from('.hero-title', {
     });
 
     // Hero description animation
-    gsap.from('.hero-description', {
-        opacity: 0,
-        y: 20,
+    gsap.to('.hero-description', {
+        opacity: 1,
+        y: -20,
         duration: 0.8,
-        delay: 3.0
+        delay: 2.5
     });
 
-    gsap.from('.words-container', {
-        opacity: 0,
+    gsap.to('.words-container', {
+        opacity: 1,
         duration: 0.8,
-        delay: 3.3
+        delay: 3.1
     })
 
         // Fade in scroll section to opacity 0.7
     gsap.to('.scroll-down-section', {
         opacity: 0.7,
         duration: 0.8,
-        delay: 3.6
+        delay: 3.1,
+        y: -20
     })
 
 
@@ -230,7 +231,7 @@ gsap.from('.hero-title', {
 // ===================================
 if ($('.hero').length && $('.words-container').length) {
     const words = [
-        " visual design",
+        " design",
         "  Deutsch",
         " programming languages",
         " français",
@@ -240,7 +241,7 @@ if ($('.hero').length && $('.words-container').length) {
     
     // Remove leading space for scroll words
     const scrollWords = [
-        "↓ → ✳︎",
+        "Scroll to see works",
         "Scrollen, um Arbeiten zu sehen",
         "while (scrolling) {show(works);}",
         "Faites défiler pour voir les projets",
@@ -265,7 +266,7 @@ if ($('.hero').length && $('.words-container').length) {
         
         // Calculate typewriter timing
         const typeOutDuration = currentWord.length * 0.09;
-        const pauseDuration = 1.4;
+        const pauseDuration = 1.8;
         const deleteInDuration = currentWord.length * 0.06;
         const shortPauseDuration = 0.8;
         
@@ -322,7 +323,7 @@ if ($('.hero').length && $('.words-container').length) {
     }
     
     // Start both animations together after initial page load
-    gsap.delayedCall(4.0, synchronizedLoop);
+    gsap.delayedCall(3.8, synchronizedLoop);
     
     // Hide scroll arrow when user scrolls down
     if (scrollDownSection) {
@@ -467,41 +468,10 @@ if ($('.case-study-page').length) {
 // ===================================
 if ($('.case-study-page').length) {
     // Animate hero content on load
-    gsap.from('.case-study-hero .back-link', {
+    gsap.fromTo('.case-study-hero', {
         opacity: 0,
         y: 20,
-        duration: 0.6,
-        delay: 0.7
-    });
-    
-    gsap.from('.case-study-title', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        delay: 0.7
-    });
-    
-    gsap.from('.case-study-subtitle', {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: 0.9
-    });
-
-    gsap.from('.case-study-title-img', {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: 1.1
-    })
-
-    gsap.from('.case-study-hero .img-rounder', {
-        opacity: 0,
-        y:20,
-        duration: 0.8,
-        delay: 1.1
-    })
-
+    }, {opacity: 1, y: 0, duration: 0.6, delay: 0.7});
     
 }
 
@@ -856,46 +826,148 @@ if ($('.hero').length && $('#work').length) {
 // ===================================
 if ($('.about-hero').length) {
     // Fade in about content on load
-    gsap.from('.about-text', {
-        opacity: 0,
-        y: 20,
+
+    gsap.to('.about-text', {
+        opacity: 1,
+        y: -20,
         duration: 0.8,
         delay: 0.2
     });
     
-    gsap.from('.about-image-placeholder', {
-        opacity: 0,
-        y: 20,
+    gsap.to('.about-image-placeholder', {
+        opacity: 1,
+        y: -20,
         duration: 0.8,
         delay: 0.2
     });
 
-        gsap.utils.toArray('.skills-section').forEach((section) => {
-        gsap.from(section, {
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 30,
-            duration: 0.6
-        });
+    gsap.to('.social-slider-section', {
+        opacity: 1,
+        y: -20,
+        duration: 0.8,
+        delay: 0.2
     });
 
-        gsap.utils.toArray('.gallery-section').forEach((section) => {
-        gsap.from(section, {
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 30,
-            duration: 0.6
+    
+}
+
+// ===================================
+// Social Slider Overlay Logic (About Page)
+// ===================================
+if ($('.social-slider').length) {
+    const socialOverlay = document.querySelector('.social-overlay');
+    const socialSlider = document.querySelector('.social-slider');
+    const socialItems = document.querySelectorAll('.social-slider ul li');
+    
+    // Create custom "Copied!" cursor
+    const copiedCursor = $('<div>', {
+        class: 'custom-cursor copied-cursor',
+        text: 'Copied!'
+    });
+    $('body').append(copiedCursor);
+    
+    // Function to update overlay position
+    function updateOverlayPosition(link) {
+        const linkRect = link.getBoundingClientRect();
+        const sliderRect = socialSlider.getBoundingClientRect();
+        
+        socialOverlay.style.opacity = '1';
+        socialOverlay.style.left = (linkRect.left - sliderRect.left) + 'px';
+        socialOverlay.style.top = (linkRect.top - sliderRect.top) + 'px';
+        socialOverlay.style.height = linkRect.height + 'px';
+        socialOverlay.style.width = linkRect.width + 'px';
+    }
+    
+    // Hover effect for social slider
+    socialItems.forEach((item) => {
+        const link = item.querySelector('a, button');
+        
+        item.addEventListener('mouseover', () => {
+            updateOverlayPosition(link);
+        });
+        
+        // Add pressed effect on mousedown
+        link.addEventListener('mousedown', () => {
+            socialSlider.classList.add('pressed');
+        });
+        
+        // Remove pressed effect on mouseup
+        link.addEventListener('mouseup', () => {
+            socialSlider.classList.remove('pressed');
+        });
+        
+        // Remove pressed effect if mouse leaves while pressing
+        link.addEventListener('mouseleave', () => {
+            socialSlider.classList.remove('pressed');
         });
     });
     
+    
+    // Email copy functionality for second button
+    const copyBtn2 = document.getElementById('copyEmailBtn2');
+    if (copyBtn2) {
+        let isHovering = false;
+        
+        // Track if mouse is over the button
+        copyBtn2.addEventListener('mouseenter', () => {
+            isHovering = true;
+        });
+        
+        copyBtn2.addEventListener('mouseleave', () => {
+            isHovering = false;
+        });
+        
+        // Track mouse position for copied cursor
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        $(document).on('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Update copied cursor position if active
+            if (copiedCursor.hasClass('active')) {
+                copiedCursor.css({
+                    left: mouseX + 15 + 'px',
+                    top: mouseY + 15 + 'px'
+                });
+            }
+        });
+        
+        copyBtn2.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText('sjb5@williams.edu');
+                const originalText = copyBtn2.textContent;
+                
+                // Show custom "Copied!" cursor
+                copiedCursor.addClass('active');
+                copiedCursor.css({
+                    left: mouseX + 15 + 'px',
+                    top: mouseY + 15 + 'px'
+                });
+                
+                // Update overlay size smoothly when text changes
+                if (isHovering) {
+                    setTimeout(() => {
+                        updateOverlayPosition(copyBtn2);
+                    }, 10);
+                }
+                
+                setTimeout(() => {
+                    copiedCursor.removeClass('active');
+                    
+                    // Update overlay size back when text changes
+                    if (isHovering) {
+                        setTimeout(() => {
+                            updateOverlayPosition(copyBtn2);
+                        }, 10);
+                    }
+                }, 500);
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        });
+    }
 }
 
 // ===================================
