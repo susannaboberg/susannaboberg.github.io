@@ -641,7 +641,7 @@ mark {
 }
 
 .dropdown-trigger[aria-expanded="true"] + .dropdown-content {
-    max-height: 1200px;
+    max-height: 4000;
     padding: 1.5rem;
 }
 

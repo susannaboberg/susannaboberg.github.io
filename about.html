@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="About Susanna Boberg - UX Designer">
     <title>About | Susanna Boberg</title>
+    <link rel="icon" href="/scribble-imgs/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
@@ -42,25 +43,39 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h1 class="hero-title">About Me</h1>
+                    <div id="name">
+                        <div class="first-name">
+                            <h1 style="padding-bottom: 0; margin-bottom: 0px;"class="hero-title">susanna </h1>
+                            <h5 style="margin-bottom: 30px;" class="hero-subtitle">/su&#720;zænə/</h5>
+                        </div>
+                        <div class="last-name">
+                            <h1 style="padding-bottom: 0; margin-bottom: 0px;"class="hero-title">boberg</h1>
+                            <h5 style="margin-bottom: 30px;" class="hero-subtitle">/boʊbɚg/</h5>
+                        </div>
+                    </div>
+
+            
                     <p class="about-description">
-                        I'm a UX designer passionate about creating meaningful digital experiences that solve real problems. 
-                        With a background in psychology and visual design, I bring both analytical thinking and creative 
-                        vision to every project.
+                        Hi again! I'm a computer science and german double major in my third year 
+                        at Williams College.
                     </p>
                     <p class="about-description">
-                        My design philosophy centers on empathy and iteration. I believe the best solutions emerge when 
-                        we truly understand our users' needs, test our assumptions, and continuously refine our approach. 
-                        Whether I'm conducting user research, sketching wireframes, or prototyping interactions, I'm always 
-                        focused on the human at the other end of the screen.
+                        The concept of language has always fascinated me (as can be 
+                        seen from the home page of this website)&mdash;this puzzle of working within 
+                        constraints (grammar, syntax) to figure out how to most effectively and 
+                        clearly communicate. For me, UX design is another kind of communication&mdash; 
+                        a way to translate complex ideas into experiences that feel natural. 
+                        As a computer science major I am always mindful of 
+                        technical limitations. My hope as a researcher and designer as that users don't have to be.
                     </p>
                     <p class="about-description">
-                        When I'm not designing, you'll find me exploring local coffee shops, experimenting with film photography, 
-                        or learning about the latest design trends and technologies.
+                        There never seems to be enough time to explore everything I want,
+                         but in my free time, you might find me playing clarinet, ultimate 
+                         frisbee, 3d modelling/animating, or knitting.
                     </p>
                 </div>
                 <div class="about-image-placeholder">
-                    <div class="placeholder-image gradient-1"></div>
+                    <img src="about-imgs/bigger-gallery.jpg" alt="three images of myself">
                 </div>
             </div>
         </div>
@@ -69,7 +84,7 @@
     <!-- Skills Section -->
     <section class="skills-section">
         <div class="container">
-            <h2 class="section-title">Skills & Tools</h2>
+            <h2  class="section-title">Skills & Tools</h2>
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3>Design</h3>
@@ -105,15 +120,84 @@
         </div>
     </section>
 
+<!-- Photo Gallery Section - Add this after the Skills Section -->
+<section class="gallery-section">
+    <div style="margin-bottom: 40px;" class="container">
+        <h2 style="margin-bottom: 0px;" class="section-title">Construction Zone</h2>
+        <p>
+            Building and breaking things since 2005.
+        </p>
+    </div>
+        <div class="gallery-wrapper">
+            <div class="gallery-track">
+                <!-- First set of images -->
+                <div class="gallery-item" data-caption="A handmade tote bag with embroidered flowers" data-cursor-text="embroidery, sewing">
+                    <img src="about-imgs/bag.jpg" alt="A handmade tote bag with embroidered flowers">
+                </div>
+                <div class="gallery-item" data-caption="3D modelled and textured isometric kitchen in Blender" data-cursor-text="blender">
+                    <img src="about-imgs/kitchen.jpg" alt="3D modelled and textured isometric kitchen in Blender">
+                </div>
+                <div class="gallery-item" data-caption="Macramé wall hanging" data-cursor-text="macrame">
+                    <img src="about-imgs/macrame-1.jpg" alt="Macramé wall hanging">
+                </div>
+                <div class="gallery-item" data-caption="Embroidered otter on jeans" data-cursor-text="embroidery">
+                    <img src="about-imgs/otter.jpeg" alt="Embroidered otter on jeans">
+                </div>
+                <div class="gallery-item" data-caption="A robotic turtle that pokes its head out and wags its tail in the sun" data-cursor-text="robotics">
+                    <img src="about-imgs/terry.gif" alt="A robotic turtle that pokes its head out and wags its tail in the sun">
+                </div>
+                <div class="gallery-item" data-caption="Macramé tote bag" data-cursor-text="macrame">
+                    <img src="about-imgs/macrame-bag.jpg" alt="Macramé tote bag">
+                </div>
+                <div class="gallery-item" data-caption="Embroidered, hand-sewn needle case" data-cursor-text="embroidery">
+                    <img src="about-imgs/flowers.jpg" alt="Embroidered, hand-sewn needle case">
+                </div>
+                
+                <!-- First set of images -->
+                <div class="gallery-item" data-caption="A handmade tote bag with embroidered flowers" data-cursor-text="embroidery, sewing">
+                    <img src="about-imgs/bag.jpg" alt="A handmade tote bag with embroidered flowers">
+                </div>
+                <div class="gallery-item" data-caption="3D modelled and textured isometric kitchen in Blender" data-cursor-text="blender">
+                    <img src="about-imgs/kitchen.jpg" alt="3D modelled and textured isometric kitchen in Blender">
+                </div>
+                <div class="gallery-item" data-caption="Macramé wall hanging" data-cursor-text="macrame">
+                    <img src="about-imgs/macrame-1.jpg" alt="Macramé wall hanging">
+                </div>
+                <div class="gallery-item" data-caption="Embroidered otter on jeans" data-cursor-text="embroidery">
+                    <img src="about-imgs/otter.jpeg" alt="Embroidered otter on jeans">
+                </div>
+                <div class="gallery-item" data-caption="A robotic turtle that pokes its head out and wags its tail in the sun" data-cursor-text="robotics">
+                    <img src="about-imgs/terry.gif" alt="A robotic turtle that pokes its head out and wags its tail in the sun">
+                </div>
+                <div class="gallery-item" data-caption="Macramé tote bag" data-cursor-text="macrame">
+                    <img src="about-imgs/macrame-bag.jpg" alt="Macramé tote bag">
+                </div>
+                <div class="gallery-item" data-caption="Embroidered, hand-sewn needle case" data-cursor-text="embroidery">
+                    <img src="about-imgs/flowers.jpg" alt="Embroidered, hand-sewn needle case">
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Overlay -->
+    <div class="gallery-lightbox" id="galleryLightbox">
+        <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImage">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-left">
-                <p class="footer-text">Let's work together</p>
-                <a href="mailto:susanna@example.com" class="footer-email">susanna@example.com</a>
+                <p class="footer-text">Coded with a serving of html/css/js, a spray of bug repellent and lots of ♡</p>
             </div>
             <div class="footer-right">
-                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <button class="footer-email"id="copyEmailBtn">Email</button>
+                <span class="footer-divider">·</span>
+                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
                 <span class="footer-divider">·</span>
                 <span class="footer-copyright">© 2025 Susanna Boberg</span>
             </div>

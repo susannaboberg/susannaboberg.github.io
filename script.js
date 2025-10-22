@@ -159,6 +159,22 @@ navLinks.find('a').on('click', function() {
 // GSAP Animations for Index Page
 // ===================================
 if ($('.hero').length) {
+
+    gsap.from('.hello-text', {
+    opacity: 0,
+    y: 20,
+    duration: 0.8,
+    delay: 0.0 // Starts immediately
+});
+
+gsap.from('.hero-title', {
+    opacity: 0,
+    y: 20,
+    duration: 0.8,
+    delay: 0.2 // Slight stagger for natural timing
+});
+
+
     // Hero title animation
     gsap.to('.hero-title', {
         duration: 3.0, 
@@ -175,22 +191,21 @@ if ($('.hero').length) {
         opacity: 0,
         y: 20,
         duration: 0.8,
-        delay: 3.3
+        delay: 3.0
     });
 
     gsap.from('.words-container', {
         opacity: 0,
         duration: 0.8,
-        delay: 3.8
+        delay: 3.3
     })
 
         // Fade in scroll section to opacity 0.7
     gsap.to('.scroll-down-section', {
         opacity: 0.7,
         duration: 0.8,
-        delay: 3.8
+        delay: 3.6
     })
-
 
 
 
@@ -219,7 +234,8 @@ if ($('.hero').length && $('.words-container').length) {
         "  Deutsch",
         " programming languages",
         " français",
-        " music"
+        " music",
+        " storytelling"
     ];
     
     // Remove leading space for scroll words
@@ -229,6 +245,7 @@ if ($('.hero').length && $('.words-container').length) {
         "while (scrolling) {show(works);}",
         "Faites défiler pour voir les projets",
         "coda below",
+        "chapter 2 below"
     ]
     
     let currentWordIndex = 0;
@@ -248,8 +265,8 @@ if ($('.hero').length && $('.words-container').length) {
         
         // Calculate typewriter timing
         const typeOutDuration = currentWord.length * 0.09;
-        const pauseDuration = 1.8;
-        const deleteInDuration = currentWord.length * 0.07;
+        const pauseDuration = 1.4;
+        const deleteInDuration = currentWord.length * 0.06;
         const shortPauseDuration = 0.8;
         
         // Create master timeline for typewriter
@@ -305,7 +322,7 @@ if ($('.hero').length && $('.words-container').length) {
     }
     
     // Start both animations together after initial page load
-    gsap.delayedCall(5.0, synchronizedLoop);
+    gsap.delayedCall(4.0, synchronizedLoop);
     
     // Hide scroll arrow when user scrolls down
     if (scrollDownSection) {
@@ -328,7 +345,7 @@ if ($('.work-card').length || $('.footer-email').length) {
     });
     $('body').append(customCursor);
 
-    const cursorOffset = 3;
+    const cursorOffset = -10;
 
     
     // Work Card Cursor
@@ -361,8 +378,8 @@ if ($('.work-card').length || $('.footer-email').length) {
     
     $('.footer-email').on('mousemove', function(e) {
         customCursor.css({
-            left: e.clientX + cursorOffset + 'px',
-            top: e.clientY + cursorOffset + 'px'
+            left: e.clientX + 5 + 'px',
+            top: e.clientY + 5 + 'px'
         });
     });
 }
@@ -406,7 +423,7 @@ copyButton.addEventListener('click', async () => {
     setTimeout(() => {
         copyButton.textContent = 'Email';
         copyButton.classList.remove('copied');
-    }, 2000);
+    }, 1000);
     } catch (err) {
     console.error('Failed to copy: ', err);
     }
@@ -835,6 +852,136 @@ if ($('.hero').length && $('#work').length) {
 }
 
 // ===================================
+// About Page: Simple Fade-in Animations
+// ===================================
+if ($('.about-hero').length) {
+    // Fade in about content on load
+    gsap.from('.about-text', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 0.2
+    });
+    
+    gsap.from('.about-image-placeholder', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: 0.2
+    });
+
+        gsap.utils.toArray('.skills-section').forEach((section) => {
+        gsap.from(section, {
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6
+        });
+    });
+
+        gsap.utils.toArray('.gallery-section').forEach((section) => {
+        gsap.from(section, {
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6
+        });
+    });
+    
+}
+
+// ===================================
+// Photo Gallery Lightbox Functionality
+// ===================================
+if ($('.gallery-section').length) {
+    const lightbox = $('#galleryLightbox');
+    const lightboxImage = $('#lightboxImage');
+    const lightboxCaption = $('#lightboxCaption');
+    const closeBtn = $('.lightbox-close');
+    
+    // Create custom cursor for gallery (reuse existing if it exists)
+    let galleryCursor = $('.custom-cursor');
+    if (!galleryCursor.length) {
+        galleryCursor = $('<div>', {
+            class: 'custom-cursor'
+        });
+        $('body').append(galleryCursor);
+    }
+    
+    
+    // Gallery item hover - show custom cursor with text
+    $('.gallery-item').on('mouseenter', function() {
+        const cursorText = $(this).data('cursor-text') || 'View Photo';
+        galleryCursor.text(cursorText);
+        galleryCursor.addClass('active');
+    });
+    
+    $('.gallery-item').on('mouseleave', function() {
+        galleryCursor.removeClass('active');
+    });
+    
+    $('.gallery-item').on('mousemove', function(e) {
+        galleryCursor.css({
+            left: e.clientX + 15 + 'px',
+            top: e.clientY + + 15 + 'px'
+        });
+    });
+    
+    // Open lightbox when clicking on gallery item
+    $('.gallery-item').on('click', function() {
+        const imgSrc = $(this).find('img').attr('src');
+        const imgAlt = $(this).find('img').attr('alt');
+        const caption = $(this).data('caption');
+        
+        lightboxImage.attr('src', imgSrc);
+        lightboxImage.attr('alt', imgAlt);
+        lightboxCaption.text(caption);
+        
+        // Add active class to trigger transitions
+        lightbox.addClass('active');
+        $('body').css('overflow', 'hidden');
+        
+        // Hide custom cursor when lightbox opens
+        galleryCursor.removeClass('active');
+    });
+    
+    // Close lightbox when clicking close button
+    closeBtn.on('click', function(e) {
+        e.stopPropagation();
+        closeLightbox();
+    });
+    
+    // Close lightbox when clicking on background
+    lightbox.on('click', function(e) {
+        if (e.target === this) {
+            closeLightbox();
+        }
+    });
+    
+    // Close lightbox with Escape key
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.hasClass('active')) {
+            closeLightbox();
+        }
+    });
+    
+    function closeLightbox() {
+        lightbox.removeClass('active');
+        $('body').css('overflow', '');
+    }
+    
+}
+
+
+// ===================================
 // Intersection Observer for Simple Animations
 // ===================================
 const observerOptions = {
@@ -856,3 +1003,4 @@ const observer = new IntersectionObserver((entries) => {
 $('.skill-category').each(function() {
     observer.observe(this);
 });
+
