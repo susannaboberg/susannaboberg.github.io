@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Services Redesign - Susanna Boberg">
+    <title>Student Services | Susanna Boberg</title>
+    <link rel="icon" href="/scribble-imgs/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="case-study-styles.css">
+</head>
+<body data-mode="williams" class="case-study-page">
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <a id="logo" class="logo" href="index.html" aria-label="Home">sjb</a>
+                <div class="logo-overlay"></div>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-list">
+                <div class="overlay-bounds">
+                <div class="overlay"></div>
+                <ul>
+                    <li><a href="index.html#work">Work</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="mailto:sjb5@williams.edu">Contact</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Navigation -->
+    <aside class="page-nav" aria-label="Page sections">
+        <nav class="page-nav-content">
+            <svg class="progress-line" viewBox="0 0 2 100" preserveAspectRatio="none">
+                <line x1="1" y1="0" x2="1" y2="100" stroke="#e5e7eb" stroke-width="2"/>
+                <line class="progress-line-active" x1="1" y1="0" x2="1" y2="0" stroke="#6366f1" stroke-width="2"/>
+            </svg>
+            <ul class="page-nav-links">
+                <li class="nav-section" data-section="overview">
+                    <a href="#overview">Overview</a>
+                </li>
+                <li class="nav-section" data-section="research">
+                    <a href="#research">Research</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#navigation">Navigation Testing</a></li>
+                        <li><a href="#inventory">Content Inventory</a></li>
+                        <li><a href="#card-sorting">Card Sorting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="brainstorming">
+                    <a href="#brainstorming">Brainstorming</a>
+                </li>
+                <li class="nav-section" data-section="tree-testing">
+                    <a href="#tree-testing">Tree Testing</a>
+                </li>
+                <li class="nav-section" data-section="design">
+                    <a href="#design">Design</a>
+                    <ul class="nav-subsections">
+                        <li><a href="#low-fi">Wireframes</a></li>
+                        <li><a href="#high-fi">High-Fidelity</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section" data-section="testing">
+                    <a href="#testing">Usability Testing</a>
+                </li>
+                <li class="nav-section" data-section="going-forward">
+                    <a href="#going-forward">Going Forward</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Case Study Content -->
+    <main class="williams case-study-content">
+        <!-- Hero -->
+        <section class="case-study-hero">
+            <div class="case-study-hero-container">
+                <a href="index.html#work" class="back-link">← Back to work</a>
+
+                <h1 class="case-study-title">Student Services</h1>
+                
+                <p class="case-study-subtitle">A mobile redesign focused on restructuring the information architecture 
+                    of a student services website.</p>
+                <div class="img-rounder">
+                    <img class="case-study-title-img full-img" src="williams-imgs/white-bg-tiles.png" alt="Comparison of the original and new mobile redesign">
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section id="overview" class="case-study-section">
+            <div class="case-study-container">
+                <div class="case-study-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Role</span>
+                        <span class="meta-value">UX Researcher & Designer</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Timeline</span>
+                        <span class="meta-value">1 week</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Project Type</span>
+                        <span class="meta-value">Personal</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Tools & Techniques</span>
+                        <span class="meta-value">Figma, Card Sorting, Tree Testing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-study-container">
+                <div style="margin-bottom: 4rem;">
+                    <h2>Overview</h2>
+
+                        <p>The <b>Williams College Student Records</b> website is used by students for everything 
+                            from enrolling in classes, to checking grades, to managing financial aid, and more.</p>
+                        <p>Despite its many uses, the site is a bit of a running joke among students. It's impossible to 
+                            navigate, poorly labeled, and so unintuitive that the college routinely has to email students
+                            to help them navigate to certain tasks.</p>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img style="justify-self: center; width: 80%;" class="full-img-with-caption" src="williams-imgs/nav-email.png" alt="college email explaining navigation of student services website">
+                            <p class="caption">College email explaining how to navigate various parts of the website</p>
+                        </div>
+                </div>
+                <div style="align-items: start"class="side-by-side-layout">
+                    <div class="image-side">
+                        <img src="williams-imgs/mobile-view.jpg" alt="mobile view of the main menu of student services website">
+                        <p class="caption">The mobile view of the main menu on the student services website (unusable)</p>
+                    </div>
+                    <div>
+                    <p>Given how important the information on this website is, I find it unacceptable that the site
+                        is so difficult to navigate. Its maze-like organization leads the user in clicking frenzies until 
+                        they end up back on the page where they started. After hearing the 
+                        same complaints from classmates, I established <mark class="highlight-text"><b>my goal:</b> to redesign the information architechture 
+                        of Williams College student services to be clear, communicative, and efficient. </mark>
+                    </p>
+                    <p><mark class="highlight-text">I also chose to do this redesign in the form of a mobile app</mark>&mdash;partly 
+                    due to how utterly inaccessible the website is on mobile, and partly as a personal 
+                    challenge/opportunity for growth, as designing for 
+                    a small screen forced me to prioritize what really mattered: a clear, efficient 
+                    information architecture.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Research -->
+        <section id="research" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Research</h2>
+                
+                <section id="navigation" class="case-study-section">
+                    <h3>Navigation Testing</h3>
+                                   
+                    <div class="side-by-side-layout">
+                        <div>
+                            <p>My first objective was to understand how new users navigate the existing site and identify 
+                            pain points in the site's structure and wording.</p>
+                            <p><mark class="highlight-text">I recruited 5 students from other colleges (to avoid bias from familiarity)</mark> 
+                            and asked them to complete four tasks.</p>
+                        </div>
+                       
+                        <div class="bullet-box">
+                            <ul>
+                                <li>Add a course to their cart</li>
+                                <li>Request to change their registered name on campus</li>
+                                <li>Change their board meal plan</li>
+                                <li>Request to pass/fail a class</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <h3>Findings</h3>
+                    <p>Some of the difficulties participants faced:</p>
+
+                    <div style="align-items: start;" class="side-by-side-layout">
+                        <div>
+                            <h4>Misleading Language</h4>
+                            <p>"Academic Records" vs. "Student Records"&mdash;what is the difference? Both these 
+                                subpages are available from the landing page, and it's not clear what the difference is. Funnily enough, 
+                                clicking on "Student Records" leads to yet more 
+                                subpages, one of which is "Academic Records".</p>
+                        </div>
+                        
+                        <div>
+                            <h4>Feeling Lost</h4>
+                            <p>Through the combination of endless navigation loops and a lack of clear menus, students end up clicking and 
+                                clicking in a brute-force method until they spot some piece of helpful information.</p>
+                        </div>
+                    </div>
+                    <img style="margin: 0px;" class="full-img-with-caption" src="williams-imgs/landing-page-original.jpg" alt="landing page of the desktop view">
+                    <p class="caption">Landing page on the desktop view of student services website</p>
+
+
+                        <h4>Quantitative Data</h4>
+
+                        <table class="results-table">
+                            <thead>
+                                <tr class="results-header">
+                                    <th>Task</th>
+                                    <th>Avg. Time</th>
+                                    <th>Error Incidence</th>
+                                    <th>Error Frequency</th>
+                                </tr>
+                            </thead>
+                            <tbody class="results-body">
+                                <tr>
+                                    <td>Add a course to your cart</td>
+                                    <td>38 seconds</td>
+                                    <td>90%</td>
+                                    <td>17%</td>
+                                </tr>
+                                <tr>
+                                    <td>Request to change your registered name on campus</td>
+                                    <td>18 seconds</td>
+                                    <td>60%</td>
+                                    <td>13%</td>
+                                </tr>
+                                <tr>
+                                    <td>Change your board meal plan</td>
+                                    <td>20 seconds</td>
+                                    <td>30%</td>
+                                    <td>8%</td>
+                                </tr>
+                                <tr>
+                                    <td>Request a pass/fail class</td>
+                                    <td>50 seconds</td>
+                                    <td>100%</td>
+                                    <td>40%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>I measured both <b>error incidence</b> (the percentage of users that made at least one mistake) and 
+                            <b>error frequency</b> (the number of errors / total error opportunities&mdash;essentially the percentage 
+                            of clicks that were "incorrect," or led the user away from their goal).</p>
+
+                        <div class="highlight-box">
+                            <h4>Key Findings</h4>
+                            <ul>
+                                <li><mark class="highlight-text">At least 30% of users made a navigation error on every 
+                                    single task, highlighting consistent confusion with the site's structure.</li>
+                                <li>A clear learning curve emerged: as participants became more familiar with the system, both 
+                                    task time and error rate decreased.</li>
+                                <li>The final task&mdash;requesting a pass/fail grading 
+                                    option&mdash;stood out. <mark class="highlight-text">No participant completed it without error, and one user failed to 
+                                    locate it entirely.</mark></li>
+                            </ul>
+                        </div>
+
+                        <p>This task revealed a key structural flaw: the feature was not accessible from the main menu, but 
+                            instead buried under Student Records → Self-Service Forms. By this point, users had learned to rely 
+                            heavily on the main menu for navigation, so the deviation from that pattern broke their expectations.</p>
+
+                        <img style="margin-bottom: 0px;" class="full-img-with-caption" src="williams-imgs/overlapping-menus.png" alt="several overlapping navigation menus">
+                        <p class="caption">The main menu page of the student services website</p>
+                </section>
+
+                <section id="inventory" class="case-study-section">
+                    <h3>Content Inventory</h3>
+                    
+                    <p>After testing, <mark class="highlight-text">I performed a full content inventory to understand the scope and redundancy of the site.</mark> 
+                        This involved recording the titles and URLs of every page within the website. There were easily over 
+                        100 pages, many of which with outdated, repetitive, or missing information, broken links or odd amounts 
+                        of whitespace.</p>
+                    
+                    <h4>Findings</h4>
+                    <div class="side-by-side-layout">
+                                            <ul>
+                        <li><b>Circular navigation</b>&mdash;some pages, like "personal information" or 
+                            "student records" were linked to 3-4 times</li>
+                        <li><b>External links</b> to multiple subdomains (without indication that these links 
+                            were external), creating inconsistent experiences</li>
+                        <li><b>Excessive clicking</b>&mdash;users have to click through pages and pages to reach 
+                            commonly-needed actions such as course enrollment or viewing grades</li>
+                    </ul>
+                    <div class="image-side">
+                        <img src="williams-imgs/content-inventory.gif">
+                        <p class="caption">Spreadsheet showing every page of the students services website, every instance of the "addresses" page highlighted in red to show page repetition</p>
+                    </div>
+
+                    </div>
+
+                </section>
+
+                <section id="card-sorting" class="case-study-section">
+                    <h3>Card Sorting</h3>
+                    <p>Content inventory allowed me to pare down any excessive or repetitive pages. However, there were still 
+                        an enourmous amount of different ways to sort through information. <mark class="highlight-text"> The current biggest issue with the student 
+                        services website is that it's difficult to tell what each menu or subpage leads to, either due to ambiguous 
+                        naming or hiding items behind links</mark> . Where should enrollment be found? Contact information? 
+                    </p>
+
+                    <p>I had a foundation structure from the existing website&mdash;but I wanted to make changes that would actually 
+                        reflect the priorities of students. Thus, I decided to conduct card sorting, in order to see how 
+                        students naturally group pieces of information.
+                    </p>
+
+                    <p style="margin-bottom: 3rem;"><b>Objective</b>:  Discover how students would naturally organize content — and which items didn't belong anywhere.</p>
+                    
+                    <h4>Method</h4>
+                    <p><mark class="highlight-text">6 participants grouped 20 items into logical categories in an open card sort </mark>(meaning 
+                        they created and labelled their own categories).</p>
+                    <h4>Emerging Categories</h4>
+                    <img style="margin-bottom: 0px;" class="full-img-with-caption" src="williams-imgs/sample-card-sort.png" alt="one user's created categories">
+                    <p class="caption">One participant's created card categories</p>
+                    <div class="questions-box">
+                        <ul style="margin-top: 1rem; margin-bottom: 2rem;">
+                            <li><b>Academics</b>: Enrollment, Grades, Transcripts</li>
+                            <li><b>Finances</b>: Billing, Financial Aid, Payment Plans</li>
+                            <li><b>Personal</b>: Profile, Address, ID Information</li>
+                            <li><b>Campus Life/Miscellaneous</b>: Meal Plans, Housing, Transportation</li>
+                        </ul>
+                    </div>
+
+            
+
+                    <p>The fourth category was the least consistent across users. Some left it unlabelled, some chose "campus life", 
+                        others put "meal plans" in finance and "transportation" in personal. 
+                        
+                     <p>I also put a short questionnaire before 
+                        the card sorting, asking participants how they most commonly used Student Records.</p>
+                    <div class="quote-box">
+                        <p>"I spend most of my time enrolling in classes, searching for classes, and checking my grades. Everything else I look at maybe once a year, or if an email tells me to."</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Brainstorming -->
+        <section id="brainstorming" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Brainstorming</h2>
+                
+                <p>Since I was redesigning the site as a mobile app, I had the chance to take advantage of the 
+                    navigation bar at the bottom. These buttons, always accessible, would be quick and easy for 
+                    users to navigate to. Thus, <mark class="highlight-text">I spent a long time deciding how to organize the high-level structure 
+                    of the app in the nav bar.</mark></p>
+                <p>
+                    What is clear to a user? What information are they looking for in this app? What does "home" entail? Is it clear that
+                    profile includes settings as well? All of these were questions I began to wonder while mapping out my user flow.
+                    I started with the main categories that resulted from card sorting, then created some variants.
+                </p>
+                
+                <h4>Options</h4>
+                <div class="questions-box">
+                    <ol style="margin-top: 1rem; margin-bottom: 2rem;">
+                        <li>Home / Academics / Finances / Campus Life / Profile</li>
+                        <li>Academics / Finances / Search / Campus Life / Profile</li>
+                        <li>Home / Academics / Finances / Search / Profile</li>
+                        <li>Home / Courses / Enrollment / Finances / Profile</li>
+                    </ol>
+                </div>
+
+                <h4>Decisions</h4>
+                <ul style="margin-top: 1rem; margin-bottom: 2rem;">
+                    <li><b>Removed "Search":</b> The goal was discoverability without needing to search.</li>
+                    <li><b>Merged "Campus Life" content into "Home → Resources":</b> As already expressed through the post-card sorting survey, these resources weren't accessed frequently enough to warrant an entire tab of the navigation menu</li>
+                    <li><b>Prioritized frequent actions:</b> enrollment and grades became separate top-level items, since they are so frequently used.</li>
+                </ul>
+                <p><mark class="highlight-text">Thus, I ended up choosing to start with Home / Grades / Enrollment / Finances / Profile.</mark>
+                    I created a basic tree mapping out the navigation of all subpages on the website.
+                </p>
+            </div>
+        </section>
+
+        <!-- Tree Testing -->
+        <section id="tree-testing" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Tree Testing</h2>
+                
+                <p>Before going ahead with implementation, I wanted to test my reorganization of the information 
+                    on the site. This meant tree testing&mdash;a way to have users navigate the hypothetical 
+                    layout of the website, without as much of an emphasis on visual design.</p>
+                
+                <div class="questions-box">
+                    <h4>Tasks</h4>
+                    <div style="align-items: start; margin-top: 2rem;" class="side-by-side-layout">
+                        <ul>
+                            <li><b>Task 1:</b> Request to pass/fail a class</li>
+                            <li><b>Task 2:</b> View final exam schedule</li>
+                            <li><b>Task 3:</b> Request to change campus name</li>
+                            <li><b>Task 4:</b> Drop a course</li>
+                        </ul>
+                        <div>
+                            <img style="margin-top: 0px;" class="full-img-with-caption" src="williams-imgs/tree-test-bar-graph.png" alt="bar graph showing the directness of each task">
+                            <p class="caption">Graph displaying how directly each task answer was found</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <p>Overall, times to find items were quite short&mdash;however, our main issue was directness. 
+                    In fact, <mark class="highlight-text">out of all the tasks completed by participants, 
+                    only 42% of destinations were chosen without backtracking.</mark>
+                    Specifically, users struggled to differentiate between grades 
+                        and enrollment. For adding classes or checking grades, the difference was clear. 
+                        However, for more ambiguous actions such as pass/fail a class, or drop an extra class, 
+                        more misclicks occurred. In fact, all users had indirect success when trying to drop a course.</p>
+                
+                <p>I figured this confusion came from the labelling&mdash;enrollment seemed to describe more 
+                    anything to do with taking action in regards to classes, whereas grades was much more passive.
+                    <mark class="highlight-text">I thus decided to rename "enrollment" to "courses", so users better understood that 
+                    the tab referred to current classes in addition to enrollment.</mark> This way,  anything unrelated 
+                    to grades would be redirected to the "courses" tab (thus solving the "drop a course" ambiguity).</p>
+                
+                <p>I also decided to put actions such as pass/fail requests at the top of the screen when designing,
+                    as this quicker, simpler action (in comparison to looking through grades) would then not be missed.
+                </p>
+            </div>
+        </section>
+
+        <!-- Design -->
+        <section id="design" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Design</h2>
+                <section id="low-fi" class="case-study-section">
+                    <h3>Wireframes</h3>
+
+
+                    
+                    <p>Starting with mobile wireframes, <mark class="highlight-text">I focused on reducing depth — the number of screens users had to navigate to complete a task.</mark></p>
+                    
+                    <ul>
+                        <li>Enrollment combines class search, add/drop/swap into one flow.</li>
+                        <li>Home page includes quick links for common actions and a notification area for deadlines and announcements.</li>
+                    </ul>
+                    
+                    <p><b>A note:</b> I restricted myself to using features that the website already had&mdash;so I didn't, for instancek 
+                        completely restructure and redesign the class search process, but instead improved the way 
+                        in which class search can be accessed.</p>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <img style="width: 80%;" class="full-img" src="williams-imgs/low-frames.png" alt="image of hand-drawn wireframes, low-fidelity">
+                    </div>
+                </section>
+
+                <section id="high-fi" class="case-study-section">
+                    <h3>High-Fidelity Design</h3>
+                    <div class="side-by-side-layout-first-larger">
+                        <p>The final design was created in Figma. I stuck to the college's style guide for color, and kept a simplistic typography.</p>
+                        <div class="image-side">
+                            <img src="williams-imgs/color-guide.svg" alt="color guide of my redesign">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 3rem;" class="side-by-side-layout">
+                        <div class="image-side">
+                            <img style="width: 80% !important;" src="williams-imgs/home-frame.png" alt="screenshot of the home frame, redesigned">
+                        </div>
+                        <p>The landing page includes the student's ID number, which is frequently needed for documents.
+                            Notifcations are displayed below, which link to different parts of the app. I display only 
+                            the most recent ones, to avoid hiding the campus resources. <mark class="highlight-text">Since these are somewhat miscellaneous (the same problem 
+                            that was encountered in card sorting), I wanted them to be easily discoverable&mdash;the 
+                            fold indicates that the user can scroll</mark>. The icons (arrow vs. link-out) indicate
+                            what happens when the user clicks the resource tiles.
+                        </p>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <img style="width: 70%;" class="full-img" src="williams-imgs/courses-frame.png" alt="new redesign of the current course and enrollment frames, in one tab">
+                    <p class="caption">Current courses and enrollment information, in one tab of the mobile app</p>
+                    </div>
+                    <p>As can be seen above, I used a toggle to allow the user to switch between viewing their current courses, and enrolling in new courses.
+                        The app first opens on current courses, since they are more commonly viewed&mdash;<mark class="highlight-text">a theme of my redesign is that almost 
+                        everything that needs to be accessed more often, is higher up on the information tree hierarchy</mark>. Note the user can also 
+                        switch between a list and calendar (which scrolls horizontally) view.
+                    </p>
+                    <p>In addition, class search and enrollment options have been condensed to one page, again to reduce
+                        the number of interactions needed to reach these features.
+                    </p>
+
+
+                    <div class="side-by-side-layout-first-larger">
+                        <p>The grades page includes request actions at the top, so they can be quickly accessed and won't 
+                            be missed at the bottom of the screen. The user can view different semester grades via a dropdown 
+                            menu, and their cumulative gpa is calculated, so they don't have to manually calculate it.
+                        </p>
+                        <div class="image-side">
+                            <img style="width: 80% !important;" src="williams-imgs/grades-frame.png" alt="screen of grades tab of redesign">
+                        </div>
+                    </div>
+
+                    <p id="prototype" style="margin-top: 3rem;">Finally, feel free to view the entire prototype <a target="_blank" href="https://www.figma.com/proto/gTMh20V1MqJo88HYDqRRbg/Williams-Student-Records?page-id=0%3A1&node-id=40-3&viewport=574%2C548%2C0.22&t=cW8pdETg7XWeQiNi-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=40%3A3">here on Figma</a></p>
+                    <img class="full-img" src="williams-imgs/full-frames.png" alt="five screens of the redesign protoype">
+                </section>
+            </div>
+        </section>
+
+        <!-- Usability Testing -->
+        <section id="testing" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Usability Testing</h2>
+                
+                <p>Lastly, I wanted to compare efficiency and satisfaction between the original website and the redesigned prototype.
+                    <mark class="highlight-text"> asked five new people to complete the same tasks from the original navigation testing.</mark>
+                </p>
+
+                <table class="results-table" style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
+                    <thead class="results-header">
+                        <tr>
+                            <th>Task</th>
+                            <th>Avg. Time</th>
+                            <th>Error Incidence</th>
+                            <th>Error Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody class="results-body">
+                        <tr>
+                            <td>Add a course to your cart</td>
+                            <td>10 seconds</td>
+                            <td>0%</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>Request to change your registered name on campus</td>
+                            <td>7 seconds</td>
+                            <td>0%</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>Change your board meal plan</td>
+                            <td>5 seconds</td>
+                            <td>10%</td>
+                            <td>0.05%</td>
+                        </tr>
+                        <tr>
+                            <td>Request a pass/fail class</td>
+                            <td>12 seconds</td>
+                            <td>20%</td>
+                            <td>10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><mark class="highlight-text">All in all, error incidence with the redesign was 
+                    far lower.</mark> Of course, time comparisons aren't completely fair, as the original 
+                    requires some time to load pages, whereas Figma prototype loading is immediate. However, 
+                    consistently across the board, users completed tasks in testing far quicker, and more 
+                    directly without errors.</p>
+
+                <p>The big improvement is that by reorganizing the tabs and flow of the website, there are no 
+                    longer deep paths of endless clicking users must go through. <mark class="highlight-text">Thus, the penalty for misclicking 
+                    is far smaller, and less time-consuming</mark>.
+                </p>
+
+                <img class="full-img-with-caption" src="williams-imgs/straight-mobile-comp.png" alt="comparing the original and new landing pages">
+                <p class="caption">Comparison between the original and new mobile landing pages</p>
+            </div>
+        </section>
+
+        <!-- Going Forward -->
+        <section id="going-forward" class="case-study-section">
+            <div class="case-study-container">
+                <h2>Going Forward</h2>
+                
+                <p>If expanded beyond a one-week sprint, I would:</p>
+                
+                <ul>
+                    <li><b>Expand to smaller features, such as the process of adding courses and searching.</b> I've 
+                        completed the overarching information architecture, but there are still many more 
+                        frustrating aspects to this website</li>
+                    <li><b>Experiment with adding features that are not currently on "Student Records"</b> but 
+                        are scattered throughout various pages on the Williams College website&mdash;for example, 
+                        the yearly academic schedule, degree requirement information, etc.</li>
+                    <li><b>Conduct testing with a higher sample size</b>. Simply due to time constraints I limited how much testing and how many participants I involved.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><mark class="highlight-text">This project deepened my understanding of information 
+                        architecture as the foundation of UX design.</mark> Methods such as card sorting and 
+                        tree testing showed me just how much a user's mental model of a website can vary.</p>
+                    
+                    <p>Through this process, I also learned how valuable iterative validation is. Assuring myself 
+                        that I was making the right choices through card sorting and tree testing allowed me as a 
+                        designer to avoid wasting time and stay focused on features that directly contributed to 
+                        my main goal.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Project -->
+        <section class="next-project">
+            <div class="case-study-container">
+                <a href="side-scribble.html" class="next-project-link">
+                    <span class="next-label">Up Next</span>
+                    <h3>SideScribble →</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p class="footer-text">Coded with a serving of html/css/js, a spray of bug repellent and lots of ♡</p>
+            </div>
+            <div class="footer-right">
+                <button class="footer-email" id="copyEmailBtn">Email</button>
+                <span class="footer-divider">·</span>
+                <a href="www.linkedin.com/in/susanna-boberg" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                <span class="footer-divider">·</span>
+                <span class="footer-copyright">© 2025 Susanna Boberg</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

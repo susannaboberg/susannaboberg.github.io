@@ -1,12 +1,12 @@
 
 // ===================================
-// GSAP & ScrollTrigger Setup
-// ===================================
+// GSAP ScrollTrigger
+
 gsap.registerPlugin(ScrollTrigger); 
 
 // ===================================
-// Navigation Overlay Logic
-// ===================================
+// Navigation Overlay
+
 const overlay = document.querySelector('.nav-list .overlay');
 const logoOverlay = document.querySelector('.logo-overlay');
 const nav_list = document.querySelectorAll('.nav-list ul li');
@@ -72,7 +72,7 @@ nav_list.forEach((list) => {
         overlay.style.height = linkRect.height + 'px';
         overlay.style.width = linkRect.width + 'px';
         
-        // Hide logo overlay when hovering nav
+        // Hide logo overlay when hovering over right nav
         logoOverlay.style.opacity = '0';
     });
 });
@@ -97,6 +97,7 @@ logo.addEventListener('mouseenter', () => {
 logo.addEventListener('mouseleave', () => {
     overlay.classList.remove('active');
     logoOverlay.classList.remove('active');
+
     // Return to active link position
     positionOverlayOnActive();
 });
@@ -105,11 +106,10 @@ logo.addEventListener('mouseleave', () => {
 nav_list_container.addEventListener('mouseleave', () => {
     overlay.classList.remove('active');
     logoOverlay.classList.remove('active');
-    // Return to active link position smoothly
     positionOverlayOnActive();
 });
 
-// Throttle resize and scroll listeners for better performance
+// better performance
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -130,7 +130,7 @@ window.addEventListener('scroll', () => {
 
 // ===================================
 // Mobile Menu Toggle
-// ===================================
+
 const mobileMenuToggle = $('.mobile-menu-toggle');
 const navLinks = $('.nav-list');
 const navbar = $('.navbar');
@@ -153,40 +153,34 @@ navLinks.find('a').on('click', function() {
 });
 
 
-
-
 // ===================================
 // GSAP Animations for Index Page
-// ===================================
+
 if ($('.hero').length) {
-
     gsap.to('.hello-text', {
-    opacity: 1,
-    y: -20,
-    duration: 0.8,
-    delay: 0.0 // Starts immediately
-});
-
-gsap.to('.hero-title', {
-    opacity: 1,
-    y: -20,
-    duration: 0.8,
-    delay: 0.2 // Slight stagger for natural timing
-});
-
-
-    // Hero title animation
-    gsap.to('.hero-title', {
-        duration: 2.5, 
-        scrambleText: {
-            text: "Susanna Boberg",
-            chars: "lowerCase",
-            revealDelay: 1,
-            speed: 0.8
-        }
+        opacity: 1,
+        y: -20,
+        duration: 0.8,
+        delay: 0.0 // Starts immediately
     });
 
-    // Hero description animation
+    gsap.to('.hero-title', {
+        opacity: 1,
+        y: -20,
+        duration: 0.8,
+        delay: 0.2
+    });
+
+    gsap.to('.hero-title', {
+            duration: 2.5, 
+            scrambleText: {
+                text: "Susanna Boberg",
+                chars: "lowerCase",
+                revealDelay: 1,
+                speed: 0.8
+            }
+        });
+
     gsap.to('.hero-description', {
         opacity: 1,
         y: -20,
@@ -200,7 +194,6 @@ gsap.to('.hero-title', {
         delay: 3.1
     })
 
-        // Fade in scroll section to opacity 0.7
     gsap.to('.scroll-down-section', {
         opacity: 0.7,
         duration: 0.8,
@@ -208,9 +201,6 @@ gsap.to('.hero-title', {
         y: -20
     })
 
-
-
-    // Work cards animation
     gsap.utils.toArray('.work-card').forEach((card, i) => {
         gsap.from(card, {
             scrollTrigger: {
@@ -227,8 +217,8 @@ gsap.to('.hero-title', {
 }
 
 // ===================================
-// SYNCHRONIZED Typewriter & Scramble Animations
-// ===================================
+// Typewriter & Scramble Animations
+
 if ($('.hero').length && $('.words-container').length) {
     const words = [
         " design",
@@ -239,7 +229,6 @@ if ($('.hero').length && $('.words-container').length) {
         " storytelling"
     ];
     
-    // Remove leading space for scroll words
     const scrollWords = [
         "Scroll to see works",
         "Scrollen, um Arbeiten zu sehen",
@@ -254,7 +243,6 @@ if ($('.hero').length && $('.words-container').length) {
     const scrollTextElement = document.querySelector('.scroll-down-text');
     const scrollDownSection = document.querySelector('.scroll-down-section');
     
-    // Create a single span for the typing effect
     const typingSpan = document.createElement('span');
     typingSpan.className = 'typing-word';
     container.innerHTML = '';
@@ -304,7 +292,7 @@ if ($('.hero').length && $('.words-container').length) {
         // Short pause before next word
         typewriterTL.to({}, { duration: shortPauseDuration });
         
-        // SYNCHRONIZED SCRAMBLE - starts at the same time
+        // SYNCHRONIZED SCRAMBLE
         if (scrollTextElement) {
             const scrambleDuration = 1.0;
             const scrambleStartDelay = typeOutDuration - 2.0;
@@ -322,7 +310,7 @@ if ($('.hero').length && $('.words-container').length) {
         }
     }
     
-    // Start both animations together after initial page load
+    // Start both animations together
     gsap.delayedCall(3.8, synchronizedLoop);
     
     // Hide scroll arrow when user scrolls down
@@ -339,7 +327,10 @@ if ($('.hero').length && $('.words-container').length) {
     }
 }
 
-if ($('.work-card').length || $('.footer-email').length) {
+// ===================================
+// Custom Cursor on Works & Footer
+
+if ($('.work-card').length) {
     // Create single custom cursor element (reused for both)
     const customCursor = $('<div>', {
         class: 'custom-cursor'
@@ -348,7 +339,6 @@ if ($('.work-card').length || $('.footer-email').length) {
 
     const cursorOffset = -10;
 
-    
     // Work Card Cursor
     $('.work-card').on('mouseenter', function() {
         customCursor.text('View Case Study');
@@ -367,71 +357,12 @@ if ($('.work-card').length || $('.footer-email').length) {
         });
     });
     
-    // Email Button Cursor
-    $('.footer-email').on('mouseenter', function() {
-        customCursor.text('Copy Email');
-        customCursor.addClass('active');
-    });
-    
-    $('.footer-email').on('mouseleave', function() {
-        customCursor.removeClass('active');
-    });
-    
-    $('.footer-email').on('mousemove', function(e) {
-        customCursor.css({
-            left: e.clientX + 5 + 'px',
-            top: e.clientY + 5 + 'px'
-        });
-    });
 }
 
-if ($('.footer-email').length) {
-    const customCursor = $('<div>', {
-        class: 'custom-cursor',
-        text: 'Copy Email to Clipboard'
-    });
 
-    // Track cursor position
-    $('.footer-email').on('mouseenter', function() {
-        customCursor.addClass('active');
-    });
-    
-    $('.footer-email').on('mouseleave', function() {
-        customCursor.removeClass('active');
-    });
-    
-    $('.footer-email').on('mousemove', function(e) {
-        customCursor.css({
-            left: e.clientX + 'px',
-            top: e.clientY + 'px'
-        });
-    });    
-}
-
-// ===================================
-// Footer: Copy email
-// ===================================
-const copyButton = document.getElementById('copyEmailBtn');
-const email = 'sboberg617@gmail.com'; // 👈 your email address
-
-copyButton.addEventListener('click', async () => {
-    try {
-    await navigator.clipboard.writeText(email);
-    copyButton.textContent = 'Copied!';
-    copyButton.classList.add('copied');
-
-    // Reset button after 2 seconds
-    setTimeout(() => {
-        copyButton.textContent = 'Email';
-        copyButton.classList.remove('copied');
-    }, 1000);
-    } catch (err) {
-    console.error('Failed to copy: ', err);
-    }
-});
 // ===================================
 // Case Study Page: Text Highlight Animation
-// ===================================
+
 if ($('.case-study-page').length) {
     
     // Smooth text highlight on scroll
@@ -448,7 +379,7 @@ if ($('.case-study-page').length) {
         });
     });
     
-    // Section animations
+    // Section fade-in animations
     gsap.utils.toArray('.case-study-section').forEach((section) => {
         gsap.from(section, {
             scrollTrigger: {
@@ -464,20 +395,23 @@ if ($('.case-study-page').length) {
 }
 
 // ===================================
-// Case Study Page Load Animations
-// ===================================
+// Case Study On Page Load Animations
+
 if ($('.case-study-page').length) {
     // Animate hero content on load
     gsap.fromTo('.case-study-hero', {
         opacity: 0,
         y: 20,
     }, {opacity: 1, y: 0, duration: 0.6, delay: 0.7});
+
+    gsap.fromTo('.case-study-meta', {
+        opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.6, delay: 0.7});
     
 }
 
 // ===================================
-// Case Study Page Navigation
-// ===================================
+// Case Study Page Side Navigation
+
 if ($('.page-nav').length) {
     const pageNav = $('.page-nav');
     const overviewSection = $('#overview');
@@ -524,7 +458,7 @@ if ($('.page-nav').length) {
             }
         });
         
-        // Update nav highlighting - FIXED: Check if link belongs to current parent section
+        // Update nav highlighting
         navSections.each(function() {
             const $navSection = $(this);
             const mainLink = $navSection.find('> a');
@@ -592,7 +526,9 @@ if ($('.page-nav').length) {
     updateActiveNav();
 }
 
-// *** START CHANGE: Mobile Page Navigation Toggle ***
+// ===================================
+// Mobile Menu Toggle
+
 if ($('.page-nav').length) {
     // Create mobile toggle button
     const pageNavToggle = $('<button>', {
@@ -607,8 +543,7 @@ if ($('.page-nav').length) {
     
     // Check screen size and show button only on mobile
     function checkScreenSize() {
-        if ($(window).width() <= 1024) {
-            // On mobile, check if we should show the button
+        if ($(window).width() <= 1240) {
             const overviewSection = $('#overview');
             
             if (overviewSection.length) {
@@ -616,7 +551,6 @@ if ($('.page-nav').length) {
                 const scrollPos = $(window).scrollTop();
                 const navHeight = $('.navbar').outerHeight();
                 
-                // Show button if past overview and not near bottom
                 if (scrollPos >= (overviewTop - navHeight - 100)) {
                     pageNavToggle.addClass('show');
                 } else {
@@ -689,9 +623,10 @@ if ($('.page-nav').length) {
     
     checkScreenSize(); // Initial check
 }
-// *** END CHANGE ***
 
-// *** START CHANGE: Back to Top Button ***
+// ===================================
+// Back to Top Button
+
 if ($('.case-study-page').length) {
     // Create back to top button
     const backToTop = $('<button>', {
@@ -724,11 +659,10 @@ if ($('.case-study-page').length) {
         }, 200, 'linear');
     });
 }
-// *** END CHANGE ***
 
 // ===================================
-// Dropdown Functionality
-// ===================================
+// Solutions Dropdown Functionality
+
 $('.dropdown-trigger').on('click', function() {
     const isExpanded = $(this).attr('aria-expanded') === 'true';
     $(this).attr('aria-expanded', !isExpanded);
@@ -736,7 +670,7 @@ $('.dropdown-trigger').on('click', function() {
 
 // ===================================
 // Smooth Scroll for Anchor Links
-// ===================================
+
 $('a[href^="#"]').on('click', function(e) {
     const href = $(this).attr('href');
     if (href !== '#' && href !== '') {
@@ -747,14 +681,14 @@ $('a[href^="#"]').on('click', function(e) {
             const targetPosition = target.offset().top - navHeight - 20;
             $('html, body').animate({
                 scrollTop: targetPosition
-            }, 50, 'linear'); /* *** CHANGE: Increased from 100 to 400 for smoother scroll *** */
+            }, 50, 'linear');
         }
     }
 });
 
 // ===================================
 // Active Navigation Based on Scroll Position (Index Page Only)
-// ===================================
+
 if ($('.hero').length && $('#work').length) {
     // Only run on index page where hero and work sections exist
     
@@ -823,9 +757,8 @@ if ($('.hero').length && $('#work').length) {
 
 // ===================================
 // About Page: Simple Fade-in Animations
-// ===================================
+
 if ($('.about-hero').length) {
-    // Fade in about content on load
 
     gsap.to('.about-text', {
         opacity: 1,
@@ -847,24 +780,22 @@ if ($('.about-hero').length) {
         duration: 0.8,
         delay: 0.2
     });
-
-    
 }
 
 // ===================================
-// Social Slider Overlay Logic (About Page)
-// ===================================
+// Socials Slider Overlay Logic (About Page)
+
 if ($('.social-slider').length) {
     const socialOverlay = document.querySelector('.social-overlay');
     const socialSlider = document.querySelector('.social-slider');
     const socialItems = document.querySelectorAll('.social-slider ul li');
     
-    // Create custom "Copied!" cursor
-    const copiedCursor = $('<div>', {
-        class: 'custom-cursor copied-cursor',
+    // Create a SEPARATE custom "copied" cursor (don't reuse gallery cursor)
+    const socialCopiedCursor = $('<div>', {
+        class: 'custom-cursor social-copied-cursor',
         text: 'Copied!'
     });
-    $('body').append(copiedCursor);
+    $('body').append(socialCopiedCursor);
     
     // Function to update overlay position
     function updateOverlayPosition(link) {
@@ -902,6 +833,11 @@ if ($('.social-slider').length) {
         });
     });
     
+    // Hide overlay when mouse leaves slider
+    socialSlider.addEventListener('mouseleave', () => {
+        socialOverlay.style.opacity = '0';
+        socialSlider.classList.remove('pressed');
+    });
     
     // Email copy functionality for second button
     const copyBtn2 = document.getElementById('copyEmailBtn2');
@@ -925,9 +861,9 @@ if ($('.social-slider').length) {
             mouseX = e.clientX;
             mouseY = e.clientY;
             
-            // Update copied cursor position if active
-            if (copiedCursor.hasClass('active')) {
-                copiedCursor.css({
+            // Update ONLY the social copied cursor position if active
+            if (socialCopiedCursor.hasClass('active')) {
+                socialCopiedCursor.css({
                     left: mouseX + 15 + 'px',
                     top: mouseY + 15 + 'px'
                 });
@@ -937,11 +873,11 @@ if ($('.social-slider').length) {
         copyBtn2.addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText('sjb5@williams.edu');
-                const originalText = copyBtn2.textContent;
                 
-                // Show custom "Copied!" cursor
-                copiedCursor.addClass('active');
-                copiedCursor.css({
+                $('.custom-cursor.gallery-cursor').removeClass('active');
+                // Show custom "Copied!" cursor (the separate one)
+                socialCopiedCursor.addClass('active');
+                socialCopiedCursor.css({
                     left: mouseX + 15 + 'px',
                     top: mouseY + 15 + 'px'
                 });
@@ -954,7 +890,7 @@ if ($('.social-slider').length) {
                 }
                 
                 setTimeout(() => {
-                    copiedCursor.removeClass('active');
+                    socialCopiedCursor.removeClass('active');
                     
                     // Update overlay size back when text changes
                     if (isHovering) {
@@ -962,7 +898,7 @@ if ($('.social-slider').length) {
                             updateOverlayPosition(copyBtn2);
                         }, 10);
                     }
-                }, 500);
+                }, 1000);
             } catch (err) {
                 console.error('Failed to copy: ', err);
             }
@@ -979,18 +915,19 @@ if ($('.gallery-section').length) {
     const lightboxCaption = $('#lightboxCaption');
     const closeBtn = $('.lightbox-close');
     
-    // Create custom cursor for gallery (reuse existing if it exists)
-    let galleryCursor = $('.custom-cursor');
-    if (!galleryCursor.length) {
-        galleryCursor = $('<div>', {
-            class: 'custom-cursor'
-        });
-        $('body').append(galleryCursor);
-    }
-    
+    // Create DEDICATED cursor for gallery only
+    const galleryCursor = $('<div>', {
+        class: 'custom-cursor gallery-cursor'
+    });
+    $('body').append(galleryCursor);
     
     // Gallery item hover - show custom cursor with text
     $('.gallery-item').on('mouseenter', function() {
+        // Don't show gallery cursor if ANY copied cursor is active
+        if ($('.custom-cursor.email-copied-cursor, .custom-cursor.social-copied-cursor').hasClass('active')) {
+            return;
+        }
+        
         const cursorText = $(this).data('cursor-text') || 'View Photo';
         galleryCursor.text(cursorText);
         galleryCursor.addClass('active');
@@ -1001,9 +938,14 @@ if ($('.gallery-section').length) {
     });
     
     $('.gallery-item').on('mousemove', function(e) {
+        // Don't update position if ANY copied cursor is active
+        if ($('.custom-cursor.email-copied-cursor, .custom-cursor.social-copied-cursor').hasClass('active')) {
+            return;
+        }
+        
         galleryCursor.css({
             left: e.clientX + 15 + 'px',
-            top: e.clientY + + 15 + 'px'
+            top: e.clientY + 15 + 'px'
         });
     });
     
@@ -1050,12 +992,81 @@ if ($('.gallery-section').length) {
         $('body').css('overflow', '');
     }
     
+    // Animate gallery items on scroll
+    if (typeof gsap !== 'undefined') {
+        gsap.utils.toArray('.gallery-item').forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 0,
+                y: 30,
+                duration: 0.6,
+                delay: i * 0.05
+            });
+        });
+    }
 }
 
+// ===================================
+// Email Copy Cursor for Footer (About Page)
+// ===================================
+if ($('.footer-email').length && $('.about-hero').length) {
+    // Create separate email copied cursor for footer
+    const emailCopiedCursor = $('<div>', {
+        class: 'custom-cursor email-copied-cursor',
+        text: 'Copied!'
+    });
+    $('body').append(emailCopiedCursor);
+    
+    const copyButton = $('.footer-email');
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Track mouse position globally
+    $(document).on('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Update email copied cursor position if active
+        if (emailCopiedCursor.hasClass('active')) {
+            emailCopiedCursor.css({
+                left: mouseX + 15 + 'px',
+                top: mouseY + 15 + 'px'
+            });
+        }
+    });
+    
+    // When email button is clicked
+    copyButton.on('click', async function() {
+        try {
+            await navigator.clipboard.writeText('sjb5@williams.edu');
+            
+            // Hide gallery cursor if active
+            $('.custom-cursor.gallery-cursor').removeClass('active');
+            
+            // Show email copied cursor
+            emailCopiedCursor.addClass('active');
+            emailCopiedCursor.css({
+                left: mouseX + 15 + 'px',
+                top: mouseY + 15 + 'px'
+            });
+            
+            // Hide after 1 second
+            setTimeout(() => {
+                emailCopiedCursor.removeClass('active');
+            }, 1000);
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    });
+}
 
 // ===================================
 // Intersection Observer for Simple Animations
-// ===================================
+
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'

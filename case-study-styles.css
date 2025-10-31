@@ -78,7 +78,7 @@
 }
 
 .progress-line-active {
-    stroke: var(--primary);
+    stroke: var(--secondary);
     transition: y2 0.3s ease;
 }
 
@@ -104,7 +104,7 @@
 
 .page-nav-links .nav-section > a.active,
 .page-nav-links .nav-section > a:hover {
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 .nav-subsections {
@@ -136,7 +136,7 @@
 
 .nav-subsections a.active,
 .nav-subsections a:hover {
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 .case-study-content {
@@ -210,6 +210,7 @@
     padding: 2rem 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    opacity: 0;
 }
 
 .meta-item {
@@ -233,7 +234,7 @@
 /* =================================
    IMAGE STYLING
    ================================= */
-.full-img, #long-panel-img {
+.full-img, .full-img-with-caption, #long-panel-img {
     width: 100%;
     border-radius: 7px;
 }
@@ -241,6 +242,11 @@
 .full-img {
     margin-bottom: 2rem;
     margin-top: 1.5rem;
+}
+
+.full-img-with-caption {
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
 }
 
 
@@ -471,7 +477,7 @@ mark {
     margin-bottom: 1rem;
 }
 
-.case-study-section ol li:last-child {
+.case-study-section ol li:last-child, ul li:last-child {
     margin-bottom: 0px;
 }
 
@@ -532,6 +538,7 @@ mark {
 .caption {
     text-align:center;
     font-size: smaller !important;
+    margin-bottom: 2rem !important;
 }
 
 #interviews p:last-of-type {
@@ -541,6 +548,13 @@ mark {
 /* =================================
    CONTENT BOXES
    ================================= */
+.bullet-box {
+    background: var(--highlight-lighter);
+    padding: 1.4rem;
+    border-radius: 10px;
+    align-items: center;
+    justify-self: center;
+}
 
 .quote-box {
     background: var(--bg-gray);
@@ -584,6 +598,24 @@ mark {
     margin-bottom: 0px;
 }
 
+.results-table {
+    border-radius: 15px;
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 2rem 0; 
+    background-color: var(--highlight-lighter);
+    overflow: hidden;
+}
+
+.results-header {
+    text-align: left;
+}
+
+
+.results-body tr td, .results-header th {
+    padding: 1rem; 
+    border: 1px solid lightgray;
+}
 
 
 
@@ -643,8 +675,9 @@ mark {
 }
 
 .dropdown-trigger[aria-expanded="true"] + .dropdown-content {
-    max-height: 4000;
+    max-height: 4000px;
     padding: 1.5rem;
+    overflow: visible;
 }
 
 .jump-button {
