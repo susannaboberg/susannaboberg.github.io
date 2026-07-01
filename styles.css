@@ -218,11 +218,15 @@ body.menu-open {
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
+    min-height: 70vh;
 }
 
+
+
+
 .hero-text {
-    max-width: 800px;
-    margin-bottom: 3rem;
+    max-width: 900px;
+    margin-bottom: clamp(1rem, 4vh, 3rem);
 }
 
 
@@ -230,7 +234,7 @@ body.menu-open {
     font-size: clamp(3rem, 9vw, 7rem);
     font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(0.75rem, 3vh, 2rem);
     letter-spacing: -0.03em;
     color: var(--text-dark);
     opacity: 0;
