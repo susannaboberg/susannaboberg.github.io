@@ -47,7 +47,7 @@ body[data-mode="williams"] {
 /* Fluid base: ~15px on mobile, ~18px on wide screens.
    All other sizes are rem — they scale automatically with this. */
 html {
-    font-size: calc(14px + 0.25vw);
+    font-size: calc(14px + 0.16vw);
     scroll-behavior: smooth;
 }
 
@@ -117,7 +117,7 @@ body.menu-open {
 
 .logo {
     position: relative;
-    font-size: 1.0rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: var(--text-dark);
     text-decoration: none;
@@ -227,7 +227,7 @@ body.menu-open {
 
 
 .hero-title {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3rem, 9vw, 7rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 2rem;
