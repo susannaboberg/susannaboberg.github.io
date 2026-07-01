@@ -2,7 +2,7 @@
    ABOUT PAGE
    ================================= */
 .about-hero {
-    padding: 60px 0 30px;
+    padding: 3.5rem 0 2rem;
 }
 
 .about-text,
@@ -12,7 +12,6 @@
 }
 
 .about-hero-title {
-    font-family: "Bricolage Grotesque", sans-serif;
     font-size: 4rem;
     font-weight: 700;
     line-height: 1.1;
@@ -39,10 +38,10 @@
 }
 
 .about-description {
-    font-size: 1.0625rem;
+    font-size: 1rem;
     color: var(--text-gray);
-    margin-bottom: 1.5rem;
     line-height: 1.8;
+    margin-bottom: 1.5rem;
 }
 
 .about-image-placeholder img {
@@ -60,22 +59,22 @@
 }
 
 .social-slider {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0.2rem;
     border-radius: 20px;
-    padding: 3px;
     outline: 1.5px solid rgba(99, 102, 241, 0.2);
     overflow: clip;
-    position: relative;
 }
 
 .social-slider::after {
     content: '';
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(40px);
     z-index: -3;
+    backdrop-filter: blur(40px);
 }
 
 .social-slider ul {
@@ -88,18 +87,18 @@
 
 .social-slider ul li a,
 .social-slider ul li button {
-    text-decoration: none;
-    color: var(--text-dark);
-    padding: 7px 12px;
     display: inline-block;
+    padding: 0.4rem 0.75rem;
+    margin-right: 1.25rem;
     border-radius: 20px;
-    margin-right: 20px;
-    background: none;
     border: none;
-    font-family: "Bricolage Grotesque", sans-serif;
+    background: none;
+    font-family: "DM Sans", sans-serif;
     font-size: 1rem;
-    line-height: 1.6;
     font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-dark);
+    text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -109,15 +108,15 @@
     margin-right: 0;
 }
 
-/* Social slider overlay */
+/* sliding overlay — same pattern as the nav pill */
 .social-overlay {
-    border-radius: 20px;
     position: absolute;
+    border-radius: 20px;
     background-image: linear-gradient(rgba(66, 69, 238, 0.6), rgba(185, 185, 216, 0.6));
     z-index: -1;
-    transition: opacity 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease, top 0.3s ease;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease, top 0.3s ease;
 }
 
 .social-overlay::after {
@@ -131,7 +130,7 @@
     background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.115));
 }
 
-/* Click effect */
+/* press effect */
 .social-slider ul li a:active,
 .social-slider ul li button:active {
     transform: scale(0.95);
@@ -140,16 +139,16 @@
 }
 
 .social-slider.pressed .social-overlay {
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
     transform: scale(0.98);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 /* =================================
-   PHOTO GALLERY SECTION
+   PHOTO GALLERY
    ================================= */
 .gallery-section {
-    padding: 60px 0 20px;
+    padding: 3.5rem 0 1.5rem;
     overflow: hidden;
 }
 
@@ -162,8 +161,8 @@
     display: flex;
     gap: 3rem;
     width: fit-content;
-    animation: scroll-infinite 35s linear infinite;
     justify-content: space-between;
+    animation: scroll-infinite 35s linear infinite;
 }
 
 .gallery-track:hover {
@@ -171,7 +170,7 @@
 }
 
 @keyframes scroll-infinite {
-    0% { transform: translateX(0); }
+    0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
 
@@ -180,15 +179,14 @@
     flex-shrink: 0;
     height: 280px;
     width: auto;
+    margin: 0 -1rem;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    margin: 0 -1rem;
 }
 
 .gallery-item:hover {
-
     z-index: 100;
     transform: scale(1.1);
     margin: 0 0.2rem;
@@ -201,16 +199,16 @@
     display: block;
 }
 
-/* Lightbox */
+/* lightbox */
 .gallery-lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
     z-index: 9999;
     display: none;
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
     cursor: pointer;
 }
 
@@ -219,12 +217,12 @@
 }
 
 .lightbox-content {
-    max-width: 90%;
-    max-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    max-width: 90%;
+    max-height: 90vh;
 }
 
 .lightbox-content img {
@@ -235,8 +233,8 @@
 }
 
 .lightbox-caption {
-    color: white;
     font-size: 1rem;
+    color: white;
     text-align: center;
     max-width: 600px;
 }
@@ -245,14 +243,14 @@
     position: absolute;
     top: 2rem;
     right: 2rem;
-    background: white;
-    border: none;
-    border-radius: 50%;
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: white;
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 1.5rem;
     color: var(--text-dark);
@@ -264,105 +262,51 @@
 }
 
 /* =================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
    ================================= */
 @media (max-width: 1024px) {
-    .about-hero {
-        padding: 20px 0 40px;
-    }
-
-    .about-content {
-        gap: 3rem;
-    }
+    .about-hero { padding: 1.5rem 0 2.5rem; }
+    .about-content { gap: 3rem; }
 }
 
 @media (max-width: 768px) {
-    #name {
-        flex-direction: column;
-    }
-    
-    .first-name {
-        margin-right: 0;
-    }
-    
-    .about-hero-title {
-        font-size: 3rem;
-    }
-    
+    #name { flex-direction: column; }
+    .first-name { margin-right: 0; }
+
+    .about-hero-title { font-size: 3rem; }
+
     .about-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
-    .about-image-placeholder {
-        order: -1;
-    }
-    
-    .about-description {
-        font-size: 1rem;
-    }
-    
-    .social-slider-section {
-        padding: 20px 0 40px;
-    }
-    
-    
-    .social-slider ul {
-        gap: 1rem;
-        align-items: center;
-    }
-    
+
+    .about-image-placeholder { order: -1; }
+    .about-description { font-size: 1rem; }
+
+    .social-slider-section { padding: 1.25rem 0 2.5rem; }
+
+    .social-slider ul { gap: 1rem; align-items: center; }
+
     .social-slider ul li a,
-    .social-slider ul li button {
-        font-size: 1.0rem;
-        margin: 0;
-    }
-    
-    .social-overlay {
-        display: none;
-    }
-    
-    .section-title {
-        font-size: 1.75rem;
-    }
-    
-    .gallery-item {
-        height: 250px;
-    }
-    
-    .gallery-track {
-        gap: 1rem;
-        animation-duration: 30s;
-    }
-    
-    .lightbox-close {
-        top: 1rem;
-        right: 1rem;
-        width: 36px;
-        height: 36px;
-    }
+    .social-slider ul li button { font-size: 1rem; margin: 0; }
+
+    .social-overlay { display: none; }
+
+    .section-title { font-size: 1.75rem; }
+
+    .gallery-item { height: 250px; }
+    .gallery-track { gap: 1rem; animation-duration: 30s; }
+
+    .lightbox-close { top: 1rem; right: 1rem; width: 36px; height: 36px; }
 }
 
 @media (max-width: 480px) {
-    .about-hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .gallery-section {
-        padding: 40px 0;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-    }
-    
-    .gallery-item {
-        height: 200px;
-    }
-    
-    .gallery-track {
-        gap: 0.75rem;
-        animation-duration: 25s;
-    }
+    .about-hero-title { font-size: 2.5rem; }
+
+    .gallery-section { padding: 2.5rem 0; }
+
+    .section-title { font-size: 1.5rem; margin-bottom: 2rem; }
+
+    .gallery-item { height: 200px; }
+    .gallery-track { gap: 0.75rem; animation-duration: 25s; }
 }
