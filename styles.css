@@ -296,7 +296,10 @@ body.menu-open {
     align-self: flex-end;
     text-align: right;
     transition: opacity 0.4s ease, visibility 0.4s ease;
+    margin-top: auto;
 }
+
+
 
 .scroll-down-section.hidden {
     opacity: 0 !important;
