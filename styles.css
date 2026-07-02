@@ -44,12 +44,9 @@ body[data-mode="williams"] {
     --highlight-lighter: rgba(163, 62, 222, 0.1);
 }
 
-/* Fluid base: ~15px on mobile, ~18px on wide screens.
-   All other sizes are rem — they scale automatically with this. */
 html {
     font-size: calc(14px + 0.16vw);
 
-    scrollbar-width: none;
 }
 
 body {
@@ -153,7 +150,6 @@ body.menu-open {
     box-shadow: inset 0 0 3px #a09f9e;
 }
 
-/* sliding pill overlay */
 .overlay,
 .logo-overlay {
     border-radius: 20px;
@@ -178,7 +174,6 @@ body.menu-open {
     background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.115));
 }
 
-/* mobile toggle */
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
@@ -210,23 +205,16 @@ body.menu-open {
    HERO
    ================================= */
 .hero {
-    height: 100vh;      /* CHANGED from min-height — an actual ceiling, not just a floor */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;   /* safety net: if content is still slightly too tall, clip rather than push the section taller than 100vh */
+    min-height: 80vh;
 }
 
 .hero-content {
     max-width: 1200px;
-    margin: clamp(3rem, 12vh, 100rem) auto 0;  
+    margin: clamp(5rem, 10vh, 15vh) auto 0;
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    flex: 1;            /* NEW — let hero-content take the space it needs, but within the flex parent's constraints */
-    min-height: 0;       /* NEW — allow it to shrink if needed, standard flex-child fix */
-    padding: 1px;
-
+    min-height: 75vh;
 }
 
 .hero-text {
@@ -235,7 +223,6 @@ body.menu-open {
     flex-direction: row;
     align-items: center;
 }
-
 
 .hero-title {
     font-size: clamp(3rem, 9vw, 8rem);
@@ -248,14 +235,12 @@ body.menu-open {
 }
 
 .hero-description {
-
     font-size: 1.1rem;
     color: var(--text-gray);
     max-width: 1000px;
     line-height: 1.8;
     margin: 0;
     opacity: 0;
-
 }
 
 .curved-underline {
@@ -348,23 +333,18 @@ body.menu-open {
 /* =================================
    WORK SECTION
    ================================= */
+.work-section { padding: 8vh 0; }
 
 .work-section-header {
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 .work-section-title {
-    opacity: 0;
-    font-size: 4rem;
-    font-weight: 600;
+    font-size: 3rem;
+    font-weight: 700;
     color: var(--text-dark);
-}
-
-.work-title-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    padding-top: 1px;
+    opacity: 0; /* hidden before JS runs — JS sets opacity: 1 after splitting letters */
 }
 
 .work-grid {
@@ -397,6 +377,8 @@ body.menu-open {
 
 .mock-up-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     background: var(--primary);
 }
 
@@ -579,7 +561,7 @@ body.menu-open {
 @media (max-width: 1024px) and (min-width: 769px) {
     .hero-content { padding: 0 4rem; }
     .hero-text {
-        flex-direction: column;  /* add this */
+        flex-direction: column;
         align-items: flex-start;
         max-width: 100%;
     }
@@ -636,12 +618,23 @@ body.menu-open {
     .nav-list a { font-size: 2rem; }
     .nav-list a.active { padding-bottom: 0; border-bottom: 2px solid var(--primary); box-shadow: none; }
 
-    .hero { min-height: 100vh; justify-content: center; padding: 5rem 0 2.5rem; margin-bottom: 3rem; }
-    .hero-content { margin-top: 0; }
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 5rem 0 2.5rem;
+        margin-bottom: 3rem;
+    }
+    .hero-content {
+        margin-top: 0;
+        flex: 1;
+        min-height: 0;
+    }
     .scroll-down-section {
-    position: static;   /* back in normal flow on mobile */
-    align-self: center;
-    text-align: center;
+        position: static;
+        align-self: center;
+        text-align: center;
+        margin-top: auto;
     }
     .scroll-arrow { margin-left: auto; margin-right: auto; }
     .hero-text { flex-direction: column; align-items: flex-start; }

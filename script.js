@@ -1,8 +1,7 @@
-
 // ===================================
 // GSAP ScrollTrigger
 
-gsap.registerPlugin(ScrollTrigger); 
+gsap.registerPlugin(ScrollTrigger);
 
 // ===================================
 // Navigation Overlay
@@ -14,79 +13,64 @@ const nav_list_container = document.querySelector('.nav-list');
 const logo_wrapper = document.querySelector('.logo-wrapper');
 const logo = document.querySelector('.logo');
 
-// Function to position overlay on active link
 function positionOverlayOnActive() {
-    // Check if logo is active
     if (logo.classList.contains('active')) {
-        // Position logo overlay
         const logoRect = logo.getBoundingClientRect();
         const wrapperRect = logo_wrapper.getBoundingClientRect();
-        
+
         logoOverlay.style.right = '3px';
         logoOverlay.style.top = (logoRect.top - wrapperRect.top) + 'px';
         logoOverlay.style.height = logoRect.height + 'px';
         logoOverlay.style.width = logoRect.width + 'px';
         logoOverlay.style.opacity = '1';
-        
-        // Hide nav overlay
+
         overlay.style.opacity = '0';
     } else {
-        // Check for active nav link
         const activeNavLink = document.querySelector('.nav-list a.active');
-        
+
         if (activeNavLink) {
-            // Position nav overlay
             const linkRect = activeNavLink.getBoundingClientRect();
             const containerRect = nav_list_container.getBoundingClientRect();
-            
+
             overlay.style.left = (linkRect.left - containerRect.left) + 'px';
             overlay.style.top = (linkRect.top - containerRect.top) + 'px';
             overlay.style.height = linkRect.height + 'px';
             overlay.style.width = linkRect.width + 'px';
             overlay.style.opacity = '1';
-            
-            // Hide logo overlay
+
             logoOverlay.style.opacity = '0';
         } else {
-            // No active link found, hide both overlays
             overlay.style.opacity = '0';
             logoOverlay.style.opacity = '0';
         }
     }
 }
 
-// Position overlay on page load
 positionOverlayOnActive();
 
-// Nav list hover
 nav_list.forEach((list) => {
     list.addEventListener('mouseover', () => {
         const link = list.querySelector('a');
         const linkRect = link.getBoundingClientRect();
         const containerRect = nav_list_container.getBoundingClientRect();
-        
+
         overlay.classList.add('active');
         overlay.style.opacity = '1';
         overlay.style.left = (linkRect.left - containerRect.left) + 'px';
         overlay.style.top = (linkRect.top - containerRect.top) + 'px';
         overlay.style.height = linkRect.height + 'px';
         overlay.style.width = linkRect.width + 'px';
-        
-        // Hide logo overlay when hovering over right nav
+
         logoOverlay.style.opacity = '0';
     });
 });
 
-// Logo hover effect
 logo.addEventListener('mouseenter', () => {
-    // Hide the nav overlay
     overlay.style.opacity = '0';
-    
-    // Get measurements
+
     const logoRect = logo.getBoundingClientRect();
     const wrapperRect = logo_wrapper.getBoundingClientRect();
-    
-    // Position logo overlay
+
     logoOverlay.style.right = '3px';
     logoOverlay.style.top = (logoRect.top - wrapperRect.top) + 'px';
     logoOverlay.style.height = logoRect.height + 'px';
@@ -97,19 +81,15 @@ logo.addEventListener('mouseenter', () => {
 logo.addEventListener('mouseleave', () => {
     overlay.classList.remove('active');
     logoOverlay.classList.remove('active');
-
-    // Return to active link position
     positionOverlayOnActive();
 });
 
-// When mouse leaves the entire nav area, return overlay to active link
 nav_list_container.addEventListener('mouseleave', () => {
     overlay.classList.remove('active');
     logoOverlay.classList.remove('active');
     positionOverlayOnActive();
 });
 
-// better performance
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -138,13 +118,12 @@ const navbar = $('.navbar');
 mobileMenuToggle.on('click', function() {
     $(this).toggleClass('active');
     navLinks.toggleClass('active');
-    
+
     const isExpanded = navLinks.hasClass('active');
     $(this).attr('aria-expanded', isExpanded);
     $('body').css('overflow', isExpanded ? 'hidden' : '');
 });
 
-// Close menu when clicking nav links
 navLinks.find('a').on('click', function() {
     mobileMenuToggle.removeClass('active');
     navLinks.removeClass('active');
@@ -157,13 +136,6 @@ navLinks.find('a').on('click', function() {
 // GSAP Animations for Index Page
 
 if ($('.hero').length) {
-    gsap.to('.hello-text', {
-        opacity: 1,
-        y: -20,
-        duration: 0.8,
-        delay: 0.0 // Starts immediately
-    });
-
     gsap.to('.hero-title', {
         opacity: 1,
         y: -20,
@@ -172,14 +144,14 @@ if ($('.hero').length) {
     });
 
     gsap.to('.hero-title', {
-            duration: 2.5, 
-            scrambleText: {
-                text: "Susanna Boberg",
-                chars: "lowerCase",
-                revealDelay: 1,
-                speed: 0.8
-            }
-        });
+        duration: 2.5,
+        scrambleText: {
+            text: "Susanna Jinyong Boberg",
+            chars: "lowerCase",
+            revealDelay: 1,
+            speed: 0.8
+        }
+    });
 
     gsap.to('.hero-description', {
         opacity: 1,
@@ -192,29 +164,18 @@ if ($('.hero').length) {
         opacity: 1,
         duration: 0.8,
         delay: 3.1
-    })
+    });
 
     gsap.to('.scroll-down-section', {
         opacity: 0.7,
         duration: 0.8,
         delay: 3.1,
         y: -20
-    })
-
-    gsap.utils.toArray('.work-card').forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 25,
-            duration: 0.8,
-            delay: 0.1
-        });
     });
+
+
 }
+
 
 // ===================================
 // Typewriter & Scramble Animations
@@ -228,7 +189,7 @@ if ($('.hero').length && $('.words-container').length) {
         " music",
         " storytelling"
     ];
-    
+
     const scrollWords = [
         "Scroll to see works",
         "Scrollen, um Arbeiten zu sehen",
@@ -236,37 +197,34 @@ if ($('.hero').length && $('.words-container').length) {
         "Faites défiler pour voir les projets",
         "coda below",
         "chapter 2 below"
-    ]
-    
+    ];
+
     let currentWordIndex = 0;
     const container = document.querySelector('.words-container');
     const scrollTextElement = document.querySelector('.scroll-down-text');
     const scrollDownSection = document.querySelector('.scroll-down-section');
-    
+
     const typingSpan = document.createElement('span');
     typingSpan.className = 'typing-word';
     container.innerHTML = '';
     container.appendChild(typingSpan);
-    
+
     function synchronizedLoop() {
         const currentWord = words[currentWordIndex];
         const scrollWord = scrollWords[currentWordIndex];
-        
-        // Calculate typewriter timing
+
         const typeOutDuration = currentWord.length * 0.09;
         const pauseDuration = 1.8;
         const deleteInDuration = currentWord.length * 0.06;
         const shortPauseDuration = 0.8;
-        
-        // Create master timeline for typewriter
+
         const typewriterTL = gsap.timeline({
             onComplete: () => {
                 currentWordIndex = (currentWordIndex + 1) % words.length;
                 synchronizedLoop();
             }
         });
-        
-        // Type out the word
+
         typewriterTL.to(typingSpan, {
             duration: typeOutDuration,
             text: {
@@ -275,11 +233,9 @@ if ($('.hero').length && $('.words-container').length) {
             },
             ease: "none"
         });
-        
-        // Pause at full word
+
         typewriterTL.to({}, { duration: pauseDuration });
-        
-        // Delete the word
+
         typewriterTL.to(typingSpan, {
             duration: deleteInDuration,
             text: {
@@ -288,15 +244,13 @@ if ($('.hero').length && $('.words-container').length) {
             },
             ease: "none"
         });
-        
-        // Short pause before next word
+
         typewriterTL.to({}, { duration: shortPauseDuration });
-        
-        // SYNCHRONIZED SCRAMBLE
+
         if (scrollTextElement) {
             const scrambleDuration = 1.0;
             const scrambleStartDelay = typeOutDuration - 2.0;
-            
+
             gsap.to(scrollTextElement, {
                 duration: scrambleDuration,
                 delay: Math.max(0, scrambleStartDelay),
@@ -309,16 +263,14 @@ if ($('.hero').length && $('.words-container').length) {
             });
         }
     }
-    
-    // Start both animations together
+
     gsap.delayedCall(3.8, synchronizedLoop);
-    
-    // Hide scroll arrow when user scrolls down
+
     if (scrollDownSection) {
         $(window).on('scroll', function() {
             const scrollPosition = $(window).scrollTop();
-            
-            if (scrollPosition > 450) {
+
+            if (scrollPosition > 100) {
                 scrollDownSection.classList.add('hidden');
             } else {
                 scrollDownSection.classList.remove('hidden');
@@ -327,37 +279,117 @@ if ($('.hero').length && $('.words-container').length) {
     }
 }
 
+// ===================================
+// Works Title: Letter-by-letter slide-in, reversible, gated until layout is stable
+
+if ($('.work-section-title').length) {
+    const titleEl = document.querySelector('.work-section-title');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth <= 768;
+
+    // Hide immediately via inline style — prevents any flash of the
+    // plain, unsplit "Works" text while fonts/images are still loading
+    gsap.set(titleEl, { opacity: 0 });
+
+    function initWorksTitle() {
+        if (prefersReducedMotion || isMobile) {
+            gsap.set(titleEl, { opacity: 1 });
+            return;
+        }
+
+        const text = titleEl.textContent;
+        titleEl.innerHTML = '';
+        titleEl.setAttribute('aria-label', text);
+        const letters = text.split('').map(char => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.display = 'inline-block';
+            span.setAttribute('aria-hidden', 'true');
+            titleEl.appendChild(span);
+            return span;
+        });
+
+        gsap.set(titleEl, { opacity: 1 }); // parent visible now; letters control their own reveal
+
+        gsap.fromTo(letters,
+            { x: () => window.innerWidth, opacity: 0 },
+            {
+                x: 0,
+                opacity: 1,
+                stagger: 0.03,
+                ease: 'power1.out',
+                scrollTrigger: {
+                    trigger: titleEl,
+                    start: 'top 85%',
+                    end: 'top 20%',
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    id: 'worksTitle'
+                }
+            }
+        );
+
+                // Replace the existing card ScrollTrigger block with this:
+        gsap.set('.work-card', { opacity: 0, y: 20 });
+        gsap.to('.work-card', {
+            opacity: 1,
+            y: 0,
+            ease: 'power1.out',
+            scrollTrigger: {
+                trigger: titleEl,
+                start: 'top 45%',   // starts earlier, while title is still sliding in
+                end: 'top 5%',    // ends after title has fully passed — cards finish fading after title centers
+                scrub: 1,
+            }
+        });
+    }
+
+    // Wait for full page load (images) AND web fonts before ever measuring —
+    // this is what actually prevents the flash/reset, rather than
+    // creating early and refreshing afterward.
+    Promise.all([
+    new Promise(resolve => {
+        if (document.readyState === 'complete') resolve();
+        else window.addEventListener('load', resolve, { once: true });
+    }),
+    document.fonts.ready
+    ]).then(() => {
+        // Double rAF: first frame queues the work, second frame runs after
+        // the browser has actually painted — layout is fully settled by then
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                initWorksTitle();
+                ScrollTrigger.refresh(true); // true = immediate, not deferred
+            });
+        });
+    });
+}
 
 // ===================================
 // Custom Cursor on Works & Footer
 
 if ($('.work-card').length) {
-    // Create single custom cursor element (reused for both)
     const customCursor = $('<div>', {
         class: 'custom-cursor'
     });
     $('body').append(customCursor);
 
-    const cursorOffset = -10;
-
-    // Work Card Cursor
     $('.work-card').on('mouseenter', function() {
         customCursor.text('View Case Study');
         customCursor.addClass('active with-arrow');
     });
-    
+
     $('.work-card').on('mouseleave', function() {
         customCursor.removeClass('active');
         customCursor.removeClass('with-arrow');
     });
-    
+
     $('.work-card').on('mousemove', function(e) {
         customCursor.css({
             left: e.clientX + 'px',
             top: e.clientY + 'px'
         });
     });
-    
 }
 
 
@@ -365,8 +397,7 @@ if ($('.work-card').length) {
 // Case Study Page: Text Highlight Animation
 
 if ($('.case-study-page').length) {
-    
-    // Smooth text highlight on scroll
+
     gsap.utils.toArray('.highlight-text').forEach((elem) => {
         gsap.to(elem, {
             scrollTrigger: {
@@ -379,8 +410,7 @@ if ($('.case-study-page').length) {
             }
         });
     });
-    
-    // Section fade-in animations
+
     gsap.utils.toArray('.case-study-section').forEach((section) => {
         gsap.from(section, {
             scrollTrigger: {
@@ -399,7 +429,6 @@ if ($('.case-study-page').length) {
 // Case Study On Page Load Animations
 
 if ($('.case-study-page').length) {
-    // Animate hero content on load
     gsap.fromTo('.case-study-hero', {
         opacity: 0,
         y: 20,
@@ -407,7 +436,6 @@ if ($('.case-study-page').length) {
 
     gsap.fromTo('.case-study-meta', {
         opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.6, delay: 0.7});
-    
 }
 
 // ===================================
@@ -416,14 +444,13 @@ if ($('.case-study-page').length) {
 if ($('.page-nav').length) {
     const pageNav = $('.page-nav');
     const overviewSection = $('#overview');
-    
+
     function toggleNavVisibility() {
         if (overviewSection.length) {
             const overviewTop = overviewSection.offset().top;
             const scrollPos = $(window).scrollTop();
             const navHeight = $('.navbar').outerHeight();
-            
-            // Show nav when user reaches overview section
+
             if (scrollPos >= (overviewTop - navHeight - 100)) {
                 pageNav.addClass('visible');
             } else {
@@ -431,63 +458,54 @@ if ($('.page-nav').length) {
             }
         }
     }
-    
+
     $(window).on('scroll', toggleNavVisibility);
-    toggleNavVisibility(); // Check on load
+    toggleNavVisibility();
     const sections = $('.case-study-section, .case-study-hero');
     const navSections = $('.nav-section');
     const progressLineActive = $('.progress-line-active');
-    
-    // Store current progress value for lerping
+
     let currentProgress = 0;
     let targetProgress = 0;
-    
 
-    // Update active nav on scroll
     function updateActiveNav() {
         const scrollPosition = $(window).scrollTop() + 150;
         let currentSection = '';
-        
-        // Find current section
+
         sections.each(function() {
             const sectionTop = $(this).offset().top;
             const sectionHeight = $(this).outerHeight();
             const sectionId = $(this).attr('id');
-            
+
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 currentSection = sectionId;
             }
         });
-        
-        // Update nav highlighting
+
         navSections.each(function() {
             const $navSection = $(this);
             const mainLink = $navSection.find('> a');
             const subsections = $navSection.find('.nav-subsections');
             const mainHref = mainLink.attr('href').substring(1);
-            
-            // Remove active from main link
+
             mainLink.removeClass('active');
-            
-            // Check if current section matches main link
+
             if (mainHref === currentSection) {
                 mainLink.addClass('active');
                 $navSection.addClass('active');
             } else if (subsections.length) {
-                // Check if current section is a subsection
                 let hasActiveSubsection = false;
                 subsections.find('a').each(function() {
                     const subLink = $(this);
                     const subHref = subLink.attr('href').substring(1);
                     subLink.removeClass('active');
-                    
+
                     if (subHref === currentSection) {
                         subLink.addClass('active');
                         hasActiveSubsection = true;
                     }
                 });
-                
-                // Only keep section open if it has active subsection
+
                 if (hasActiveSubsection) {
                     $navSection.addClass('active');
                 } else {
@@ -497,8 +515,7 @@ if ($('.page-nav').length) {
                 $navSection.removeClass('active');
             }
         });
-        
-        // Update progress line with lerp for smooth movement
+
         const activeLink = $('.page-nav-links a.active').first();
         if (activeLink.length) {
             const linkPosition = activeLink.position().top;
@@ -506,52 +523,45 @@ if ($('.page-nav').length) {
             targetProgress = Math.min((linkPosition / containerHeight) * 100, 100);
         }
     }
-    
-    // Lerp function for smooth animation
+
     function lerp(start, end, factor) {
         return start + (end - start) * factor;
     }
-    
-    // Animate progress line
+
     function animateProgressLine() {
         currentProgress = lerp(currentProgress, targetProgress, 0.1);
         progressLineActive.attr('y2', currentProgress + '%');
         requestAnimationFrame(animateProgressLine);
     }
-    
-    // Start animation loop
+
     animateProgressLine();
-    
-    // Update on scroll
+
     $(window).on('scroll', updateActiveNav);
     updateActiveNav();
 }
 
 // ===================================
-// Mobile Menu Toggle
+// Page Nav Mobile Toggle
 
 if ($('.page-nav').length) {
-    // Create mobile toggle button
     const pageNavToggle = $('<button>', {
         class: 'page-nav-toggle',
         'aria-label': 'Toggle page navigation',
         'aria-expanded': 'false',
         html: '<svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     });
-    
-    // Append toggle button to body (so it stays visible)
+
     $('body').append(pageNavToggle);
-    
-    // Check screen size and show button only on mobile
+
     function checkScreenSize() {
         if ($(window).width() <= 1240) {
             const overviewSection = $('#overview');
-            
+
             if (overviewSection.length) {
                 const overviewTop = overviewSection.offset().top;
                 const scrollPos = $(window).scrollTop();
                 const navHeight = $('.navbar').outerHeight();
-                
+
                 if (scrollPos >= (overviewTop - navHeight - 100)) {
                     pageNavToggle.addClass('show');
                 } else {
@@ -562,23 +572,20 @@ if ($('.page-nav').length) {
                 }
             }
         } else {
-            // On desktop, hide button completely
             pageNavToggle.removeClass('show');
             $('.page-nav').removeClass('mobile-open');
             pageNavToggle.removeClass('active');
         }
     }
-    
-    // Toggle page nav on mobile
+
     pageNavToggle.on('click', function(e) {
-        e.stopPropagation(); // Prevent event bubbling
+        e.stopPropagation();
         const isOpen = $('.page-nav').hasClass('mobile-open');
         $('.page-nav').toggleClass('mobile-open');
         $(this).toggleClass('active');
         $(this).attr('aria-expanded', !isOpen);
     });
-    
-    // Close page nav when clicking on a link
+
     $('.page-nav-links a').on('click', function() {
         if ($(window).width() <= 1024) {
             $('.page-nav').removeClass('mobile-open');
@@ -586,11 +593,10 @@ if ($('.page-nav').length) {
             pageNavToggle.attr('aria-expanded', 'false');
         }
     });
-    
-    // Close page nav when clicking outside on mobile
+
     $(document).on('click', function(e) {
         if ($(window).width() <= 1024) {
-            if (!$('.page-nav').is(e.target) && 
+            if (!$('.page-nav').is(e.target) &&
                 $('.page-nav').has(e.target).length === 0 &&
                 !pageNavToggle.is(e.target) &&
                 pageNavToggle.has(e.target).length === 0 &&
@@ -601,59 +607,54 @@ if ($('.page-nav').length) {
             }
         }
     });
-    
-    // Use debounce to prevent excessive function calls on resize
+
     let resizeTimer;
     $(window).on('resize', function() {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(checkScreenSize, 150); // Wait 150ms after resize stops
+        resizeTimer = setTimeout(checkScreenSize, 150);
     });
-    
-    // Check on scroll (throttled for better performance)
+
     let scrollTimer;
-    let isScrolling = false;
+    let isScrollingPageNav = false;
     $(window).on('scroll', function() {
-        if (!isScrolling) {
+        if (!isScrollingPageNav) {
             window.requestAnimationFrame(function() {
                 checkScreenSize();
-                isScrolling = false;
+                isScrollingPageNav = false;
             });
-            isScrolling = true;
+            isScrollingPageNav = true;
         }
     });
-    
-    checkScreenSize(); // Initial check
+
+    checkScreenSize();
 }
 
 // ===================================
 // Back to Top Button
 
 if ($('.case-study-page').length) {
-    // Create back to top button
     const backToTop = $('<button>', {
         class: 'back-to-top',
         'aria-label': 'Back to top',
         html: '<svg viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     });
-    
+
     $('body').append(backToTop);
-    
-    // Show/hide button based on scroll position
+
     function toggleBackToTop() {
         const scrollTop = $(window).scrollTop();
         const showThreshold = 400;
-        
+
         if (scrollTop > showThreshold) {
             backToTop.addClass('visible');
         } else {
             backToTop.removeClass('visible');
         }
     }
-    
+
     $(window).on('scroll', toggleBackToTop);
     toggleBackToTop();
-    
-    // Scroll to top on click
+
     backToTop.on('click', function() {
         $('html, body').animate({
             scrollTop: 0
@@ -691,43 +692,39 @@ $('a[href^="#"]').on('click', function(e) {
 // Active Navigation Based on Scroll Position (Index Page Only)
 
 if ($('.hero').length && $('#work').length) {
-    // Only run on index page where hero and work sections exist
-    
+
     function updateActiveNavOnScroll() {
         const sections = [
             { id: 'work', element: document.querySelector('#work') },
             { id: 'hero', element: document.querySelector('.hero') }
         ];
-        
-        const scrollPosition = window.scrollY + 200; // Offset for better trigger
-        
-        let currentSection = 'hero'; // Default to home/hero
-        
+
+        const scrollPosition = window.scrollY + 200;
+
+        let currentSection = 'hero';
+
         sections.forEach(section => {
             if (section.element) {
                 const sectionTop = section.element.offsetTop;
                 const sectionHeight = section.element.offsetHeight;
-                
+
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                     currentSection = section.id;
                 }
             }
         });
-        
-        // Update active class on nav links
+
         $('.nav-list a, .logo').removeClass('active');
-        
+
         if (currentSection === 'work') {
             $('.nav-list a[href="#work"]').addClass('active');
         } else {
             $('.logo').addClass('active');
         }
-        
-        // Reposition overlay
+
         positionOverlayOnActive();
     }
 
-    // Throttled scroll listener for performance
     let scrollThrottle;
     $(window).on('scroll', function() {
         if (!scrollThrottle) {
@@ -738,21 +735,18 @@ if ($('.hero').length && $('#work').length) {
         }
     });
 
-    // Handle click on Work link
     $('.nav-list a[href="#work"]').on('click', function() {
         $('.nav-list a, .logo').removeClass('active');
         $(this).addClass('active');
         positionOverlayOnActive();
     });
 
-    // Handle click on Logo
     $('.logo').on('click', function() {
         $('.nav-list a').removeClass('active');
         $(this).addClass('active');
         positionOverlayOnActive();
     });
 
-    // Initial check on page load
     updateActiveNavOnScroll();
 }
 
@@ -760,14 +754,13 @@ if ($('.hero').length && $('#work').length) {
 // About Page: Simple Fade-in Animations
 
 if ($('.about-hero').length) {
-
     gsap.to('.about-text', {
         opacity: 1,
         y: -20,
         duration: 0.8,
         delay: 0.2
     });
-    
+
     gsap.to('.about-image-placeholder', {
         opacity: 1,
         y: -20,
@@ -790,79 +783,68 @@ if ($('.social-slider').length) {
     const socialOverlay = document.querySelector('.social-overlay');
     const socialSlider = document.querySelector('.social-slider');
     const socialItems = document.querySelectorAll('.social-slider ul li');
-    
-    // Create a SEPARATE custom "copied" cursor (don't reuse gallery cursor)
+
     const socialCopiedCursor = $('<div>', {
         class: 'custom-cursor social-copied-cursor',
         text: 'Copied!'
     });
     $('body').append(socialCopiedCursor);
-    
-    // Function to update overlay position
+
     function updateOverlayPosition(link) {
         const linkRect = link.getBoundingClientRect();
         const sliderRect = socialSlider.getBoundingClientRect();
-        
+
         socialOverlay.style.opacity = '1';
         socialOverlay.style.left = (linkRect.left - sliderRect.left) + 'px';
         socialOverlay.style.top = (linkRect.top - sliderRect.top) + 'px';
         socialOverlay.style.height = linkRect.height + 'px';
         socialOverlay.style.width = linkRect.width + 'px';
     }
-    
-    // Hover effect for social slider
+
     socialItems.forEach((item) => {
         const link = item.querySelector('a, button');
-        
+
         item.addEventListener('mouseover', () => {
             updateOverlayPosition(link);
         });
-        
-        // Add pressed effect on mousedown
+
         link.addEventListener('mousedown', () => {
             socialSlider.classList.add('pressed');
         });
-        
-        // Remove pressed effect on mouseup
+
         link.addEventListener('mouseup', () => {
             socialSlider.classList.remove('pressed');
         });
-        
-        // Remove pressed effect if mouse leaves while pressing
+
         link.addEventListener('mouseleave', () => {
             socialSlider.classList.remove('pressed');
         });
     });
-    
-    // Hide overlay when mouse leaves slider
+
     socialSlider.addEventListener('mouseleave', () => {
         socialOverlay.style.opacity = '0';
         socialSlider.classList.remove('pressed');
     });
-    
-    // Email copy functionality for second button
+
     const copyBtn2 = document.getElementById('copyEmailBtn2');
     if (copyBtn2) {
         let isHovering = false;
-        
-        // Track if mouse is over the button
+
         copyBtn2.addEventListener('mouseenter', () => {
             isHovering = true;
         });
-        
+
         copyBtn2.addEventListener('mouseleave', () => {
             isHovering = false;
         });
-        
-        // Track mouse position for copied cursor
+
         let mouseX = 0;
         let mouseY = 0;
-        
+
         $(document).on('mousemove', function(e) {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            // Update ONLY the social copied cursor position if active
+
             if (socialCopiedCursor.hasClass('active')) {
                 socialCopiedCursor.css({
                     left: mouseX + 15 + 'px',
@@ -870,30 +852,27 @@ if ($('.social-slider').length) {
                 });
             }
         });
-        
+
         copyBtn2.addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText('sjb5@williams.edu');
-                
+
                 $('.custom-cursor.gallery-cursor').removeClass('active');
-                // Show custom "Copied!" cursor (the separate one)
                 socialCopiedCursor.addClass('active');
                 socialCopiedCursor.css({
                     left: mouseX + 15 + 'px',
                     top: mouseY + 15 + 'px'
                 });
-                
-                // Update overlay size smoothly when text changes
+
                 if (isHovering) {
                     setTimeout(() => {
                         updateOverlayPosition(copyBtn2);
                     }, 10);
                 }
-                
+
                 setTimeout(() => {
                     socialCopiedCursor.removeClass('active');
-                    
-                    // Update overlay size back when text changes
+
                     if (isHovering) {
                         setTimeout(() => {
                             updateOverlayPosition(copyBtn2);
@@ -915,85 +894,74 @@ if ($('.gallery-section').length) {
     const lightboxImage = $('#lightboxImage');
     const lightboxCaption = $('#lightboxCaption');
     const closeBtn = $('.lightbox-close');
-    
-    // Create DEDICATED cursor for gallery only
+
     const galleryCursor = $('<div>', {
         class: 'custom-cursor gallery-cursor'
     });
     $('body').append(galleryCursor);
-    
-    // Gallery item hover - show custom cursor with text
+
     $('.gallery-item').on('mouseenter', function() {
-        // Don't show gallery cursor if ANY copied cursor is active
         if ($('.custom-cursor.email-copied-cursor, .custom-cursor.social-copied-cursor').hasClass('active')) {
             return;
         }
-        
+
         const cursorText = $(this).data('cursor-text') || 'View Photo';
         galleryCursor.text(cursorText);
         galleryCursor.addClass('active');
     });
-    
+
     $('.gallery-item').on('mouseleave', function() {
         galleryCursor.removeClass('active');
     });
-    
+
     $('.gallery-item').on('mousemove', function(e) {
-        // Don't update position if ANY copied cursor is active
         if ($('.custom-cursor.email-copied-cursor, .custom-cursor.social-copied-cursor').hasClass('active')) {
             return;
         }
-        
+
         galleryCursor.css({
             left: e.clientX + 15 + 'px',
             top: e.clientY + 15 + 'px'
         });
     });
-    
-    // Open lightbox when clicking on gallery item
+
     $('.gallery-item').on('click', function() {
         const imgSrc = $(this).find('img').attr('src');
         const imgAlt = $(this).find('img').attr('alt');
         const caption = $(this).data('caption');
-        
+
         lightboxImage.attr('src', imgSrc);
         lightboxImage.attr('alt', imgAlt);
         lightboxCaption.text(caption);
-        
-        // Add active class to trigger transitions
+
         lightbox.addClass('active');
         $('body').css('overflow', 'hidden');
-        
-        // Hide custom cursor when lightbox opens
+
         galleryCursor.removeClass('active');
     });
-    
-    // Close lightbox when clicking close button
+
     closeBtn.on('click', function(e) {
         e.stopPropagation();
         closeLightbox();
     });
-    
-    // Close lightbox when clicking on background
+
     lightbox.on('click', function(e) {
         if (e.target === this) {
             closeLightbox();
         }
     });
-    
-    // Close lightbox with Escape key
+
     $(document).on('keydown', function(e) {
         if (e.key === 'Escape' && lightbox.hasClass('active')) {
             closeLightbox();
         }
     });
-    
+
     function closeLightbox() {
         lightbox.removeClass('active');
         $('body').css('overflow', '');
     }
-    
-    // Animate gallery items on scroll
+
     if (typeof gsap !== 'undefined') {
         gsap.utils.toArray('.gallery-item').forEach((item, i) => {
             gsap.from(item, {
@@ -1015,23 +983,20 @@ if ($('.gallery-section').length) {
 // Email Copy Cursor for Footer (About Page)
 // ===================================
 if ($('.footer-email').length && $('.about-hero').length) {
-    // Create separate email copied cursor for footer
     const emailCopiedCursor = $('<div>', {
         class: 'custom-cursor email-copied-cursor',
         text: 'Copied!'
     });
     $('body').append(emailCopiedCursor);
-    
+
     const copyButton = $('.footer-email');
     let mouseX = 0;
     let mouseY = 0;
-    
-    // Track mouse position globally
+
     $(document).on('mousemove', function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
-        // Update email copied cursor position if active
+
         if (emailCopiedCursor.hasClass('active')) {
             emailCopiedCursor.css({
                 left: mouseX + 15 + 'px',
@@ -1039,23 +1004,19 @@ if ($('.footer-email').length && $('.about-hero').length) {
             });
         }
     });
-    
-    // When email button is clicked
+
     copyButton.on('click', async function() {
         try {
             await navigator.clipboard.writeText('sjb5@williams.edu');
-            
-            // Hide gallery cursor if active
+
             $('.custom-cursor.gallery-cursor').removeClass('active');
-            
-            // Show email copied cursor
+
             emailCopiedCursor.addClass('active');
             emailCopiedCursor.css({
                 left: mouseX + 15 + 'px',
                 top: mouseY + 15 + 'px'
             });
-            
-            // Hide after 1 second
+
             setTimeout(() => {
                 emailCopiedCursor.removeClass('active');
             }, 1000);
@@ -1087,4 +1048,3 @@ const observer = new IntersectionObserver((entries) => {
 $('.skill-category').each(function() {
     observer.observe(this);
 });
-
