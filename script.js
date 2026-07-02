@@ -320,7 +320,7 @@ if ($('.work-section-title').length) {
                 ease: 'power1.out',
                 scrollTrigger: {
                     trigger: titleEl,
-                    start: 'top 85%',
+                    start: 'top 100%',
                     end: 'top 20%',
                     scrub: 1,
                     invalidateOnRefresh: true,
@@ -337,7 +337,7 @@ if ($('.work-section-title').length) {
             ease: 'power1.out',
             scrollTrigger: {
                 trigger: titleEl,
-                start: 'top 45%',   // starts earlier, while title is still sliding in
+                start: 'top 35%',   // starts earlier, while title is still sliding in
                 end: 'top 5%',    // ends after title has fully passed — cards finish fading after title centers
                 scrub: 1,
             }
@@ -365,32 +365,6 @@ if ($('.work-section-title').length) {
     });
 }
 
-// ===================================
-// Custom Cursor on Works & Footer
-
-if ($('.work-card').length) {
-    const customCursor = $('<div>', {
-        class: 'custom-cursor'
-    });
-    $('body').append(customCursor);
-
-    $('.work-card').on('mouseenter', function() {
-        customCursor.text('View Case Study');
-        customCursor.addClass('active with-arrow');
-    });
-
-    $('.work-card').on('mouseleave', function() {
-        customCursor.removeClass('active');
-        customCursor.removeClass('with-arrow');
-    });
-
-    $('.work-card').on('mousemove', function(e) {
-        customCursor.css({
-            left: e.clientX + 'px',
-            top: e.clientY + 'px'
-        });
-    });
-}
 
 
 // ===================================

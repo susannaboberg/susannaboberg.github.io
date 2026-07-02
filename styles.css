@@ -347,33 +347,35 @@ body.menu-open {
     opacity: 0; /* hidden before JS runs — JS sets opacity: 1 after splitting letters */
 }
 
-.work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-    gap: 3rem;
-}
-
+/* Remove custom cursor — work cards use default pointer */
 .work-card {
     display: block;
     text-decoration: none;
     background: white;
-    padding: 1.25rem;
+    padding: 0.875rem;          /* was 1.25rem */
     border-radius: 10px;
-    cursor: none;
+    cursor: pointer;            /* was: none */
     transition: transform 0.5s ease, box-shadow 0.4s ease;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 2rem;                  /* was 3rem */
+}
+
+.work-image {
+    width: 100%;
+    aspect-ratio: 7 / 5;       /* was 6/5 — slightly less tall */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;        /* was 1.5rem */
 }
 
 .work-card:hover {
     box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
 }
 
-.work-image {
-    width: 100%;
-    aspect-ratio: 6 / 5;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-}
 
 .mock-up-img {
     width: 100%;
