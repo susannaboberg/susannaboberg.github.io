@@ -209,12 +209,14 @@ body.menu-open {
    HERO
    ================================= */
 .hero {
-    min-height: 80vh;
+    min-height: 100vh;
+    overflow: hidden;
 }
+
 
 .hero-content {
     max-width: 1200px;
-    margin: 15vh auto 0;
+    margin: 18vh auto 0;
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
@@ -223,10 +225,9 @@ body.menu-open {
 
 
 
-
 .hero-text {
     max-width: 900px;
-    margin-bottom: clamp(1rem, 4vh, 3rem);
+
 }
 
 
@@ -297,8 +298,7 @@ body.menu-open {
     opacity: 0;
     visibility: visible;
     width: 100%;
-    align-self: flex-end;
-    text-align: right;
+    text-align: left;
     transition: opacity 0.4s ease, visibility 0.4s ease;
     margin-top: auto;
 }
@@ -322,7 +322,7 @@ body.menu-open {
 .scroll-arrow {
     width: 24px;
     height: 24px;
-    margin-left: auto;
+
     animation: bounce 2s infinite;
 }
 
@@ -341,17 +341,23 @@ body.menu-open {
 /* =================================
    WORK SECTION
    ================================= */
-.work-section { padding: 4vh 0; }
 
 .work-section-header {
     text-align: center;
-    margin-bottom: 2rem;
 }
 
 .work-section-title {
-    font-size: 3rem;
-    font-weight: 700;
+    opacity: 0;
+    font-size: 4rem;
+    font-weight: 600;
     color: var(--text-dark);
+}
+
+.work-title-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 1px;
 }
 
 .work-grid {
