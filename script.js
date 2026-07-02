@@ -328,45 +328,6 @@ if ($('.hero').length && $('.words-container').length) {
 }
 
 
-if ($('.work-section-title').length) {
-    const heroEl   = document.querySelector('.hero');
-    const arrowEl  = document.querySelector('.scroll-down-section');
-    const titleEl  = document.querySelector('.work-section-title');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth <= 768;
-
-    if (prefersReducedMotion || isMobile) {
-        gsap.set(titleEl, { opacity: 1, x: 0 });
-        gsap.set('.work-card', { opacity: 1 });
-    } else {
-        gsap.set(titleEl, { display: 'inline-block', x: 0, opacity: 1 });
-        gsap.set('.work-card', { opacity: 0 });
-
-        const arrowRect = arrowEl.getBoundingClientRect();
-        const titleRect = titleEl.getBoundingClientRect();
-        const startX = titleRect.right - arrowRect.right;
-        gsap.set(titleEl, { x: startX });
-
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: heroEl,
-                start: 'bottom 55%',
-                pin: heroEl,
-                scrub: 1,
-                end: '+=800',
-                pinSpacing: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true
-            }
-        })
-        .to(titleEl, { x: 0, ease: 'power1.out' })
-        .to('.work-card', { opacity: 1, ease: 'none' }, '-=0.01');
-    }
-}
-
-window.addEventListener('load', () => ScrollTrigger.refresh());
-document.fonts.ready.then(() => ScrollTrigger.refresh());
-
 // ===================================
 // Custom Cursor on Works & Footer
 

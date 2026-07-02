@@ -48,7 +48,8 @@ body[data-mode="williams"] {
    All other sizes are rem — they scale automatically with this. */
 html {
     font-size: calc(14px + 0.16vw);
-    scroll-behavior: smooth;
+
+    scrollbar-width: none;
 }
 
 body {
@@ -209,30 +210,35 @@ body.menu-open {
    HERO
    ================================= */
 .hero {
-    min-height: 100vh;
-    overflow: hidden;
+    height: 100vh;      /* CHANGED from min-height — an actual ceiling, not just a floor */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;   /* safety net: if content is still slightly too tall, clip rather than push the section taller than 100vh */
 }
-
 
 .hero-content {
     max-width: 1200px;
-    margin: 18vh auto 0;
+    margin: clamp(3rem, 12vh, 100rem) auto 0;  
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    min-height: 70vh;
+    flex: 1;            /* NEW — let hero-content take the space it needs, but within the flex parent's constraints */
+    min-height: 0;       /* NEW — allow it to shrink if needed, standard flex-child fix */
+    padding: 1px;
+
 }
 
-
-
 .hero-text {
-    max-width: 900px;
-
+    margin-bottom: clamp(1rem, 4vh, 3rem);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 
 .hero-title {
-    font-size: clamp(3rem, 9vw, 7rem);
+    font-size: clamp(3rem, 9vw, 8rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: clamp(0.75rem, 3vh, 2rem);
@@ -242,12 +248,14 @@ body.menu-open {
 }
 
 .hero-description {
+
     font-size: 1.1rem;
     color: var(--text-gray);
-    max-width: 800px;
+    max-width: 1000px;
     line-height: 1.8;
     margin: 0;
     opacity: 0;
+
 }
 
 .curved-underline {
@@ -257,7 +265,7 @@ body.menu-open {
 
 .one-line-text {
     display: inline-block;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .words-container {
@@ -298,12 +306,11 @@ body.menu-open {
     opacity: 0;
     visibility: visible;
     width: 100%;
-    text-align: left;
+    align-self: flex-end;
+    text-align: right;
     transition: opacity 0.4s ease, visibility 0.4s ease;
     margin-top: auto;
 }
-
-
 
 .scroll-down-section.hidden {
     opacity: 0 !important;
@@ -322,7 +329,7 @@ body.menu-open {
 .scroll-arrow {
     width: 24px;
     height: 24px;
-
+    margin-left: auto;
     animation: bounce 2s infinite;
 }
 
@@ -571,7 +578,11 @@ body.menu-open {
 
 @media (max-width: 1024px) and (min-width: 769px) {
     .hero-content { padding: 0 4rem; }
-    .hero-text { max-width: 100%; }
+    .hero-text {
+        flex-direction: column;  /* add this */
+        align-items: flex-start;
+        max-width: 100%;
+    }
     .footer-text { font-size: 0.8rem; max-width: 45%; }
     .footer-right { font-size: 0.85rem; gap: 1rem; }
 }
@@ -627,8 +638,13 @@ body.menu-open {
 
     .hero { min-height: 100vh; justify-content: center; padding: 5rem 0 2.5rem; margin-bottom: 3rem; }
     .hero-content { margin-top: 0; }
-    .scroll-down-section { margin-top: 3rem; align-self: center; text-align: center; }
+    .scroll-down-section {
+    position: static;   /* back in normal flow on mobile */
+    align-self: center;
+    text-align: center;
+    }
     .scroll-arrow { margin-left: auto; margin-right: auto; }
+    .hero-text { flex-direction: column; align-items: flex-start; }
 
     .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
     .hero-description { font-size: 1.125rem; }
