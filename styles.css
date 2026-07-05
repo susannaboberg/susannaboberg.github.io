@@ -18,6 +18,14 @@
     --bg-white: #ffffff;
     --bg-gray: #f8fafc;
     --border: #e2e8f0;
+
+    /* Glass-pill overlay system — every pill/cursor overlay across the site
+       pulls from these so the color can be changed in one place. */
+    --overlay-grad: linear-gradient(rgba(168, 14, 137, 0.6), rgba(249, 148, 232, 0.6));
+    --overlay-grad-strong: linear-gradient(rgba(168, 14, 137, 0.9), rgba(249, 148, 232, 0.9));
+    --overlay-sheen: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.115));
+    --overlay-outline: rgba(99, 102, 241, 0.2);
+    --overlay-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
 }
 
 body[data-mode="side-scribble"] {
@@ -46,7 +54,8 @@ body[data-mode="williams"] {
 
 html {
     font-size: calc(14px + 0.16vw);
-
+    overflow-anchor: none; /* prevents load nav out of view */
+    overflow-x: hidden;
 }
 
 body {
@@ -54,7 +63,6 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-white);
-    overflow-x: hidden;
 }
 
 body.menu-open {
@@ -67,6 +75,59 @@ body.menu-open {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+}
+
+#nav-placeholder,
+#footer-placeholder {
+    display: contents;
+}
+
+/* =================================
+   GLASS PILL (shared component)
+   ================================= */
+/* Shape/appearance only — used by the logo wrapper, nav link list, and
+   social slider. Hover/position behavior lives in JS (see utils.js). */
+.glass-pill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    border-radius: 20px;
+    outline: 2px solid var(--overlay-outline);
+    box-shadow: var(--overlay-shadow);
+    overflow: clip;
+    position: relative;
+}
+
+.glass-pill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(40px);
+    z-index: -3;
+}
+
+/* The sliding overlay element that lives inside a .glass-pill and follows
+   hover/active state. Shared across nav, logo, and social slider. */
+.pill-overlay {
+    border-radius: 20px;
+    position: absolute;
+    background-image: var(--overlay-grad);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease, left 0.3s ease, top 0.3s ease,
+                width 0.3s ease, height 0.3s ease, right 0.3s ease;
+}
+
+.pill-overlay::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0;
+    width: calc(100% - 6px);
+    height: 50%;
+    border-radius: 20px 20px 0 0;
+    background-image: var(--overlay-sheen);
 }
 
 /* =================================
@@ -89,29 +150,7 @@ body.menu-open {
     align-items: center;
 }
 
-.logo-wrapper,
-.nav-list ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.2rem;
-    border-radius: 20px;
-    outline: 2px solid rgba(99, 102, 241, 0.2);
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-    overflow: clip;
-    position: relative;
-}
-
 .logo-wrapper { z-index: 3; }
-
-.logo-wrapper::after,
-.nav-list ul li::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(40px);
-    z-index: -3;
-}
 
 .logo {
     position: relative;
@@ -150,19 +189,6 @@ body.menu-open {
     box-shadow: inset 0 0 3px #a09f9e;
 }
 
-.overlay,
-.logo-overlay {
-    border-radius: 20px;
-    position: absolute;
-    background-image: linear-gradient(rgba(168, 14, 137, 0.6), rgba(249, 148, 232, 0.6));
-    z-index: -1;
-    opacity: 1;
-    transition: opacity 0.3s ease, left 0.3s ease, width 0.3s ease, right 0.3s ease;
-}
-
-.overlay::after,
-.logo-overlay::after,
-.custom-cursor::after,
 .typing-word::before {
     content: '';
     position: absolute;
@@ -171,7 +197,7 @@ body.menu-open {
     width: calc(100% - 6px);
     height: 50%;
     border-radius: 20px 20px 0 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.115));
+    background-image: var(--overlay-sheen);
 }
 
 .mobile-menu-toggle {
@@ -184,8 +210,8 @@ body.menu-open {
     z-index: 1001;
     border-radius: 10px;
     padding: 0.8rem 0.55rem;
-    outline: 2px solid rgba(99, 102, 241, 0.2);
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+    outline: 2px solid var(--overlay-outline);
+    box-shadow: var(--overlay-shadow);
     backdrop-filter: blur(40px);
 }
 
@@ -273,7 +299,7 @@ body.menu-open {
     white-space: nowrap;
     padding: 0.2rem 0.4rem;
     border-radius: 20px;
-    background-image: linear-gradient(rgba(168, 14, 137, 0.6), rgba(249, 148, 232, 0.6));
+    background-image: var(--overlay-grad);
 }
 
 .typing-word::after {
@@ -344,38 +370,34 @@ body.menu-open {
     font-size: 3rem;
     font-weight: 700;
     color: var(--text-dark);
-    opacity: 0; /* hidden before JS runs — JS sets opacity: 1 after splitting letters */
+    opacity: 0;
 }
 
-/* Remove custom cursor — work cards use default pointer */
 .work-card {
     display: block;
     text-decoration: none;
-    background: white;
-    padding: 0.875rem;          /* was 1.25rem */
+    padding: 0.875rem;
     border-radius: 10px;
-    cursor: pointer;            /* was: none */
     transition: transform 0.5s ease, box-shadow 0.4s ease;
 }
 
 .work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-    gap: 2rem;                  /* was 3rem */
+    gap: 2rem;
 }
 
 .work-image {
     width: 100%;
-    aspect-ratio: 7 / 5;       /* was 6/5 — slightly less tall */
+    aspect-ratio: 7 / 5;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 1rem;        /* was 1.5rem */
+    margin-bottom: 1rem;
 }
 
 .work-card:hover {
     box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
 }
-
 
 .mock-up-img {
     width: 100%;
@@ -419,7 +441,7 @@ body.menu-open {
 .copied-cursor,
 .footer-copied-cursor {
     position: fixed;
-    background-image: linear-gradient(rgba(66, 69, 238, 0.9), rgba(185, 185, 216, 0.9));
+    background-image: var(--overlay-grad-strong);
     color: var(--bg-white);
     padding: 0.3rem 0.75rem;
     border-radius: 25px;
@@ -581,7 +603,7 @@ body.menu-open {
     }
 
     .mobile-menu-toggle { display: flex; }
-    .overlay { display: none !important; }
+    .overlay-bounds .pill-overlay { display: none !important; }
 
     .one-line-text { display: block; margin-bottom: 0; }
     .words-container { display: block; margin-bottom: 2rem; min-width: auto; }

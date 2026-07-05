@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Susanna Boberg - Portfolio">
+    <meta name="description" content="Susanna Boberg Portfolio">
     <title>Susanna Boberg</title>
     <link rel="icon" href="/scribble-imgs/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,32 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page="home">
     <!-- Navigation -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <div class="logo-wrapper">
-                <a id="logo" class="logo active" href="index.html" aria-label="Home">sjb</a>
-                <div class="logo-overlay"></div>
-            </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-list">
-                <div class="overlay-bounds">
-                    <div class="overlay"></div>
-                    <ul>
-                        <li><a href="#work">Work</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="mailto:sjb5@williams.edu">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div>
-    </nav>
+    <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="hero" role="banner">
@@ -103,6 +80,7 @@
                         </div>
                     </div>
                 </a>
+
                 <a href="side-scribble.html" class="work-card">
                     <div class="work-image">
                         <img class="mock-up-img" src="scribble-imgs/closer-mockup.png" alt="image of a macbook showing a side panel browser extension with notes">
@@ -122,26 +100,15 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer-content">
-            <div class="footer-left">
-                <p class="footer-text">Coded with a serving of html/css/js, a spray of bug repellent and lots of ♡</p>
-            </div>
-            <div class="footer-right">
-                <button class="footer-email" id="copyEmailBtn">Email</button>
-                <span class="footer-divider">·</span>
-                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                <span class="footer-divider">·</span>
-                <span class="footer-copyright">© 2025 Susanna Boberg</span>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/TextPlugin.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/home.js" defer></script>
 </body>
 </html>

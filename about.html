@@ -12,31 +12,9 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="about-styles.css">
 </head>
-<body>
+<body data-page="about">
     <!-- Navigation -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <div class="logo-wrapper">
-                <a id = "logo" class="logo" href="index.html" aria-label="Home">sjb</a>
-                <div class="logo-overlay"></div>
-            </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="nav-list">
-                <div class="overlay-bounds">
-                <div class="overlay"></div>
-                <ul>
-                    <li><a href="index.html#work">Work</a></li>
-                    <li><a class="active" href="about.html">About</a></li>
-                    <li><a href="sjb5@williams.edu">Contact</a></li>
-                </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div id="nav-placeholder"></div>
 
     <!-- About Section -->
     <section class="about-hero">
@@ -56,8 +34,8 @@
 
             
                     <p class="about-description">
-                        Hi again! I'm a computer science and german double major with a cognitive science 
-                        concentration in my third year 
+                        Hi again! I'm a computer science and german double major  
+                        in my fourth year 
                         at Williams College.
                     </p>
                     <p class="about-description">
@@ -81,8 +59,8 @@
             </div>
             <section class="social-slider-section">
                     <div class="social-slider-wrapper">
-                        <div class="social-slider">
-                            <div class="social-overlay"></div>
+                        <div class="social-slider glass-pill">
+                            <div class="pill-overlay"></div>
                             <ul>
                                 <li><a href="https://drive.google.com/file/d/1EqfnqumnUc_YiICgeepOAYT9WLGWK_bf/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a></li>
                                 <li><button id="copyEmailBtn2">Email</button></li>
@@ -164,24 +142,14 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer-content">
-            <div class="footer-left">
-                <p class="footer-text">Coded with a serving of html/css/js, a spray of bug repellent and lots of ♡</p>
-            </div>
-            <div class="footer-right">
-                <button class="footer-email"id="copyEmailBtn">Email</button>
-                <span class="footer-divider">·</span>
-                <a href="https://www.linkedin.com/in/susanna-b-94953a37b/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                <span class="footer-divider">·</span>
-                <span class="footer-copyright">© 2025 Susanna Boberg</span>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/about.js" defer></script>
 </body>
 </html>
