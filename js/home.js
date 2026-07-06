@@ -3,45 +3,33 @@ gsap.registerPlugin(ScrollTrigger);
 // ===================================
 // GSAP Animations for Index Page
 
-if ($('.hero').length) {
-    gsap.to('.hero-title', {
-        opacity: 1,
-        y: -20,
-        duration: 0.8,
-        delay: 0.2
+if ($('.hero-title').length) {
+    const heroLines = Array.from(document.querySelectorAll('.hero-title-line'));
+
+    gsap.set('.hero-title', { opacity: 1 });
+    gsap.set(heroLines, { opacity: 0, y: 20 });
+    gsap.set('.scroll-down-section', { y: 20 });
+
+    const appearOffset = 0.9;
+    const scrambleDurations = [3, 2.0, 1.5];
+
+    const introTl = gsap.timeline({ delay: 0.2 });
+
+    heroLines.forEach((line, i) => {
+        const startTime = i * appearOffset;
+        introTl.to(line, { opacity: 1, y: 0, duration: 0.9 }, startTime);
+        introTl.to(line, {
+            duration: scrambleDurations[i],
+            scrambleText: { text: line.dataset.word, chars: 'lowerCase', revealDelay: 0.2, speed: 1.5 }
+        }, startTime);
     });
 
-    gsap.to('.hero-title', {
-        duration: 2.5,
-        scrambleText: {
-            text: "Susanna Jinyong Boberg",
-            chars: "lowerCase",
-            revealDelay: 1,
-            speed: 0.8
-        }
-    });
+    const lastSettle = (heroLines.length - 1.3) * appearOffset
+        + scrambleDurations[scrambleDurations.length - 1];
 
-    gsap.to('.hero-description', {
-        opacity: 1,
-        y: -20,
-        duration: 0.8,
-        delay: 2.5
-    });
-
-    gsap.to('.words-container', {
-        opacity: 1,
-        duration: 0.8,
-        delay: 3.1
-    });
-
-    gsap.to('.scroll-down-section', {
-        opacity: 0.7,
-        duration: 0.8,
-        delay: 3.1,
-        y: -20
-    });
-
-
+    introTl.to('.hero-description', { opacity: 1, y: -20, duration: 0.8 }, lastSettle + 0.1);
+    introTl.to('.words-container', { opacity: 1, duration: 0.8 }, '<0.6');
+    introTl.to('.scroll-down-section', { opacity: 0.7, y: 0, duration: 0.8 }, '<');
 }
 
 
