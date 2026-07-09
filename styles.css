@@ -373,34 +373,20 @@ body.menu-open {
 
 .hero-content {
     max-width: 1200px;
-    margin: clamp(4rem,7vh, 15vh) auto 0;
+    margin: 18vh auto 0;
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    min-height: 75vh;
+    min-height: 70vh;
 }
 
 .hero-text {
     margin-bottom: clamp(1rem, 4vh, 3rem);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 
 }
-
-.hero-title-line {
-    display: inline-block;
-    opacity: 0;
-}
-
-.hero-title-line:not(:last-child) {
-    margin-right: 0.35em;
-}
-
-
 
 .hero-title {
-    font-size: clamp(3rem, 9vw, 8rem);
+    font-size: clamp(3rem, 9vw, 7rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: clamp(0.75rem, 3vh, 2rem);
@@ -412,7 +398,7 @@ body.menu-open {
 .hero-description {
     font-size: 1.1rem;
     color: var(--text-gray);
-    max-width: 1000px;
+    max-width: 800px;
     line-height: 1.8;
     margin: 0;
     opacity: 0;
@@ -425,7 +411,7 @@ body.menu-open {
 
 .one-line-text {
     display: inline-block;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .words-container {
