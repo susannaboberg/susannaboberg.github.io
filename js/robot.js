@@ -137,8 +137,8 @@ loader.load("/models/final-room.glb", (glb)=>{
   // Chair: a continuous swivel around its own resting orientation — it's excluded
   // from the spawn-in above, it's just always gently rotating.
   const chairRestRotationY = chairBody ? chairBody.rotation.y : 0;
-  const CHAIR_SWIVEL_AMPLITUDE = THREE.MathUtils.degToRad(18);
-  const CHAIR_SWIVEL_SPEED = 0.6; // radians/sec inside the sine, ~10s per full cycle
+  const CHAIR_SWIVEL_AMPLITUDE = THREE.MathUtils.degToRad(10);
+  const CHAIR_SWIVEL_SPEED = 1; // radians/sec inside the sine, ~6.3s per full cycle
   const updateChairSwivel = () => {
     if (!chairBody) return;
     chairBody.rotation.y = chairRestRotationY

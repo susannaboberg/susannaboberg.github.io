@@ -146,7 +146,11 @@ body.menu-open {
 }
 
 .nav-container {
-    max-width: 1320px;
+    /* Stays at 1320px on any normal monitor; only widens past that once the
+       viewport is bigger than typical desktop screens (crossover ~1590px), so
+       it doesn't look lost/cramped in the middle of an ultra-wide or huge
+       display like a TV. */
+    max-width: clamp(1320px, 83vw, 2200px);
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -250,14 +254,22 @@ body.menu-open {
 }
 
 .hero-content {
-    max-width: 1320px;
-    margin: 11vh auto 0;
+    /* Same fluid cap as .nav-container, so both stay aligned at any width.
+       width: 100% is required here (not just max-width) because this is a flex
+       item in .hero's column layout — its horizontal auto margins override
+       flexbox's default stretch, so without an explicit width it shrink-wraps
+       to its content instead of actually filling out to the cap. */
+    width: 100%;
+    max-width: clamp(1320px, 83vw, 2200px);
+    margin: 0 auto;
     padding: 0 2rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 3rem;
+    /* Grows a bit wider than normal once there's real extra room, so the text
+       and scene separate rather than just floating in a wider shared box. */
+    gap: clamp(3rem, 5.5vw, 6rem);
     flex: 1;
     min-height: 0;
 }
@@ -358,7 +370,7 @@ body.menu-open {
     opacity: 0;
     visibility: visible;
     flex: 0 0 auto;
-    max-width: 1320px;
+    max-width: clamp(1320px, 83vw, 2200px);
     width: 100%;
     margin: 0 auto;
     padding: 0 2rem 1rem;
