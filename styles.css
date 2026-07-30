@@ -20,14 +20,15 @@
     --border: #e2e8f0;
 
     /* Glass-pill overlay system — every pill/cursor overlay across the site
-       pulls from these so the color can be changed in one place. */
-    --overlay-grad: linear-gradient(rgba(168, 14, 137, 0.6), rgba(249, 148, 232, 0.6));
-    --overlay-grad-strong: linear-gradient(rgba(168, 14, 137, 0.9), rgba(249, 148, 232, 0.9));
+       pulls from these. Fixed to FFB029 (hue 38, ~100% saturation, 58% lightness —
+       FFB029 itself falls almost exactly on that lightness, no picker needed). */
+    --overlay-grad: linear-gradient(hsla(38, 100%, 40%, 0.6), hsla(38, 100%, 78%, 0.6));
+    --overlay-grad-strong: linear-gradient(hsla(38, 100%, 40%, 0.9), hsla(38, 100%, 78%, 0.9));
     --overlay-sheen: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.115));
     --overlay-outline:  rgba(111, 112, 123, 0.2);
     --overlay-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-    --accent-solid: #d142ee; /* default, matches original pink theme */
-    --accent-solid-dark: #a52ec9;
+    --accent-solid: #FFB029;
+    --accent-solid-dark: hsla(38, 100%, 48%, 0.15);
 
 }
 
@@ -145,7 +146,7 @@ body.menu-open {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -199,133 +200,6 @@ body.menu-open {
     box-shadow: inset 0 0 3px #a09f9e;
 }
 
-.color-picker-wrapper { position: relative; }
-
-.color-picker-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    outline: 2px solid var(--overlay-outline);
-    box-shadow: var(--overlay-shadow);
-    backdrop-filter: blur(40px);
-    padding: 20px;
-    transition: background 0.3s ease;
-}
-
-.color-picker-btn:hover,
-.color-picker-btn.active {
-    background: var(--accent-solid-dark);
-}
-
-.color-picker-icon {
-    width: 24px;
-    height: 24px;
-    pointer-events: none;
-}
-
-.color-picker-panel {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    width: 220px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    background: var(--bg-white);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    z-index: 1200;
-}
-
-.color-picker-panel.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-}
-
-.color-wheel {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: conic-gradient(from 90deg, red, yellow, lime, cyan, blue, magenta, red);
-    cursor: crosshair;
-    touch-action: none;
-}
-
-.color-wheel::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: radial-gradient(circle at center, white, transparent 70%);
-}
-
-.color-wheel-knob {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid white;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.color-value-display {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: monospace;
-    font-size: 0.7rem;
-    color: var(--text-dark);
-}
-
-.color-format-arrow {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-    color: var(--text-light);
-    padding: 0.25rem 0.5rem;
-    border-radius: 50%;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.color-format-arrow:hover {
-    background: var(--bg-gray);
-    color: var(--text-dark);
-}
-
-.color-value-text {
-    min-width: 120px;
-    text-align: center;
-}
-
-.color-picker-reset {
-    border: none;
-    background: var(--bg-gray);
-    color: var(--text-dark);
-    padding: 0.4rem 0.9rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    cursor: pointer;
-}
-
 .typing-word::before {
     content: '';
     position: absolute;
@@ -368,16 +242,31 @@ body.menu-open {
    HERO
    ================================= */
 .hero {
-    min-height: 80vh;
+    /* Approximates the sticky navbar's own height, so hero + navbar together fit
+       one viewport instead of hero's own 100vh pushing its bottom past the fold. */
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    flex-direction: column;
 }
 
 .hero-content {
-    max-width: 1200px;
-    margin: 18vh auto 0;
+    max-width: 1320px;
+    margin: 11vh auto 0;
     padding: 0 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+    flex: 1;
+    min-height: 0;
+}
+
+.hero-left {
     display: flex;
     flex-direction: column;
-    min-height: 70vh;
+    flex: 1 1 60%;
+    min-width: 0;
 }
 
 .hero-text {
@@ -385,8 +274,25 @@ body.menu-open {
 
 }
 
+.hero-scene {
+    flex: 0 1 40%;
+    max-width: 460px;
+    min-width: 240px;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.canvas-experience {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .hero-title {
-    font-size: clamp(3rem, 9vw, 7rem);
+    font-size: clamp(2.75rem, 8vw, 6rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: clamp(0.75rem, 3vh, 2rem);
@@ -396,7 +302,7 @@ body.menu-open {
 }
 
 .hero-description {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-gray);
     max-width: 800px;
     line-height: 1.8;
@@ -451,11 +357,14 @@ body.menu-open {
 .scroll-down-section {
     opacity: 0;
     visibility: visible;
+    flex: 0 0 auto;
+    max-width: 1320px;
     width: 100%;
-    align-self: flex-end;
-    text-align: right;
+    margin: 0 auto;
+    padding: 0 2rem 1rem;
+    box-sizing: border-box;
+    text-align: left;
     transition: opacity 0.4s ease, visibility 0.4s ease;
-    margin-top: auto;
 }
 
 .scroll-down-section.hidden {
@@ -475,7 +384,6 @@ body.menu-open {
 .scroll-arrow {
     width: 24px;
     height: 24px;
-    margin-left: auto;
     animation: bounce 2s infinite;
 }
 
@@ -497,7 +405,7 @@ body.menu-open {
 .work-section { padding: 8vh 0; }
 
 .work-section-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 2rem;
 }
 
@@ -513,6 +421,8 @@ body.menu-open {
     text-decoration: none;
     padding: 0.875rem;
     border-radius: 10px;
+
+    
     transition: transform 0.5s ease, box-shadow 0.4s ease;
 }
 
@@ -724,6 +634,7 @@ body.menu-open {
         align-items: flex-start;
         max-width: 100%;
     }
+    .hero-scene { max-width: 340px; min-width: 220px; }
     .footer-text { font-size: 0.8rem; max-width: 45%; }
     .footer-right { font-size: 0.85rem; gap: 1rem; }
 }
@@ -798,12 +709,20 @@ body.menu-open {
         margin-top: 0;
         flex: 1;
         min-height: 0;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .hero-left { min-height: 0; }
+    .hero-scene {
+        align-self: stretch;
+        max-width: 100%;
+        min-width: 0;
+        margin-top: 2rem;
     }
     .scroll-down-section {
         position: static;
-        align-self: center;
+        margin-top: 2rem;
         text-align: center;
-        margin-top: auto;
     }
     .scroll-arrow { margin-left: auto; margin-right: auto; }
     .hero-text { flex-direction: column; align-items: flex-start; }

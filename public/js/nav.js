@@ -42,6 +42,22 @@ document.addEventListener('components:ready', () => {
         getActiveTarget: () => document.querySelector('.nav-list a.active'),
     });
 
+    // While hovering Work/About/Art, send the logo's own pill overlay flying
+    // off to the right (nudge + fade, riding the existing left/opacity
+    // transitions) instead of just sitting there — only relevant while it's
+    // actually showing, i.e. logo is the active section. It only flies back
+    // once the mouse leaves the list AND we're still on the logo/hero section —
+    // positionOverlayOnActive() re-checks that fresh, so if a scroll happened
+    // to move "active" onto Work in the meantime, it correctly stays away.
+    navListContainer.addEventListener('mouseenter', () => {
+        if (!logo.classList.contains('active')) return;
+        const currentLeft = parseFloat(logoOverlay.style.left) || 0;
+        logoOverlay.style.left = (currentLeft + 28) + 'px';
+        logoOverlay.style.opacity = '0';
+    });
+
+    navListContainer.addEventListener('mouseleave', positionOverlayOnActive);
+
     // Logo has its own overlay/wrapper, so it's handled separately —
     // it's mutually exclusive with the nav-link overlay above.
     logo.addEventListener('mouseenter', () => {

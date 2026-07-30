@@ -5,39 +5,43 @@ gsap.registerPlugin(ScrollTrigger);
 
 if ($('.hero').length) {
 
-
-
-    gsap.to('.hero-title', {
-            duration: 2.5,
-            opacity: 1, 
-            y: -20,
-            scrambleText: {
-                text: "Susanna Boberg",
-                chars: "lowerCase",
-                revealDelay: 0.2,
-                speed: 1.5
-            }
+    // Gated behind robot.js's "hero-scene-ready" signal (desktop: fires once the 3D
+    // scene has finished populating and sliding into place; mobile: fires immediately,
+    // since there's no slide there) — the flag is checked first in case it already
+    // fired before this listener was attached.
+    function revealHero() {
+        gsap.to('.hero-title', {
+            duration: 1,
+            opacity: 1,
+            y: -20
         });
 
-    gsap.to('.hero-description', {
-        opacity: 1,
-        y: -20,
-        duration: 0.8,
-        delay: 2.5
-    });
+        gsap.to('.hero-description', {
+            opacity: 1,
+            y: -20,
+            duration: 0.8,
+            delay: 0.4
+        });
 
-    gsap.to('.words-container', {
-        opacity: 1,
-        duration: 0.8,
-        delay: 3.1
-    })
+        gsap.to('.words-container', {
+            opacity: 1,
+            duration: 0.8,
+            delay: 0.7
+        })
 
-    gsap.to('.scroll-down-section', {
-        opacity: 0.7,
-        duration: 0.8,
-        delay: 3.1,
-        y: -20
-    })
+        gsap.to('.scroll-down-section', {
+            opacity: 0.7,
+            duration: 0.8,
+            delay: 0.7,
+            y: -20
+        })
+    }
+
+    if (window.__heroSceneReady) {
+        revealHero();
+    } else {
+        document.addEventListener('hero-scene-ready', revealHero, { once: true });
+    }
 
 }
 
@@ -129,7 +133,16 @@ if ($('.hero').length && $('.words-container').length) {
         }
     }
 
-    gsap.delayedCall(3.8, synchronizedLoop);
+    // Same hero-scene-ready gate as the fade-in above, plus a short beat so the
+    // typewriter starts just after the title/description finish fading in rather
+    // than fighting for attention while they're still moving.
+    if (window.__heroSceneReady) {
+        gsap.delayedCall(1.5, synchronizedLoop);
+    } else {
+        document.addEventListener('hero-scene-ready', () => {
+            gsap.delayedCall(1.5, synchronizedLoop);
+        }, { once: true });
+    }
 
     if (scrollDownSection) {
         $(window).on('scroll', function() {
@@ -174,16 +187,20 @@ if ($('.work-section-title').length) {
             return span;
         });
 
-        gsap.set(letters, { x: window.innerWidth, opacity: 0 }); //start letters hidden
+        // A consistent per-letter offset (not a shared absolute screen position) — every
+        // letter travels the exact same relative distance, so faster/slower letters can't
+        // overtake each other and cross paths mid-flight. Positive = enters from the right.
+        const LETTER_FLY_IN_OFFSET = 150;
+        gsap.set(letters, { x: LETTER_FLY_IN_OFFSET, opacity: 0 }); //start letters hidden
 
         gsap.set(titleEl, { opacity: 1 }); // parent visible now; letters control their own reveal
 
         gsap.fromTo(letters,
-            { x: () => window.innerWidth, opacity: 0 },
+            { x: LETTER_FLY_IN_OFFSET, opacity: 0 },
             {
                 x: 0,
                 opacity: 1,
-                stagger: 0.03,
+                stagger: { each: 0.03, from: 'end' }, // last letter ("s") reveals first
                 ease: 'power1.out',
                 scrollTrigger: {
                     trigger: titleEl,
