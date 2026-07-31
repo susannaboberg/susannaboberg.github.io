@@ -4,6 +4,12 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const canvas = document.querySelector("#canvas-experience");
 const container = canvas.parentElement;
+// The whole visual group (scene + caption + "why a robot?" callout) that gets
+// centered/slid as one unit on load — a level up from container, so the caption
+// and callout move together with the room instead of being left behind (container
+// itself stays scoped to just the square canvas box, which is what its sizing
+// logic below depends on).
+const slideTarget = container.parentElement;
 const sizes = {
   width: container.clientWidth,
   height: container.clientHeight,
@@ -32,9 +38,9 @@ function announceHeroSceneReady() {
 if (isMobile) {
   announceHeroSceneReady();
 } else {
-  container.addEventListener('transitionend', function onSlideDone(e) {
+  slideTarget.addEventListener('transitionend', function onSlideDone(e) {
     if (e.propertyName !== 'transform') return;
-    container.removeEventListener('transitionend', onSlideDone);
+    slideTarget.removeEventListener('transitionend', onSlideDone);
     announceHeroSceneReady();
   });
 
@@ -42,10 +48,10 @@ if (isMobile) {
   // hero row is still mid-reflow (nav/hero text reshuffling as fonts swap in) throws
   // the "center" off by however much layout still had left to settle.
   document.fonts.ready.then(() => {
-    const rect = container.getBoundingClientRect();
+    const rect = slideTarget.getBoundingClientRect();
     const naturalCenterX = rect.left + rect.width / 2;
     const screenCenterX = window.innerWidth / 2;
-    container.style.transform = `translateX(${screenCenterX - naturalCenterX}px)`;
+    slideTarget.style.transform = `translateX(${screenCenterX - naturalCenterX}px)`;
   });
 }
 
@@ -127,11 +133,17 @@ loader.load("/models/final-room.glb", (glb)=>{
   // Reveal: the whole canvas fades in as one unit once the room is fully assembled
   // and ready (the base is already fully opaque, nothing needs its own material
   // fade) — decor/robot pop-in below happens after this, visibly, once the canvas
-  // is showing.
+  // is showing. The caption fades in right alongside it (not gated behind the full
+  // decor/robot pop-in sequence like the rest of the hero text is).
   const CANVAS_FADE_DURATION = 700;
   canvas.style.transition = `opacity ${CANVAS_FADE_DURATION}ms ease`;
+  const heroSceneCaption = document.querySelector('.hero-scene-caption');
+  if (heroSceneCaption) {
+    heroSceneCaption.style.transition = `opacity ${CANVAS_FADE_DURATION}ms ease`;
+  }
   requestAnimationFrame(() => {
     canvas.style.opacity = '1';
+    if (heroSceneCaption) heroSceneCaption.style.opacity = '1';
   });
 
   // Chair: a continuous swivel around its own resting orientation — it's excluded
@@ -309,9 +321,9 @@ loader.load("/models/final-room.glb", (glb)=>{
     // ready immediately and has nothing to slide.
     if (!introComplete && generalSpawnDone && robotSpawnDone && !isMobile) {
       introComplete = true;
-      container.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
+      slideTarget.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
       requestAnimationFrame(() => {
-        container.style.transform = 'translateX(0px)';
+        slideTarget.style.transform = 'translateX(0px)';
       });
     }
   };

@@ -286,10 +286,17 @@ body.menu-open {
 
 }
 
-.hero-scene {
+.hero-scene-wrapper {
     flex: 0 1 40%;
     max-width: 460px;
     min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.hero-scene {
+    width: 100%;
     aspect-ratio: 1 / 1;
     position: relative;
     border: none;
@@ -303,8 +310,83 @@ body.menu-open {
     height: 100%;
 }
 
+.hero-scene-caption {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    text-align: center;
+    line-height: 1.5;
+    opacity: 0;
+}
+
+/* =================================
+   "Why a robot?" callout — simple underlined text sitting on the right side
+   of the scene, that reveals a short blurb on hover (desktop) or tap (touch,
+   toggled via home.js). Trigger + popup share one wrapper so hovering either
+   one keeps the popup open (moving the mouse from the trigger up into the
+   popup never leaves the wrapper's hover area). Stays fully inside
+   .hero-scene's own box so it never fights that panel's overflow:hidden
+   (which is what keeps the canvas's corners rounded).
+   ================================= */
+.robot-callout {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 2;
+}
+
+.robot-callout-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.robot-callout-popup {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 10px);
+    z-index: 3;
+    width: 210px;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    outline: 2px solid var(--overlay-outline);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    background: rgba(248, 250, 252, 0.92);
+    backdrop-filter: blur(20px);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    pointer-events: none;
+}
+
+.robot-callout-popup a {
+    color: var(--text-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.robot-callout:hover .robot-callout-popup,
+.robot-callout:focus-within .robot-callout-popup,
+.robot-callout.active .robot-callout-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
 .hero-title {
-    font-size: clamp(2.75rem, 8vw, 6rem);
+    font-size: clamp(2.5rem, 5vw, 6rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: clamp(0.75rem, 3vh, 2rem);
@@ -317,7 +399,7 @@ body.menu-open {
     font-size: 1rem;
     color: var(--text-gray);
     max-width: 800px;
-    line-height: 1.8;
+    line-height: 1.6;
     margin: 0;
     opacity: 0;
 }
@@ -646,7 +728,7 @@ body.menu-open {
         align-items: flex-start;
         max-width: 100%;
     }
-    .hero-scene { max-width: 340px; min-width: 220px; }
+    .hero-scene-wrapper { max-width: 340px; min-width: 220px; }
     .footer-text { font-size: 0.8rem; max-width: 45%; }
     .footer-right { font-size: 0.85rem; gap: 1rem; }
 }
@@ -725,7 +807,7 @@ body.menu-open {
         align-items: stretch;
     }
     .hero-left { min-height: 0; }
-    .hero-scene {
+    .hero-scene-wrapper {
         align-self: stretch;
         max-width: 100%;
         min-width: 0;

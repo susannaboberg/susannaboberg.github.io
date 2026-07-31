@@ -35,6 +35,12 @@ if ($('.hero').length) {
             delay: 0.7,
             y: -20
         })
+
+        gsap.to('.robot-callout-trigger', {
+            opacity: 1,
+            duration: 0.8,
+            delay: 1.1
+        })
     }
 
     if (window.__heroSceneReady) {
@@ -43,6 +49,30 @@ if ($('.hero').length) {
         document.addEventListener('hero-scene-ready', revealHero, { once: true });
     }
 
+}
+
+// ===================================
+// "Why a robot?" callout — hover keeps it open on desktop as long as the mouse is
+// anywhere over the trigger or the popup itself (pure CSS, via the shared
+// .robot-callout wrapper). This just adds click-to-pin (stays open after the mouse
+// leaves, until clicked again or clicked outside) and tap support for touch devices.
+
+if ($('.robot-callout').length) {
+    const robotCallout = document.querySelector('.robot-callout');
+    const robotCalloutTrigger = document.querySelector('.robot-callout-trigger');
+
+    robotCalloutTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = robotCallout.classList.toggle('active');
+        robotCalloutTrigger.setAttribute('aria-expanded', isActive);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (robotCallout.classList.contains('active') && !robotCallout.contains(e.target)) {
+            robotCallout.classList.remove('active');
+            robotCalloutTrigger.setAttribute('aria-expanded', 'false');
+        }
+    });
 }
 
 

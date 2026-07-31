@@ -1,7 +1,7 @@
-// about.js — about-page fades, social slider glass-pill, gallery lightbox,
-// footer email copy. Requires: components.js, utils.js (positionOverlay,
-// hideOverlay, initPillHoverOverlay). Only runs its guarded blocks on pages
-// that have the relevant markup.
+// about.js — about-page fades, social slider glass-pill, footer email copy.
+// Requires: components.js, utils.js (positionOverlay, hideOverlay,
+// initPillHoverOverlay). Only runs its guarded blocks on pages that have the
+// relevant markup.
 
 // ===================================
 // About Page: Simple Fade-in Animations
@@ -161,97 +161,4 @@ if ($('.footer-email').length && $('.about-hero').length) {
             console.error('Failed to copy: ', err);
         }
     });
-}
-
-// ===================================
-// Photo Gallery Lightbox Functionality
-
-if ($('.gallery-section').length) {
-    const lightbox = $('#galleryLightbox');
-    const lightboxImage = $('#lightboxImage');
-    const lightboxCaption = $('#lightboxCaption');
-    const closeBtn = $('.lightbox-close');
-
-    const galleryCursor = $('<div>', {
-        class: 'custom-cursor gallery-cursor'
-    });
-    $('body').append(galleryCursor);
-
-    $('.gallery-item').on('mouseenter', function () {
-        if ($('.custom-cursor.email-copied-cursor, .custom-cursor.social-copied-cursor').hasClass('active')) {
-            return;
-        }
-
-        const cursorText = $(this).data('cursor-text') || 'View Photo';
-        galleryCursor.text(cursorText);
-        galleryCursor.addClass('active');
-    });
-
-    $('.gallery-item').on('mouseleave', function () {
-        galleryCursor.removeClass('active');
-    });
-
-    $('.gallery-item').on('mousemove', function (e) {
-        if ($('.custom-cursor.email-copied-cursor, .custom-cursor.social-copied-cursor').hasClass('active')) {
-            return;
-        }
-
-        galleryCursor.css({
-            left: e.clientX + 15 + 'px',
-            top: e.clientY + 15 + 'px'
-        });
-    });
-
-    $('.gallery-item').on('click', function () {
-        const imgSrc = $(this).find('img').attr('src');
-        const imgAlt = $(this).find('img').attr('alt');
-        const caption = $(this).data('caption');
-
-        lightboxImage.attr('src', imgSrc);
-        lightboxImage.attr('alt', imgAlt);
-        lightboxCaption.text(caption);
-
-        lightbox.addClass('active');
-        $('body').css('overflow', 'hidden');
-
-        galleryCursor.removeClass('active');
-    });
-
-    closeBtn.on('click', function (e) {
-        e.stopPropagation();
-        closeLightbox();
-    });
-
-    lightbox.on('click', function (e) {
-        if (e.target === this) {
-            closeLightbox();
-        }
-    });
-
-    $(document).on('keydown', function (e) {
-        if (e.key === 'Escape' && lightbox.hasClass('active')) {
-            closeLightbox();
-        }
-    });
-
-    function closeLightbox() {
-        lightbox.removeClass('active');
-        $('body').css('overflow', '');
-    }
-
-    if (typeof gsap !== 'undefined') {
-        gsap.utils.toArray('.gallery-item').forEach((item, i) => {
-            gsap.from(item, {
-                scrollTrigger: {
-                    trigger: item,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: 30,
-                duration: 0.6,
-                delay: i * 0.05
-            });
-        });
-    }
 }

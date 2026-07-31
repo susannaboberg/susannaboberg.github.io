@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Susanna Boberg Portfolio">
     <title>Susanna Boberg</title>
-    <link rel="icon" href="/scribble-imgs/favicon.png">
+    <link rel="icon" href="src/bubble-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
@@ -30,15 +30,24 @@
                         </div>
                     </div>
                     <div>
-                        <p class="hero-description"> As a <b>UX designer</b> with a computer science background, design
-                            and programming are two sides of the same coin to me&mdash;both <span class="curved-underline">languages</span>
-                            for understanding systems, stories, and how people connect with technology. </p>
+                        <p class="hero-description">I&rsquo;m a <b>UX designer</b> with a background in computer science
+                            and robotics research. I love understanding how complex systems work, and figuring out how to
+                            <span class="curved-underline">translate</span> them into something people can understand and use.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-scene">
-                <canvas id="canvas-experience" class="canvas-experience"></canvas>
+            <div class="hero-scene-wrapper">
+                <div class="hero-scene">
+                    <canvas id="canvas-experience" class="canvas-experience"></canvas>
+                    <div class="robot-callout">
+                        <button type="button" class="robot-callout-trigger" aria-expanded="false" aria-describedby="robot-callout-popup">Why a robot?</button>
+                        <div class="robot-callout-popup" id="robot-callout-popup" role="tooltip">
+                            <p>I spent two summers researching haptic feedback in robotics before UX. Find out more in my <a href="/about.html">about me</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-scene-caption">A little glimpse into the things that make me, me.</p>
             </div>
         </div>
 
