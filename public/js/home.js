@@ -16,30 +16,35 @@ if ($('.hero').length) {
             y: -20
         });
 
+        // Everything else fades in together, right after the title (not staggered
+        // one-by-one) — each keeps its own target opacity/offset, just synced timing.
+        const restDelay = 0.5;
+        const restDuration = 0.8;
+
         gsap.to('.hero-description', {
             opacity: 1,
             y: -20,
-            duration: 0.8,
-            delay: 0.4
+            duration: restDuration,
+            delay: restDelay
         });
 
         gsap.to('.words-container', {
             opacity: 1,
-            duration: 0.8,
-            delay: 0.7
+            duration: restDuration,
+            delay: restDelay
         })
 
         gsap.to('.scroll-down-section', {
             opacity: 0.7,
-            duration: 0.8,
-            delay: 0.7,
+            duration: restDuration,
+            delay: restDelay,
             y: -20
         })
 
-        gsap.to('.robot-callout-trigger', {
+        gsap.to('.hero-scene-caption', {
             opacity: 1,
-            duration: 0.8,
-            delay: 1.1
+            duration: restDuration,
+            delay: restDelay
         })
     }
 
@@ -50,31 +55,6 @@ if ($('.hero').length) {
     }
 
 }
-
-// ===================================
-// "Why a robot?" callout — hover keeps it open on desktop as long as the mouse is
-// anywhere over the trigger or the popup itself (pure CSS, via the shared
-// .robot-callout wrapper). This just adds click-to-pin (stays open after the mouse
-// leaves, until clicked again or clicked outside) and tap support for touch devices.
-
-if ($('.robot-callout').length) {
-    const robotCallout = document.querySelector('.robot-callout');
-    const robotCalloutTrigger = document.querySelector('.robot-callout-trigger');
-
-    robotCalloutTrigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isActive = robotCallout.classList.toggle('active');
-        robotCalloutTrigger.setAttribute('aria-expanded', isActive);
-    });
-
-    document.addEventListener('click', (e) => {
-        if (robotCallout.classList.contains('active') && !robotCallout.contains(e.target)) {
-            robotCallout.classList.remove('active');
-            robotCalloutTrigger.setAttribute('aria-expanded', 'false');
-        }
-    });
-}
-
 
 // ===================================
 // Typewriter & Scramble Animations

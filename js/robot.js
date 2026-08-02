@@ -133,17 +133,11 @@ loader.load("/models/final-room.glb", (glb)=>{
   // Reveal: the whole canvas fades in as one unit once the room is fully assembled
   // and ready (the base is already fully opaque, nothing needs its own material
   // fade) — decor/robot pop-in below happens after this, visibly, once the canvas
-  // is showing. The caption fades in right alongside it (not gated behind the full
-  // decor/robot pop-in sequence like the rest of the hero text is).
+  // is showing.
   const CANVAS_FADE_DURATION = 700;
   canvas.style.transition = `opacity ${CANVAS_FADE_DURATION}ms ease`;
-  const heroSceneCaption = document.querySelector('.hero-scene-caption');
-  if (heroSceneCaption) {
-    heroSceneCaption.style.transition = `opacity ${CANVAS_FADE_DURATION}ms ease`;
-  }
   requestAnimationFrame(() => {
     canvas.style.opacity = '1';
-    if (heroSceneCaption) heroSceneCaption.style.opacity = '1';
   });
 
   // Chair: a continuous swivel around its own resting orientation — it's excluded
@@ -163,7 +157,7 @@ loader.load("/models/final-room.glb", (glb)=>{
   // has finished appearing, and keep ticking live from there. Minute hand does a full
   // rotation every 60 minutes, hour hand every 12 hours — each includes the finer
   // component (seconds/minutes) so they sweep smoothly instead of jumping once a minute.
-  const CLOCK_SPIN_SPEED = Math.PI * 2 * 1.1; // minute hand's radians/sec while spinning, ~1.1 rotations/sec
+  const CLOCK_SPIN_SPEED = Math.PI * 2 * 2.4; // minute hand's radians/sec while spinning, ~2.4 rotations/sec
   const CLOCK_SETTLE_DURATION = 700;
   let clockSettled = false;
   let clockSettleStart = null;
@@ -354,6 +348,22 @@ loader.load("/models/final-room.glb", (glb)=>{
     mouseNDC.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     mouseNDC.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   });
+
+  // Touch devices have no hover, so the same reach is driven by dragging a
+  // finger across the canvas instead — scoped to just the canvas (not the whole
+  // page, unlike the mousemove listener above) so it only takes over scrolling
+  // while the room itself is actually being touched. { passive: false } + the
+  // preventDefault is what stops the page from scrolling underneath the drag.
+  const updateNDCFromTouch = (event) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    event.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    mouseNDC.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+    mouseNDC.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+  };
+  canvas.addEventListener("touchstart", updateNDCFromTouch, { passive: false });
+  canvas.addEventListener("touchmove", updateNDCFromTouch, { passive: false });
 
   const X_AXIS = new THREE.Vector3(1, 0, 0);
   const Y_AXIS = new THREE.Vector3(0, 1, 0);
