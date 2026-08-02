@@ -4,30 +4,15 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const canvas = document.querySelector("#canvas-experience");
 const container = canvas.parentElement;
-// The whole visual group (scene + caption + "why a robot?" callout) that gets
-// centered/slid as one unit on load — a level up from container, so the caption
-// and callout move together with the room instead of being left behind (container
-// itself stays scoped to just the square canvas box, which is what its sizing
-// logic below depends on).
-const slideTarget = container.parentElement;
 const sizes = {
   width: container.clientWidth,
   height: container.clientHeight,
 };
 
-// Hidden until the model has loaded and the scene is fully assembled — revealed as
-// one clean fade-in on the canvas itself (see loader.load below), rather than each
-// object materializing visibly from nothing, or the room shell fading in on its own.
+//room fade in
 canvas.style.opacity = '0';
 
-// Intro sequencing: on desktop, the panel starts visually centered on the screen
-// (a transform, not a layout change, so the renderer's own sizing logic below is
-// unaffected), the scene populates while centered, then it slides to its normal
-// place in the layout. home.js waits for the "hero-scene-ready" event (or the
-// window.__heroSceneReady flag, in case it fires before home.js attaches its
-// listener) before fading the hero text in, so the two stay in sync. Mobile skips
-// the centering/slide entirely — the flag/event fires immediately so the text
-// fades in right away instead of waiting on the 3D scene at all.
+// scene starts centered, room fades in, objects pop in, then scene slides to the right and home.js can run (on mobile this process is skipped)
 const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
 function announceHeroSceneReady() {
@@ -38,20 +23,18 @@ function announceHeroSceneReady() {
 if (isMobile) {
   announceHeroSceneReady();
 } else {
-  slideTarget.addEventListener('transitionend', function onSlideDone(e) {
+  container.addEventListener('transitionend', function onSlideDone(e) {
     if (e.propertyName !== 'transform') return;
-    slideTarget.removeEventListener('transitionend', onSlideDone);
+    container.removeEventListener('transitionend', onSlideDone);
     announceHeroSceneReady();
   });
 
-  // Measured after web fonts are ready rather than immediately — measuring while the
-  // hero row is still mid-reflow (nav/hero text reshuffling as fonts swap in) throws
-  // the "center" off by however much layout still had left to settle.
+  // get measurements of scene AFTER all text and movement is done--so origin is accurate for robot
   document.fonts.ready.then(() => {
-    const rect = slideTarget.getBoundingClientRect();
+    const rect = container.getBoundingClientRect();
     const naturalCenterX = rect.left + rect.width / 2;
     const screenCenterX = window.innerWidth / 2;
-    slideTarget.style.transform = `translateX(${screenCenterX - naturalCenterX}px)`;
+    container.style.transform = `translateX(${screenCenterX - naturalCenterX}px)`;
   });
 }
 
@@ -65,6 +48,7 @@ dracoLoader.setDecoderPath('/draco/');
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 
+//TODO: add night textures + night mode button
 const textureMap = {
   Base: {
     day: "/textures/texture_bases_day.webp",
@@ -83,6 +67,7 @@ const loadedTextures = {
   night: {},
 }
 
+//adjust colors
 Object.entries(textureMap).forEach(([key, paths]) => {
   const dayTexture = textureLoader.load(paths.day);
   dayTexture.flipY = false;
@@ -101,10 +86,9 @@ let updateArmIK = null;
 let updateAmbientAnimations = null;
 
 loader.load("/models/final-room.glb", (glb)=>{
+
+  // objects with custom names that can't be iterated on
   const joints = {};
-  // Everything textured as "Target" pops in on load, except the chair — it's always
-  // there, it just swivels — and the whole robot chain, which pops in as its own
-  // ordered sequence after this batch (see "Robot reveal" below), not alongside it.
   const ROBOT_NAMES = ["robot_base", "joint_1", "joint_2", "joint_3", "gripper"];
   const spawnMeshes = [];
   let chairBody = null;
@@ -112,6 +96,8 @@ loader.load("/models/final-room.glb", (glb)=>{
   let hourHand = null;
 
   glb.scene.traverse((child) => {
+
+    // all targets will be animated (pop-in), base is the background room
     if (!child.isMesh) return;
     const key = child.name === "base" ? "Base" : "Target";
     child.material = new THREE.MeshBasicMaterial({ map: loadedTextures.day[key]});
@@ -123,6 +109,7 @@ loader.load("/models/final-room.glb", (glb)=>{
     if (child.name === "minute_hand") minuteHand = child;
     if (child.name === "hour_hand") hourHand = child;
 
+    //all objects that will pop in on load
     if (key === "Target" && child.name !== "chair_body" && !ROBOT_NAMES.includes(child.name)) {
       spawnMeshes.push(child);
     }
@@ -130,34 +117,25 @@ loader.load("/models/final-room.glb", (glb)=>{
 
   scene.add(glb.scene);
 
-  // Reveal: the whole canvas fades in as one unit once the room is fully assembled
-  // and ready (the base is already fully opaque, nothing needs its own material
-  // fade) — decor/robot pop-in below happens after this, visibly, once the canvas
-  // is showing.
+  // canvas fade in
   const CANVAS_FADE_DURATION = 700;
   canvas.style.transition = `opacity ${CANVAS_FADE_DURATION}ms ease`;
   requestAnimationFrame(() => {
     canvas.style.opacity = '1';
   });
 
-  // Chair: a continuous swivel around its own resting orientation — it's excluded
-  // from the spawn-in above, it's just always gently rotating.
+  // chair continuous swivel
   const chairRestRotationY = chairBody ? chairBody.rotation.y : 0;
-  const CHAIR_SWIVEL_AMPLITUDE = THREE.MathUtils.degToRad(10);
-  const CHAIR_SWIVEL_SPEED = 1; // radians/sec inside the sine, ~6.3s per full cycle
+  const CHAIR_SWIVEL_AMPLITUDE = THREE.MathUtils.degToRad(18);
+  const CHAIR_SWIVEL_SPEED = 0.6; // radians/sec inside the sine, ~10s per full cycle
   const updateChairSwivel = () => {
     if (!chairBody) return;
     chairBody.rotation.y = chairRestRotationY
       + Math.sin(performance.now() / 1000 * CHAIR_SWIVEL_SPEED) * CHAIR_SWIVEL_AMPLITUDE;
   };
 
-  // Clock hands: spin freely while the scene is still loading/popping in — a bit of
-  // motion to look at rather than sitting still at the right time from frame one —
-  // then ease into the viewer's actual current time once everything (decor + robot)
-  // has finished appearing, and keep ticking live from there. Minute hand does a full
-  // rotation every 60 minutes, hour hand every 12 hours — each includes the finer
-  // component (seconds/minutes) so they sweep smoothly instead of jumping once a minute.
-  const CLOCK_SPIN_SPEED = Math.PI * 2 * 2.4; // minute hand's radians/sec while spinning, ~2.4 rotations/sec
+  // clock hands spin on load, then settle to current time
+  const CLOCK_SPIN_SPEED = Math.PI * 2 * 1.1; // minute hand's radians/sec while spinning, ~1.1 rotations/sec
   const CLOCK_SETTLE_DURATION = 700;
   let clockSettled = false;
   let clockSettleStart = null;
@@ -169,13 +147,13 @@ loader.load("/models/final-room.glb", (glb)=>{
     while (wrapped - from < -Math.PI) wrapped += Math.PI * 2;
     return wrapped;
   };
+
   const updateClockHands = () => {
     if (!minuteHand && !hourHand) return;
 
+    //spin
     if (!(generalSpawnDone && robotSpawnDone)) {
-      // Hour hand spins at 1/12th the minute hand's rate while loading — same ratio
-      // as their real movement (a full minute-hand turn = 30° of hour-hand travel) —
-      // so it still reads as a clock spinning up, not two hands moving in lockstep.
+      // each revolution of minute hand rotates hour hand by 30°
       const elapsed = performance.now() / 1000;
       if (minuteHand) minuteHand.rotation.z = elapsed * CLOCK_SPIN_SPEED;
       if (hourHand) hourHand.rotation.z = elapsed * (CLOCK_SPIN_SPEED / 12);
@@ -206,24 +184,23 @@ loader.load("/models/final-room.glb", (glb)=>{
     if (hourHand) hourHand.rotation.z = targetHour;
     if (minuteHand) minuteHand.rotation.z = targetMinute;
   };
+
   updateAmbientAnimations = () => {
     updateSpawnAnimation();
     updateChairSwivel();
     updateClockHands();
   };
 
-  // Recenter the camera on the room's actual geometry instead of assuming world
-  // origin is its visual center — it wasn't, which is what pushed the room toward
-  // the top of the frame. Keeps the exact same viewing angle/distance (the offset
-  // the camera was originally set up with), just re-anchored on the room's center.
+  // camera position
   const roomCenter = new THREE.Box3().setFromObject(glb.scene).getCenter(new THREE.Vector3());
   camera.position.copy(roomCenter).add(cameraOffset);
   camera.lookAt(roomCenter);
 
+
+  // robot things
   const { robot_base: robotBase, joint_1: joint1, joint_2: joint2, joint_3: joint3, gripper } = joints;
 
-  // Rest pose per joint — whatever tilt is already baked into the mesh — so the
-  // driven rotation gets layered on top instead of overwriting it.
+  // rest pose of each joint
   const restQuaternion = {
     joint1: joint1.quaternion.clone(),
     joint2: joint2.quaternion.clone(),
@@ -231,22 +208,13 @@ loader.load("/models/final-room.glb", (glb)=>{
     gripper: gripper.quaternion.clone(),
   };
 
-  // Measured from the model's true (scale-1) geometry, before any spawn-in scaling
-  // below touches it — measuring these afterward, while joint_1 (their common
-  // ancestor) is scaled to 0, collapsed the whole arm to a single point and gave
-  // near-zero lengths, which is what silently broke the IK math for joint_3 and
-  // gripper (NaN downstream of a divide-by-near-zero) while joint_2 just looked
-  // subtly wrong — that's the bug behind "only the base ever shows up."
+  // length of joints
   const upperArmLength = joint2.getWorldPosition(new THREE.Vector3())
     .distanceTo(joint3.getWorldPosition(new THREE.Vector3()));
   const forearmLength = joint3.getWorldPosition(new THREE.Vector3())
     .distanceTo(gripper.getWorldPosition(new THREE.Vector3()));
 
-  // Spawn-in: everything starts at scale 0 and grows to full size, like it's
-  // materializing into the room. A little overshoot (easeOutBack) reads as a "pop"
-  // rather than a flat grow. Starts right as the canvas's own fade-in finishes, so
-  // objects begin populating a room that's already visible rather than one still
-  // fading in underneath them.
+  // spawn-in targets with easeOutBack
   const SPAWN_DELAY = CANVAS_FADE_DURATION;
   const spawnStart = performance.now() + SPAWN_DELAY;
   const easeOutBack = (t) => {
@@ -254,11 +222,7 @@ loader.load("/models/final-room.glb", (glb)=>{
     return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
   };
 
-  // Ordered by whatever number is in each object's name (popup_1, popup_2, ...) so
-  // they pop in that sequence rather than all at once — items with no number fall in
-  // at the end, except the clock hands, which jump the queue to spawn in first.
-  // Each one's own duration overlaps the next starting rather than waiting for the
-  // previous to fully finish.
+  // clock hands spawn-in, then other target objects by index
   const extractNumber = (name) => {
     if (name === "minute_hand" || name === "hour_hand") return -1;
     const match = name.match(/(\d+)/);
@@ -270,13 +234,7 @@ loader.load("/models/final-room.glb", (glb)=>{
   orderedSpawn.forEach((mesh) => mesh.scale.setScalar(0));
   const generalBatchDuration = (orderedSpawn.length - 1) * SPAWN_STAGGER + SPAWN_ITEM_DURATION;
 
-  // Robot reveal: the whole arm pops in as one ordered sequence — base, then each
-  // joint down the chain, then the gripper — starting near the end of the general
-  // room decor batch, so the robot still reads as appearing last, without ever
-  // going fully still first. The general batch's very last item or two are still
-  // mid-pop (and, thanks to the overshoot easing, visually settled well before their
-  // programmatic finish) by the time the robot starts, so there's always something
-  // visibly moving instead of a dead beat between "decor done" and "robot begins."
+  // robot spawn-in in order of joint
   const ROBOT_ORDER = ["robot_base", "joint_1", "joint_2", "joint_3", "gripper"];
   const orderedRobot = ROBOT_ORDER.map((name) => joints[name]).filter(Boolean);
   const ROBOT_STAGGER = 260;
@@ -288,6 +246,7 @@ loader.load("/models/final-room.glb", (glb)=>{
   let generalSpawnDone = false;
   let robotSpawnDone = false;
   let introComplete = false;
+
   const updateSpawnAnimation = () => {
     const now = performance.now();
     if (!generalSpawnDone) {
@@ -308,24 +267,23 @@ loader.load("/models/final-room.glb", (glb)=>{
       });
       if (allDone) robotSpawnDone = true;
     }
-    // Once everything has popped in, slide the (desktop-only) centered panel back to
-    // its normal place in the layout — the transitionend listener set up above fires
-    // announceHeroSceneReady() once this finishes, which is what unblocks home.js's
-    // text fade-in. Mobile never centered in the first place, so it already announced
-    // ready immediately and has nothing to slide.
+
+    // slide room to right side of screen (not on mobile)
     if (!introComplete && generalSpawnDone && robotSpawnDone && !isMobile) {
       introComplete = true;
-      slideTarget.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
+      container.style.transition = 'transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)';
       requestAnimationFrame(() => {
-        slideTarget.style.transform = 'translateX(0px)';
+        container.style.transform = 'translateX(0px)';
       });
     }
   };
 
+  // ROBOT IMPEMENTATION
+
   const raycaster = new THREE.Raycaster();
   const mouseNDC = new THREE.Vector2();
   const ikTarget = new THREE.Vector3();
-
+  // TODO: understand
   // A plane facing the camera, passing through the robot's base — gives the mouse
   // a 3D point to aim at without needing to hit any actual geometry.
   const cameraDirection = new THREE.Vector3();
@@ -349,6 +307,7 @@ loader.load("/models/final-room.glb", (glb)=>{
     mouseNDC.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   });
 
+
   // Touch devices have no hover, so the same reach is driven by dragging a
   // finger across the canvas instead — scoped to just the canvas (not the whole
   // page, unlike the mousemove listener above) so it only takes over scrolling
@@ -365,6 +324,7 @@ loader.load("/models/final-room.glb", (glb)=>{
   canvas.addEventListener("touchstart", updateNDCFromTouch, { passive: false });
   canvas.addEventListener("touchmove", updateNDCFromTouch, { passive: false });
 
+
   const X_AXIS = new THREE.Vector3(1, 0, 0);
   const Y_AXIS = new THREE.Vector3(0, 1, 0);
   const _targetQuat = new THREE.Quaternion();
@@ -372,9 +332,7 @@ loader.load("/models/final-room.glb", (glb)=>{
   const _shoulderPos = new THREE.Vector3();
   const _toTarget = new THREE.Vector3();
 
-  // Underdamped spring per joint instead of a plain ease — lets the motion briefly
-  // overshoot its target and settle back, which reads as "alive" rather than just slow.
-  // Lower stiffness/damping down the chain gives a cascading, whip-like lag.
+  // spring for overshooting effect
   const SPRING = {
     joint1: { stiffness: 140, damping: 14 },
     joint2: { stiffness: 110, damping: 12 },
